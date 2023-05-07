@@ -20,21 +20,27 @@
             <img class="header__ttl" src="img/title.png" alt="titre">
         </header>
         <main>
-            <div class="character__srch">
-                <section id="search" class="search">
-                    <input type="text" id="name" name="name" required minlength="3" size="30">
-                    <ul id="search-list" class="characters__list"></ul>
-                </section>
-            </div>
 
             <div id="selection-background">
                 <section class="selection" id="selection">
-                    <h2 id="selection-ttl" class="section__ttl">Selection</h2>
+                    <div class="character__srch">
+                        <section id="search" class="search">
+                            <h2 id="selection-ttl" class="section__ttl">Selection</h2>
+                            <input type="text" id="name" name="name" placeholder="Selectionnez un héro" required
+                                minlength="3" size="30">
+                            <ul id="search-list" class="characters__list"></ul>
+                        </section>
+                    </div>
                     <h2 id="fight-ttl" class="section__ttl fight__ttl display-none">Fight</h2>
                     <div class="selection__heroes">
                         <div id="hero1" class="selection__heroe ">
                             <p class="display-none selection__heroe-name"></p>
-                            <p class="display-none selection__heroe-life "></p>
+                            <div class="life-container">
+                                <img class="character__features__text display-none" src="img/coeur.png">
+                                <div class="progress-life">
+                                    <div class=" selection__heroe-life"></div>
+                                </div>
+                            </div>
                             <img class="selection__img" src="img/Choix perso mobile.png" alt="">
                             <button class="display-none btn-stat">Stats</button>
                             <ul class="display-none character-card"></ul>
@@ -43,10 +49,15 @@
                         <img id="versus" class="selection__img-versus" src="img/VS.png" alt="versus">
 
                         <p id="selection-combat-text" class="selection_combat_text display-none"> <span
-                        class="selection_combat_text_title"> <strong> Resumé du combat</strong></span></p>
+                                class="selection_combat_text_title"> <strong> Resumé du combat</strong></span></p>
                         <div id="hero2" class="selection__heroe">
                             <p class="display-none selection__heroe-name"></p>
-                            <p class="display-none selection__heroe-life "></p>
+                            <div class="life-container display-none">
+                                <img class="character__features__text-2 display-none" src="img/coeur.png">
+                                <div class="progress-life">
+                                    <div class="display-none selection__heroe-life"></div>
+                                </div>
+                            </div>
                             <img class="selection__img" src="img/Choix perso mobile.png" alt="">
                             <button class="display-none btn-stat">Stats</button>
                             <ul class="display-none character-card"></ul>
@@ -58,7 +69,7 @@
                     </button>
                 </section>
             </div>
-            
+
             <span class="margin-bottom" id="margin-bottom"></span>
 
         </main>

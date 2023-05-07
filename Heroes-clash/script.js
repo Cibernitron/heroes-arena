@@ -23,6 +23,10 @@ const hero2HTML = document.getElementById("hero2");
  */
 hero1HTML.querySelector('.btn-stat').addEventListener('click', function (e) {
     hero1HTML.querySelector('.character-card').classList.toggle('display-none');
+    hero1HTML.querySelector('.progress-val-atq').style.width = hero1.powerstats.strength + '%'
+    hero1HTML.querySelector('.progress-val-life').style.width = hero1.powerstats.durability + '%'
+    hero1HTML.querySelector('.progress-val-shield').style.width = hero1.powerstats.combat + '%'
+    hero1HTML.querySelector('.progress-val-speed').style.width = hero1.powerstats.speed + '%'
 });
 
 /**
@@ -30,6 +34,10 @@ hero1HTML.querySelector('.btn-stat').addEventListener('click', function (e) {
  */
 hero2HTML.querySelector('.btn-stat').addEventListener('click', function (e) {
     hero2HTML.querySelector('.character-card').classList.toggle('display-none');
+    hero2HTML.querySelector('.progress-val-atq').style.width = hero2.powerstats.strength + '%'
+    hero2HTML.querySelector('.progress-val-life').style.width = hero2.powerstats.durability + '%'
+    hero2HTML.querySelector('.progress-val-shield').style.width = hero2.powerstats.combat + '%'
+    hero2HTML.querySelector('.progress-val-speed').style.width = hero2.powerstats.speed + '%'
 });
 
 /**
@@ -74,6 +82,7 @@ function displayNames(array) {
             liHeroes.appendChild(buttonLiHereos);
             buttonLiHereos.setAttribute("id", `${element.id}`);
             buttonLiHereos.innerText = element.name;
+           
 
             /**
              * Si on clique sur le nom d'un héro dans la liste de recherche alors on l'ajoute comme nouveau combatant
@@ -189,10 +198,13 @@ const margin = document.querySelector("#margin-bottom");
 const imgVS = document.querySelector('.selection__img-versus')
 const selectionDivHeroes = document.querySelector('.selection__heroes')
 console.log(imgVS);
-function preparHeroToCombat(heroHTML){
+function preparHeroToCombat(heroHTML) {
     heroHTML.querySelector(".selection__heroe-name").classList.add("name-combat");
     heroHTML.querySelector(".selection__heroe-life").classList.add("life-combat");
     heroHTML.querySelector(".selection__heroe-life").classList.remove("display-none");
+    heroHTML.querySelector(".progress").style.display = "flex";
+    heroHTML.querySelector(".character__features__text").classList.remove("display-none");
+    document.querySelector(".character__features__text-2").classList.remove("display-none");
 }
 
 //---------------PAGE COMBAT BOUTON EVENT LISTENER----------------
@@ -224,12 +236,16 @@ buttonCombat.addEventListener('click', function (event) {
 });
 
 function battle(hero1, hero2) {
+    const hero1Life = hero1.powerstats.durability;
+    const hero2Life = hero2.powerstats.durability;
     const timer = setInterval(
         function () {
             getMostSpeedHero(hero1, hero2)
             executeFight(attacker, defender);
             hero1HTML.querySelector('.selection__heroe-life').textContent = `${hero1.powerstats.durability}`;
             hero2HTML.querySelector('.selection__heroe-life').textContent = `${hero2.powerstats.durability}`;
+            hero1HTML.querySelector('.selection__heroe-life').style.width = hero1Life/hero1.powerstats.durability;
+            hero2HTML.querySelector('.selection__heroe-life').style.width = hero2Life/hero2.powerstats.durability;
             if (attacker.powerstats.durability <= 0) {
                 winner = defender.name;
                 clearInterval(timer);
@@ -296,7 +312,7 @@ function executeFight(attacker, defender) {
         document.querySelector('.selection_combat_text').innerHTML += `<br> Il reste ${defender.powerstats.durability}hp a ${defender.name}.<br>`;
 
         if (defender.powerstats.durability <= 0) {
-            document.querySelector('.selection_combat_text').innerHTML += `<br> ${defender.name} est une mi mouche morte`;
+            document.querySelector('.selection_combat_text').innerHTML += `<br> ${defender.name} est K.O`;
         } else {
             attacker.powerstats.durability -= defenseCounterAttack;
 
@@ -313,7 +329,7 @@ function executeFight(attacker, defender) {
         document.querySelector('.selection_combat_text').innerHTML += `<br> ${defender.name} a riposté et a infligé ${defenseCounterAttack} points de dégâts à ${attacker.name}.`;
         document.querySelector('.selection_combat_text').innerHTML += `<br> Il reste ${attacker.powerstats.durability}hp à ${attacker.name}.<br>`;
         if (attacker.powerstats.durability <= 0) {
-            document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} est une mi mouche morte`;
+            document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} est K.O`;
             attacker.powerstats.durability = 0
         }
     } else {
@@ -332,36 +348,47 @@ function executeFight(attacker, defender) {
 function displayCards(hero) {
     return `
         <li class="character__card__list">
-        <div class="character__card__top">
-        <img class="character__card__img" src="${hero.images.sm}">
-        <div class="character__features">
-        <span class="abilities">
-        <p class="character__features__text">Attack:</p>
-        <p class="character__points">${hero.powerstats.strength}</p>
-        </span>           
-        <span class="abilities">
-        <p class="character__features__text">Shield: </p>
-        <p class="character__points">${hero.powerstats.combat}</p>
-        </span>     
-        <span class="abilities">
-        <p class="character__features__text">Speed:</p>
-        <p class="character__points">${hero.powerstats.speed}</p>
-        </span>           
-        <span class="abilities">
-        <p class="character__features__text">Life:</p>
-        <p class="character__points">${hero.powerstats.durability}</p>
-        </span>     
-        </div>
-        </div>
-        <div class="bio">
-        <p class="title__bio">Biography:</p>
-        <p class="text__bio"><span class="text__title__bio">Name:</span> ${hero.name}</p>
-        <p class="text__bio"><span class="text__title__bio">Real-Name:</span> ${hero.biography.fullName}</p>
-        <p class="text__bio"><span class="text__title__bio">Place of Birth:</span> ${hero.biography.placeOfBirth}</p>
-        <p class="text__bio"><span class="text__title__bio">Alignement:</span> ${hero.biography.alignment}</p>
-        <p class="text__bio"><span class="text__title__bio">Universe:</span> ${hero.biography.publisher}</p>
-        </div>
+            <div class="character__card__top">
+                <div class="character__card__top-title">
+                    <img class="character__card__img" src="${hero.images.sm}">
+                    <h2 class="character__card-title">${hero.name}</h2>
+                </div>
+                <div class="character__features">
+                        <li class="flex-progress abilities">  
+                            <p class="character__features__text">Attack:</p>
+                            <div class="progress">
+                                <div class="progress-val progress-val-atq">${hero.powerstats.strength}</div>
+                            </div>
+                        </li>
+                        <li class="flex-progress abilities">  
+                            <p class="character__features__text">Shield:</p>
+                            <div class="progress">
+                                <div class="progress-val progress-val-shield">${hero.powerstats.combat}</div>
+                            </div>
+                        </li>
+                        <li class="flex-progress abilities">  
+                            <p class="character__features__text">Speed:</p>
+                            <div class="progress">
+                                <div class="progress-val progress-val-speed">${hero.powerstats.speed}</div>
+                            </div>
+                        </li>
+                        <li class="flex-progress abilities">  
+                            <p class="character__features__text">Life:</p>
+                            <div class="progress">
+                                <div class="progress-val progress-val-life">${hero.powerstats.durability}</div>
+                            </div>
+                        </li> 
+                </div>
+            </div>
+            <div class="bio">
+                <p class="title__bio">Biography:</p>
+                <p class="text__bio"><span class="text__title__bio">Real-Name:</span> ${hero.biography.fullName}</p>
+                <p class="text__bio"><span class="text__title__bio">Place of Birth:</span> ${hero.biography.placeOfBirth}</p>
+                <p class="text__bio"><span class="text__title__bio">Alignement:</span> ${hero.biography.alignment}</p>
+                <p class="text__bio"><span class="text__title__bio">Universe:</span> ${hero.biography.publisher}</p>
+            </div>
         </li>`;
 };
+
 
 
