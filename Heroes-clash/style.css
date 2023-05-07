@@ -1,0 +1,428 @@
+:root {
+    font-size: 16px;
+    font-family: 'roboto', 'Helvetica Neue', sans-serif;
+    --primary-color: #171A21;
+    --secondary-color: #A82431;
+    --third-color: #818479;
+    --fourth-color: #F4D35E;
+    --fifth-color: #007AB8;
+    --sixth-color: #fff;
+}
+
+/* @media screen and (min-width:1000px){
+    :root{font-size: 30px;} 
+} */
+* {-moz-box-sizing: border-box; box-sizing: border-box;}
+
+/* * {
+    box-sizing: border-box;
+} */
+
+body,
+ul,
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    padding: 0;
+    margin: 0 0;
+}
+
+/* INPUT */
+
+#searchbar {
+    margin-left: 15%;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+input[type=text] {
+    width: 100%;
+    -webkit-transition: width 0.15s ease-in-out;
+    transition: width 0.15s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 100%;
+}
+
+.button__lnk {
+    width: 100%;
+    border: none;
+    text-align: left;
+    font-size: 16px;
+}
+
+
+
+/* CHARACTER FEATURE */
+.characters__list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    width: 100%;
+    margin: 0.5rem;
+    background-color: white;
+    border: .5px solid var(--primary-color);
+    border-top: 0;
+}
+
+.character__srch {
+    width: 75%;
+    margin: 0 auto;
+}
+
+
+.character__card__list {
+    display: flex;
+    margin-bottom: 4px;
+    background-color: var(--fifth-color);
+    /* width: 264px; */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px var(--primary-color) solid;
+    flex-direction: column;
+    height: auto;
+}
+
+.character__points {
+    border: 1px var(--primary-color) solid;
+    width: 33px;
+    height: 33px;
+    border-radius: 9px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4px;
+    margin-bottom: 0;
+    background-color: #f4d35e;
+}
+@media screen and (min-width:1000px){
+    .character__points{
+        width: 50px;
+        height: 50px;
+    }
+}
+.character__features__text {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: var(--primary-color);
+}
+
+.abilities {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
+
+.character__card__img {
+    border: 2px var(--primary-color) solid;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 5px;
+    width: 60px;
+    height: 62px;
+}
+
+.character__card__top {
+    display: flex;
+}
+
+.character__features {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.bio {
+    display: flex;
+    flex-direction: column;
+}
+
+.title__bio {
+    text-align: center;
+    color: var(--primary-color);
+    margin: 10px;
+}
+
+.text__bio {
+    margin: 0;
+}
+
+/* PROFIL CARD */
+
+.profils__character__card {
+    display: flex;
+    margin-bottom: 4px;
+    background-color: var(--fifth-color);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px var(--primary-color) solid;
+    flex-direction: column;
+    height: auto;
+    width: 150px;
+    margin: auto;
+}
+
+.profils__text__bio {
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
+}
+
+.profils__character__card__top {
+    display: none;
+}
+
+.profils__character__card__img {
+    border: 2px var(--primary-color) solid;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 5px;
+    width: 120px;
+    height: 120px;
+}
+
+
+
+
+/* BODY */
+
+.body {
+    background-color: var(--fourth-color);
+    height: 100vh;
+}
+
+.container {
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 5rem;
+}
+
+/* HEADER */
+
+.header {
+    display: flex;
+    align-items: center;
+    background-color: var(--fifth-color);
+}
+
+.header__link {
+    font-size: 0;
+    max-width: 20vw;
+}
+
+.header__logo {
+    width: 100%;
+    height: auto;
+}
+
+.header__ttl {
+    width: 50%;
+    margin: 0 auto;
+    font-size: 0;
+}
+
+.search {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: center;
+    margin-top: 1rem;
+    border-color: #171A21;
+}
+
+/* SECTION SELECTION */
+
+.selection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0 .5rem;
+}
+
+.section__ttl {
+    font-family: 'marvel';
+    font-weight: bold;
+    text-align: center;
+}
+
+.selection__heroes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* flex-wrap: wrap; */
+}
+
+.selection__heroe {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    width: 30vw;
+}
+
+.selection__img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: .5rem;
+    aspect-ratio: 1/1;
+}
+
+.selection__img-versus {
+    width: 50%;
+    max-width: 30vw;
+}
+
+.button {
+    align-self: center;
+    background-color: var(--third-color);
+    padding: 0.5rem 0.75rem;
+    border-radius: 15%;
+    color: var(--fourth-color);
+}
+
+.flex-wrap{
+    flex-wrap: wrap;
+}
+.button--active {
+    background-color: var(--fifth-color);
+}
+
+
+/* SECTION MON EQUIPE */
+
+.myTeam {
+    margin-bottom: 1rem;
+}
+
+.selection__heroe-name::after {
+    content: "❌";
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+
+}
+
+.selection__heroe-name:hover {
+    background-color: var(--third-color);
+    color: var(--white);
+    cursor: pointer;
+}
+
+.selection__heroe-name:hover::after {
+    opacity: 1;
+}
+.character-card{
+    width: 35vw;
+}
+
+/* SECTION COMBAT */
+
+.combat-design {
+    background-image: url(img/fond_combat.png);
+    margin: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: auto;
+    padding-bottom: 2rem;
+    padding-top: 3rem;
+}
+
+.display-none {
+    display: none;
+}
+
+
+.name-combat {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: var(--sixth-color);
+    font-family: 'marvel';
+    font-weight: bold;
+    font-size: larger;
+}
+
+.life-combat {
+    background-color: chartreuse;
+    border: 1px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+.fight__ttl {
+    color: var(--fourth-color);
+}
+
+.margin-bottom {
+    display: block;
+    margin-bottom: 3rem;
+}
+
+.selection_combat_text {
+    width: 100vw;
+    
+    background-color: var(--fifth-color);
+    overflow-y: scroll;
+    height: 13vh;
+    padding-top: .25rem;
+    padding-left: .5rem;
+    order: 3;
+    border: 3px solid black;
+}
+
+.selection_combat_text_title {
+    display: flex;
+    justify-content: center;
+}
+
+
+@media screen and (min-width:1000px){
+    .selection_combat_text {
+        width: 25vw;
+        height: 40vh;
+        order: 0;
+    }
+    .selection__heroe{
+        order: 0;
+    }
+}
+
+/* SECTION FOOTER */
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--secondary-color);
+    width: 100%;
+    position: absolute;
+    /* bottom: 0; */
+    /* left: 0;
+    right: 0; */
+}
+
+.footer__ttl {
+    margin: auto;
+    width: 50%;
+}
+
+.footer__logo {
+    width: 20%;
+    height: auto;
+}

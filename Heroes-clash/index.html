@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Marvel:wght@400;700&family=Roboto:wght@100&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="body">
+    <div class="container">
+        <header class="header">
+            <a class="header__link" href="index.html"><img class="header__logo" src="img/logo.png" alt="logo"></a>
+            <img class="header__ttl" src="img/title.png" alt="titre">
+        </header>
+        <main>
+            <div class="character__srch">
+                <section id="search" class="search">
+                    <input type="text" id="name" name="name" required minlength="3" size="30">
+                    <ul id="search-list" class="characters__list"></ul>
+                </section>
+            </div>
+
+            <div id="selection-background">
+                <section class="selection" id="selection">
+                    <h2 id="selection-ttl" class="section__ttl">Selection</h2>
+                    <h2 id="fight-ttl" class="section__ttl fight__ttl display-none">Fight</h2>
+                    <div class="selection__heroes">
+                        <div id="hero1" class="selection__heroe ">
+                            <p class="display-none selection__heroe-name"></p>
+                            <p class="display-none selection__heroe-life "></p>
+                            <img class="selection__img" src="img/Choix perso mobile.png" alt="">
+                            <button class="display-none btn-stat">Stats</button>
+                            <ul class="display-none character-card"></ul>
+                        </div>
+
+                        <img id="versus" class="selection__img-versus" src="img/VS.png" alt="versus">
+
+                        <p id="selection-combat-text" class="selection_combat_text display-none"> <span
+                        class="selection_combat_text_title"> <strong> Resumé du combat</strong></span></p>
+                        <div id="hero2" class="selection__heroe">
+                            <p class="display-none selection__heroe-name"></p>
+                            <p class="display-none selection__heroe-life "></p>
+                            <img class="selection__img" src="img/Choix perso mobile.png" alt="">
+                            <button class="display-none btn-stat">Stats</button>
+                            <ul class="display-none character-card"></ul>
+                        </div>
+
+                    </div>
+                    <button class="button" id="button-combat">
+                        <p>Combat</p>
+                    </button>
+                </section>
+            </div>
+            
+            <span class="margin-bottom" id="margin-bottom"></span>
+
+        </main>
+    </div>
+    <footer class="footer">
+        <img class="footer__ttl" src="img/Heroesjaune.png" alt="">
+        <img class="footer__logo" src="img/logo.png" alt="logo">
+    </footer>
+</body>
+<script src="script.js"></script>
+
+</html>
