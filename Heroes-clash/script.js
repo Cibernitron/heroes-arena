@@ -13,7 +13,7 @@ const button = document.getElementById("name");
 const hero1HTML = document.getElementById("hero1");
 const hero2HTML = document.getElementById("hero2");
 const buttonCombat = document.querySelector("#button-combat");
-const combatArea = document.querySelector("#selection-background");
+const combatArea = document.querySelector(".combat-design");
 const combatText = document.querySelector("#selection-combat-text");
 const selectionTitle = document.querySelector("#selection-ttl");
 const fightTitle = document.querySelector("#fight-ttl");
@@ -58,7 +58,7 @@ function addHero(hero, heroHtml) {
     heroHtml.querySelector(".selection__heroe-name").classList.add("name-combat");
 
     // Display the life points of the hero
-    heroHtml.querySelector('.selection__heroe-life').textContent = `${hero.powerstats.durability}`;
+    // heroHtml.querySelector('.selection__heroe-life').textContent = `${hero.powerstats.durability}`;
 
     // Display the picture of the hero
     heroHtml.querySelector('.selection__img').src = hero.images.md;
@@ -262,15 +262,21 @@ function battle(hero1, hero2) {
     const hero2Life = hero2.powerstats.durability;
     let hero1LifeAfterDamage;
     let hero2LifeAfterDamage;
+    setTimeout(() => {
+        document.querySelector('.selection__img-fight').style.width = "20%";
+        document.querySelector('.selection__img-fight').style.top = "5rem";
+    }, "2000");
+    
     // Executing fight, turn by turn all the 2 sec
     const timer = setInterval(
+
         function () {
             hero1LifeAfterDamage = (hero1.powerstats.durability / hero1Life) * 100 // Give percent of life remaining of hero 1
             hero2LifeAfterDamage = (hero2.powerstats.durability / hero2Life) * 100 // Give percent of life remaining of hero 2
             getMostSpeedHero(hero1, hero2)
             executeFight(attacker, defender); // Do 1 turn of the fight
-            hero1HTML.querySelector('.selection__heroe-life').textContent = `${hero1.powerstats.durability}/${hero1Life}`; // Display number of the life of hero 1 in life-bar
-            hero2HTML.querySelector('.selection__heroe-life').textContent = `${hero2.powerstats.durability}/${hero2Life}`; // Display number of the life of hero 2 in life-bar
+            // hero1HTML.querySelector('.progress-life').textContent = `${hero1.powerstats.durability}/${hero1Life}`; // Display number of the life of hero 1 in life-bar
+            // hero2HTML.querySelector('.progress-life').textContent = `${hero2.powerstats.durability}/${hero2Life}`; // Display number of the life of hero 2 in life-bar
             hero1HTML.querySelector('.life-combat').style.width = Math.max(hero1LifeAfterDamage, 0) + `%`; // Reduce life-bar of hero 1 in terms of his remaining life 
             hero2HTML.querySelector('.life-combat').style.width = Math.max(hero2LifeAfterDamage, 0) + `%`; // Reduce life-bar of hero 2 in terms of his remaining life 
 
@@ -290,13 +296,13 @@ function battle(hero1, hero2) {
                 hero1HTML.querySelector('.selection__heroe-life').textContent = `0`
                 hero1HTML.querySelector('.life-combat').style.width = `0%`;
                 // hero1HTML.querySelector('.img-cross').classList.remove("display-none")
-                hero1HTML.querySelector('.img-cross').classList.add("img-cross-display")
+                hero1HTML.querySelector('.img-cross-1').classList.add("img-cross-1-display")
             }
             else if (hero2.powerstats.durability <= 0) {
                 hero2HTML.querySelector('.selection__heroe-life').textContent = `0`
                 hero2HTML.querySelector('.life-combat').style.width = `0%`;
                 // hero2HTML.querySelector('.img-cross').classList.remove("display-none")
-                hero2HTML.querySelector('.img-cross').classList.add("img-cross-display")
+                hero2HTML.querySelector('.img-cross-2').classList.add("img-cross-2-display")
             }
 
             if (attacker.powerstats.durability <= 0) { // If attacker have not life, defender win, and the fight is close 
@@ -429,14 +435,16 @@ buttonCombat.addEventListener('click', function (event) {
     }
     preparHeroToCombat(hero1HTML)
     preparHeroToCombat(hero2HTML)
-    combatArea.classList.add("combat-design")
-    buttonCombat.classList.add("display-none")
+    combatArea.style.backgroundImage = "url(img/fond_combat.png)"
+    // combatArea.classList.add("combat-design")
+    buttonCombat.style.display = "none"
     combatText.classList.remove("display-none")
     selectionTitle.classList.toggle("display-none")
-    fightTitle.classList.toggle("display-none")
-    search.classList.toggle("display-none")
+    // fightTitle.classList.toggle("display-none")
+    search.style.display = "none"
     margin.classList.toggle("margin-bottom")
     imgVS.classList.toggle("display-none")
+    document.querySelector(".selection__img-fight").style.width = "100%";
     selectionDivHeroes.classList.toggle("flex-wrap")
     hero2.powerstats.durability *= 10;
     hero1.powerstats.durability *= 10;

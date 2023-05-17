@@ -9,17 +9,10 @@
     --sixth-color: #fff;
 }
 
-/* @media screen and (min-width:1000px){
-    :root{font-size: 30px;} 
-} */
 * {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-
-/* * {
-    box-sizing: border-box;
-} */
 
 body,
 ul,
@@ -33,6 +26,16 @@ h5,
 h6 {
     padding: 0;
     margin: 0 0;
+}
+
+/* UTILITIES */
+.display-none {
+    display: none;
+}
+
+.margin-bottom {
+    display: block;
+    margin-bottom: 3rem;
 }
 
 /* INPUT */
@@ -66,6 +69,14 @@ input[type=text]:focus {
     color: var(--fourth-color);
 }
 
+.search {
+    margin: 3rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: center;
+    border-color: #171A21;
+}
 
 
 /* CHARACTER FEATURE */
@@ -77,8 +88,6 @@ input[type=text]:focus {
     background-color: white;
     border: .5px solid var(--primary-color);
     border-top: 0;
-
-
 }
 
 .character__srch {
@@ -115,33 +124,13 @@ input[type=text]:focus {
     }
 }
 
-.health-img-1{
-    margin-top: 0;
-    margin-bottom: 0;
-    color: var(--primary-color);
-    font-weight: 700;
-    width: 2rem;
-    left: 1rem;
-}
-
-.health-img-2{
-    margin-top: 0;
-    margin-bottom: 0;
-    color: var(--primary-color);
-    font-weight: 700;
-    width: 2rem;
-    left: 1rem;
-}
-
 
 .character__features__text {
     margin-top: 0;
     margin-bottom: 0;
     color: var(--primary-color);
     font-weight: 700;
-    /* width: 20%;
-    position: relative; */
-    margin-right: 2rem;
+    margin-right: .5rem;
     left: 1rem;
 }
 
@@ -150,11 +139,11 @@ input[type=text]:focus {
     margin-bottom: 0;
     color: var(--primary-color);
     font-weight: 700;
-    /* width: 20%; */
-    /* position: relative; */
     margin-right: 2rem;
     left: 1rem;
 }
+
+/* CHARACTERS CARDS */
 
 .character__card__img {
     border: 2px var(--primary-color) solid;
@@ -193,14 +182,11 @@ input[type=text]:focus {
     padding: 1rem;
 }
 
-
-
 .character__features {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
     flex-direction: column;
-
 }
 
 .bio {
@@ -259,9 +245,6 @@ input[type=text]:focus {
     height: 120px;
 }
 
-
-
-
 /* BODY */
 
 .body {
@@ -269,11 +252,6 @@ input[type=text]:focus {
     height: 100vh;
 }
 
-.container {
-    position: relative;
-    /* min-height: 100%; */
-    /* padding-bottom: 5rem; */
-}
 
 /* HEADER */
 
@@ -281,40 +259,29 @@ input[type=text]:focus {
     display: flex;
     align-items: center;
     background-color: var(--fifth-color);
+    height: 61px;
 }
 
 .header__link {
+    max-width: 25vw;
     font-size: 0;
-    max-width: 20vw;
+    max-height: 61px;
 }
 
 .header__logo {
     width: 100%;
-    height: auto;
+    height: 61px;
+
 }
 
 .header__ttl {
-    width: 50%;
+    max-width: 75vw;
+    height: auto;
     margin: 0 auto;
     font-size: 0;
+    max-height: 61px;
 }
 
-.search {
-    margin-bottom: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    align-items: center;
-    margin-top: 1rem;
-    border-color: #171A21;
-}
-
-@media screen and (min-width:1000px) {
-    .header__link {
-        font-size: 0;
-        max-width: 8vw;
-    }
-}
 
 /* SECTION SELECTION */
 
@@ -329,6 +296,8 @@ input[type=text]:focus {
     font-family: 'marvel';
     font-weight: bold;
     text-align: center;
+    font-size: xx-large;
+    color: var(--fourth-color)
 }
 
 .selection__heroes {
@@ -346,27 +315,20 @@ input[type=text]:focus {
     margin-right: 1rem;
     margin-left: 1rem;
     width: 30vw;
+    position: relative;
 }
 
-.selection__img {
-    width: 100%;
-    object-fit: cover;
-    border: black 2px solid;
-    border-radius: 1.5rem;
-    aspect-ratio: 1/1;
-}
-
-.selection__img-versus {
-    width: 50%;
-    max-width: 30vw;
-}
 
 .button {
-    align-self: center;
-    background-color: var(--third-color);
+    /* background-color: var(--third-color); */
+    background: linear-gradient(var(--primary-color), #790909, var(--primary-color));
     padding: 0.5rem 0.75rem;
-    border-radius: 15%;
+    border-radius: 10% 90% 10% 90% / 90% 10% 90% 10% ;
     color: var(--fourth-color);
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .flex-wrap {
@@ -374,7 +336,7 @@ input[type=text]:focus {
 }
 
 .button--active {
-    background-color: var(--fifth-color);
+    background-color: var(--secondary-color);
 }
 
 
@@ -384,7 +346,8 @@ input[type=text]:focus {
     margin-bottom: 1rem;
 }
 
-.selection__heroe-name::after {
+.selection__heroe-name::after,
+.selection__heroe-name::before {
     content: "❌";
     opacity: 0;
     transition: opacity .3s ease-in-out;
@@ -397,7 +360,8 @@ input[type=text]:focus {
     cursor: pointer;
 }
 
-.selection__heroe-name:hover::after {
+.selection__heroe-name:hover::after,
+.selection__heroe-name:hover::before {
     opacity: 1;
 }
 
@@ -412,44 +376,43 @@ input[type=text]:focus {
 /* SECTION COMBAT */
 
 .combat-design {
-    background-image: url(img/fond_combat.png);
-    margin: 0;
+    background-image: url(img/—Pngtree—colorful\ and\ rich\ yellow\ black_1338586.jpg);
+    background-position: center;
     background-repeat: no-repeat;
+    margin: 0;
     background-size: cover;
     width: 100vw;
-    height: auto;
     padding-bottom: 2rem;
     padding-top: 3rem;
-}
 
-.display-none {
-    display: none;
 }
-
 
 .name-combat {
-    background-color: var(--secondary-color);
-    border: 1px solid var(--primary-color);
+    background-color: var(--sixth-color);
+    border: .5vw solid var(--primary-color);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    color: var(--sixth-color);
+    color: var(--primary-color);
     font-family: 'marvel';
     font-weight: bold;
-    font-size: larger;
+    font-size: 3vw
 }
 
-.life-combat {
-    border: 1px solid var(--primary-color);
-    border-radius: 1rem;
+.life-container {
     display: flex;
     align-items: center;
-    width: 1px;
     justify-content: center;
-    transition: ease 1s;
+    width: 100%;
 }
 
+.fight__ttl {
+    color: var(--fourth-color);
+}
+
+/* COLORS LIFE */
 .green {
     background-color: chartreuse;
 }
@@ -462,24 +425,9 @@ input[type=text]:focus {
     background-color: red;
 }
 
-.life-container {
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-
-.fight__ttl {
-    color: var(--fourth-color);
-}
-
-.margin-bottom {
-    display: block;
-    margin-bottom: 3rem;
-}
-
 .selection_combat_text {
+    margin-top: 8rem;
     width: 100vw;
-
     background-color: var(--fifth-color);
     overflow-y: scroll;
     height: 13vh;
@@ -509,27 +457,46 @@ input[type=text]:focus {
 
 /* SECTION FOOTER */
 
+
+
 .footer {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background-color: var(--secondary-color);
-    width: 100%;
-    position: absolute;
+    background-color: var(--fifth-color);
+    height: 61px;
 }
 
-.footer__ttl {
-    margin: auto;
-    width: 50%;
+.footer__link {
+    max-width: 25vw;
+    font-size: 0;
+    max-height: 61px;
 }
 
 .footer__logo {
-    width: 20%;
-    height: auto;
+    width: 100%;
+    height: 61px;
+
 }
+
+.footer__ttl {
+    max-width: 75vw;
+    height: auto;
+    margin: 0 auto;
+    font-size: 0;
+    max-height: 61px;
+}
+
+
+
+
+
+
+
+/* PROGRESS-BAR */
 
 .flex-progress {
     display: flex;
+    flex-direction: column;
     margin: .5rem 0;
     align-items: center;
     justify-content: space-between;
@@ -537,7 +504,7 @@ input[type=text]:focus {
 }
 
 .progress {
-    width: 20vw;
+    width: 25vw;
     height: 1rem;
     background-color: #fff;
     display: flex;
@@ -556,31 +523,56 @@ input[type=text]:focus {
     padding-bottom: 1rem;
 }
 
+.life-combat {
+    height: 3vw;
+    max-height: 21px;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1px;
+    transition: ease 0.5s;
+    top: 0;
+    border: 1px solid var(--primary-color);
+}
+
 .progress-life {
     width: 100%;
-    height: 1.5rem;
+    height: 3vw;
+    max-height: 22px;
     background-color: #fff;
     display: none;
     align-items: flex-end;
-    border-radius: 2rem;
-    border: 2px solid var(--primary-color);
-    padding-top: 1rem;
+    border-radius: 1rem;
+    top: 0;
+    border: 1px solid var(--primary-color);
+
 }
 
 .progress-val-life {
     background-color: rgb(36, 202, 36);
+    width: 0%;
+    transition: width 1s ease;
+    top: 0;
+
 }
 
 .progress-val-speed {
     background-color: rgb(196, 196, 6);
+    width: 0%;
+    transition: width 1s ease;
 }
 
 .progress-val-atq {
     background-color: rgb(179, 54, 54);
+    width: 0%;
+    transition: width 1s ease;
 }
 
 .progress-val-shield {
     background-color: rgb(40, 40, 207);
+    width: 0%;
+    transition: width 1s ease;
 }
 
 @media screen and (min-width:1000px) {
@@ -606,16 +598,102 @@ input[type=text]:focus {
         padding-top: 1rem;
     }
 
+    .flex-progress {
+        display: flex;
+        flex-direction: row;
+        margin: .5rem 0;
+        align-items: center;
+        justify-content: space-between;
+    }
 }
 
-.img-cross {
-    position: relative;
-    bottom: 26rem;
-    width: 110%;
+/* IMAGES */
+
+.img-cross-1 {
+    left: 0;
+    position: absolute;
+    width: 100%;
     opacity: 0;
     transition: opacity 5s ease;
 }
 
-.img-cross-display {
+.img-cross-2 {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 5s ease;
+    right: 0;
+}
+
+.img-cross-1-display {
     opacity: 1;
+}
+
+.img-cross-2-display {
+    opacity: 1;
+}
+
+.selection-container {
+    position: relative;
+}
+
+.selection__img {
+    width: 30vw;
+    object-fit: cover;
+    border: black 2px solid;
+    border-radius: 2vw;
+    aspect-ratio: 1/1;
+}
+
+.selection__img-fight{
+    width: 0%;
+    position: absolute;
+    z-index: 1000;
+    top: 10rem;
+    transition: width .3s ease-in-out;
+}
+
+@media screen and (min-width:1000px) {
+    .selection__img-fight{
+        width: 0%;
+        position: absolute;
+        z-index: 1000;
+        top: 10rem;
+        transition: width .3s ease-in-out;
+        margin: auto;
+    }
+}
+
+.selection__img-versus {
+    margin-top: 5vw;
+    max-width: 15vw;
+
+}
+
+.versus-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 2rem;
+    height: 30vw;
+    margin: auto;
+}
+
+.health-img-1 {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: var(--primary-color);
+    font-weight: 700;
+    width: 2rem;
+    left: 1rem;
+}
+
+.health-img-2 {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: var(--primary-color);
+    font-weight: 700;
+    width: 2rem;
+    left: 1rem;
 }
