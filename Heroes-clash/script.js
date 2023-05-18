@@ -21,6 +21,7 @@ const search = document.querySelector("#search");
 const margin = document.querySelector("#margin-bottom");
 const imgVS = document.querySelector('.selection__img-versus')
 const selectionDivHeroes = document.querySelector('.selection__heroes')
+const resumeCbt = document.querySelector('.button-resume')
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*
                          +------------------------------------------+
@@ -37,8 +38,14 @@ const selectionDivHeroes = document.querySelector('.selection__heroes')
 function verifyTheHeroes(hero1, hero2) {
     if (hero1 == undefined || hero2 == undefined) {
         buttonCombat.classList.remove("button--active");
-    } else {
+        search.style.display = "flex"
+    }
+    else if (hero1 == hero2) {
+        buttonCombat.classList.remove("button--active");
+    }
+    else {
         buttonCombat.classList.add("button--active");
+        search.style.display = "none"
     }
 }
 
@@ -158,12 +165,15 @@ function displayNames(array) {
                 // If the 2 heroes are selected then nothing is done
                 else {
                     console.log('Both hero zones are full');
+
                 }
             });
             count++;
         });
     });
 }
+
+
 
 // Function use to call JSON data
 async function waitingForResponse() {
@@ -176,10 +186,12 @@ function dice() {
     return parseInt(Math.random() * 100);
 }
 
+
 // Define "speed" value
 // Add a random value to hero "speed" value 
 function speedScore(hero) {
-    return hero.powerstats.speed + dice();
+    hero.powerstats.speed = hero.powerstats.speed + dice();
+    return hero.powerstats.speed
 }
 
 // Return hero with hightest "speed" value
@@ -188,14 +200,18 @@ function getMostSpeedHero(hero1, hero2) {
     if (speedScore(hero1) > speedScore(hero2)) {
         attacker = hero1;
         defender = hero2;
-        document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} attaque en premier `;
+        document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} à obtenu un score de vitesse plus important (${attacker.powerstats.speed}) que celui de ${defender.name}(${defender.powerstats.speed})`;
         return hero1.name;
     }
-    else {
+    else if (speedScore(hero1) < speedScore(hero2)) {
         attacker = hero2;
         defender = hero1;
-        document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} attaque en premier `;
+        document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} à obtenu un score de vitesse plus important (${attacker.powerstats.speed}) que celui de ${defender.name}(${defender.powerstats.speed})`;
         return hero2.name;
+    }
+
+    else {
+        return
     }
 }
 
@@ -232,6 +248,13 @@ function executeFight(attacker, defender) {
 
     if (damagesAttack > shieldDefense) {
         defender.powerstats.durability -= damagesAttack;
+        setTimeout(() => {
+            document.querySelector('.selection__img').classList.add("position-attack-1");
+        }, "500");
+        setTimeout(() => {
+            document.querySelector('.selection__img').classList.remove("position-attack-1");
+        }, "500");
+
         document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} a attaqué ${defender.name} et lui a infligé ${damagesAttack}`;
         document.querySelector('.selection_combat_text').innerHTML += `<br> Il reste ${defender.powerstats.durability}hp a ${defender.name}.<br>`;
 
@@ -241,9 +264,12 @@ function executeFight(attacker, defender) {
     }
 
     else if (damagesAttack < shieldDefense) {
+        // attacker == defender && defender == attacker
+        // executeFight(attacker, defender)
         attacker.powerstats.durability -= defenseCounterAttack;
 
-        document.querySelector('.selection_combat_text').innerHTML += `<br> ${defender.name} a riposté et a infligé ${defenseCounterAttack} points de dégâts à ${attacker.name}.`;
+        document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} loupe son attaque.`;
+        document.querySelector('.selection_combat_text').innerHTML += `<br> ${defender.name} riposte et inflige ${defenseCounterAttack} points de dégâts à ${attacker.name}.`;
         document.querySelector('.selection_combat_text').innerHTML += `<br> Il reste ${attacker.powerstats.durability}hp à ${attacker.name}.<br>`;
         if (attacker.powerstats.durability <= 0) {
             document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} est K.O`;
@@ -253,6 +279,7 @@ function executeFight(attacker, defender) {
     else {
         document.querySelector('.selection_combat_text').innerHTML += `<br> Il y a égalité!`;
     }
+
 }
 
 
@@ -265,8 +292,8 @@ function battle(hero1, hero2) {
     setTimeout(() => {
         document.querySelector('.selection__img-fight').style.width = "20%";
         document.querySelector('.selection__img-fight').style.top = "5rem";
-    }, "2000");
-    
+    }, "1000");
+
     // Executing fight, turn by turn all the 2 sec
     const timer = setInterval(
 
@@ -415,36 +442,49 @@ hero2HTML.querySelector('.btn-stat').addEventListener('click', function (e) {
     hero2HTML.querySelector('.progress-val-shield').style.width = hero2.powerstats.combat + '%'
     hero2HTML.querySelector('.progress-val-speed').style.width = hero2.powerstats.speed + '%'
 });
+resumeCbt.addEventListener('click', function (e) {
+    combatText.classList.toggle("display-none")
+});
 
 // Remove hero 1 if you click on his name
-hero1HTML.querySelector('.selection__heroe-name').addEventListener('click', function (e) {
-    removeHero(hero1HTML);
-});
+hero1HTML.querySelector('.selection__heroe-name').addEventListener('click', function (e) { removeHero(hero1HTML) });
 
 // Remove hero 2 if you click on his name
-hero2HTML.querySelector('.selection__heroe-name').addEventListener('click', function (e) {
-    removeHero(hero2HTML);
-});
+hero2HTML.querySelector('.selection__heroe-name').addEventListener('click', function (e) { removeHero(hero2HTML) });
 
 // On click of button "combat", fight starting
 buttonCombat.addEventListener('click', function (event) {
+
 
     // If hero 1 or héro 2 is not selected, so the fight don't start
     if (hero1 == undefined || hero2 == undefined) {
         return;
     }
+
+    // If hero 1 and héro 2 is same, so the fight don't start
+    if (hero1 == hero2) {
+        return;
+    }
     preparHeroToCombat(hero1HTML)
     preparHeroToCombat(hero2HTML)
     combatArea.style.backgroundImage = "url(img/fond_combat.png)"
+    resumeCbt.classList.toggle("display-none")
+    // disabled remove heros
+    // hero1HTML.querySelector('.selection__heroe-name').removeEventListener('click', function(e){removeHero(hero1HTML)});
+    // hero2HTML.querySelector('.selection__heroe-name').removeEventListener('click', function(e){removeHero(hero2HTML)});
+
     // combatArea.classList.add("combat-design")
     buttonCombat.style.display = "none"
-    combatText.classList.remove("display-none")
+
     selectionTitle.classList.toggle("display-none")
     // fightTitle.classList.toggle("display-none")
+    // hero1HTML.querySelector('.selection__heroe-name-cross').style.display = "none"
+    // hero2HTML.querySelector('.selection__heroe-name-cross').style.display = "none"
     search.style.display = "none"
     margin.classList.toggle("margin-bottom")
     imgVS.classList.toggle("display-none")
-    document.querySelector(".selection__img-fight").style.width = "100%";
+    document.querySelector(".selection__img-fight").style.width = "80%";
+    document.querySelector(".selection__img-fight").style.top = "1vw";
     selectionDivHeroes.classList.toggle("flex-wrap")
     hero2.powerstats.durability *= 10;
     hero1.powerstats.durability *= 10;
