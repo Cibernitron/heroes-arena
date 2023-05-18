@@ -187,33 +187,56 @@ function dice() {
 }
 
 
-// Define "speed" value
+// // Define "speed" value
 // Add a random value to hero "speed" value 
-function speedScore(hero) {
-    hero.powerstats.speed = hero.powerstats.speed + dice();
-    return hero.powerstats.speed
-}
-
-// Return hero with hightest "speed" value
+// function speedScore(hero) {
+//     return hero.powerstats.speed + dice();
+// }
+// Define the difference of speed of selected heroes
 function getMostSpeedHero(hero1, hero2) {
-
-    if (speedScore(hero1) > speedScore(hero2)) {
+    const speedHero1 = hero1.powerstats.speed;
+    const speedHero2 = hero2.powerstats.speed;
+    const speedDiff = speedHero1 - speedHero2;
+    let attacksLuckH1;
+    let attacksLuckH2;
+    // If Hero1 have more speed, he win the difference add a dice (1-100)
+    if (speedDiff > 0) {
+        attacksLuckH1 = dice() + speedDiff
+        attacksLuckH2 = dice()
+    }
+    // If Hero2 have more speed, he win the difference add a dice (1-100)
+    else if (speedDiff < 0) {
+        attacksLuckH1 = dice()
+        attacksLuckH2 = dice() + speedDiff
+    }
+    // If heroes have same speed, they just launch a dice (1-100)
+    else if (speedDiff == 0) {
+        attacksLuckH1 = dice()
+        attacksLuckH2 = dice()
+    }
+    // Return hero with hightest "speed" value
+    if (attacksLuckH1 > attacksLuckH2) {
         attacker = hero1;
         defender = hero2;
-        document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} à obtenu un score de vitesse plus important (${attacker.powerstats.speed}) que celui de ${defender.name}(${defender.powerstats.speed})`;
+        document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} à obtenu un score de vitesse (${attacksLuckH1}) plus important que celui de ${defender.name} (${attacksLuckH2})`;
         return hero1.name;
     }
-    else if (speedScore(hero1) < speedScore(hero2)) {
+    else if (attacksLuckH1 < attacksLuckH2) {
         attacker = hero2;
         defender = hero1;
-        document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} à obtenu un score de vitesse plus important (${attacker.powerstats.speed}) que celui de ${defender.name}(${defender.powerstats.speed})`;
+        document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} à obtenu un score de vitesse (${attacksLuckH2}) plus important que celui de ${defender.name} (${attacksLuckH1})`;
         return hero2.name;
     }
-
     else {
         return
     }
+
 }
+
+
+// function whoStartToFight(hero1, hero2) {
+
+// }
 
 
 // Define "defense" value
@@ -301,6 +324,7 @@ function battle(hero1, hero2) {
             hero1LifeAfterDamage = (hero1.powerstats.durability / hero1Life) * 100 // Give percent of life remaining of hero 1
             hero2LifeAfterDamage = (hero2.powerstats.durability / hero2Life) * 100 // Give percent of life remaining of hero 2
             getMostSpeedHero(hero1, hero2)
+            // whoStartToFight(hero1, hero2)
             executeFight(attacker, defender); // Do 1 turn of the fight
             // hero1HTML.querySelector('.progress-life').textContent = `${hero1.powerstats.durability}/${hero1Life}`; // Display number of the life of hero 1 in life-bar
             // hero2HTML.querySelector('.progress-life').textContent = `${hero2.powerstats.durability}/${hero2Life}`; // Display number of the life of hero 2 in life-bar
