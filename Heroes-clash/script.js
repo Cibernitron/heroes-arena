@@ -49,6 +49,8 @@ function verifyTheHeroes(hero1, hero2) {
     }
 }
 
+
+
 /**
  * Add Hero
  * This function is used to create a hero.                                              
@@ -137,16 +139,16 @@ function displayNames(array) {
 
             // Add the hero's name to the search list
             let liHeroes = document.createElement("li");
-            let buttonLiHereos = document.createElement("button");
-            buttonLiHereos.classList.add("button__lnk")
+            let buttonLiHeroes = document.createElement("button");
+            buttonLiHeroes.classList.add("button__lnk")
             list.appendChild(liHeroes);
-            liHeroes.appendChild(buttonLiHereos);
-            buttonLiHereos.setAttribute("id", `${element.id}`);
-            buttonLiHereos.innerText = element.name;
+            liHeroes.appendChild(buttonLiHeroes);
+            buttonLiHeroes.setAttribute("id", `${element.id}`);
+            buttonLiHeroes.innerText = element.name;
 
             // If we click on the name of a hero in the search list then we add him as a new fighter
-            const buttonHereos = document.getElementById(`${element.id}`);
-            buttonHereos.addEventListener('click', function (e) {
+            const buttonHeroes = document.getElementById(`${element.id}`);
+            buttonHeroes.addEventListener('click', function (e) {
                 const hero1Name = hero1HTML.querySelector(".selection__heroe-name");
                 const hero2Name = hero2HTML.querySelector(".selection__heroe-name");
 
@@ -165,7 +167,6 @@ function displayNames(array) {
                 // If the 2 heroes are selected then nothing is done
                 else {
                     console.log('Both hero zones are full');
-
                 }
             });
             count++;
@@ -182,9 +183,19 @@ async function waitingForResponse() {
     displayNames(heroes);
 }
 
-function dice() {
-    return parseInt(Math.random() * 100);
+function dice(number) {
+    return parseInt(Math.random() * number);
 }
+
+// Add random hero
+// buttonRandom = document.querySelector("#btn-random");
+// function addRandomHero {
+//     buttonRandom.addEventListener('click', function (e) {
+//         dice(heroes.length)
+
+//     })
+// }
+
 
 
 // // Define "speed" value
@@ -199,20 +210,20 @@ function getMostSpeedHero(hero1, hero2) {
     const speedDiff = speedHero1 - speedHero2;
     let attacksLuckH1;
     let attacksLuckH2;
-    // If Hero1 have more speed, he win the difference add a dice (1-100)
+    // If Hero1 have more speed, he win the difference and add a dice (1-100)
     if (speedDiff > 0) {
-        attacksLuckH1 = dice() + speedDiff
-        attacksLuckH2 = dice()
+        attacksLuckH1 = dice(100) + speedDiff
+        attacksLuckH2 = dice(100)
     }
-    // If Hero2 have more speed, he win the difference add a dice (1-100)
+    // If Hero2 have more speed, he win the difference and add a dice (1-100)
     else if (speedDiff < 0) {
-        attacksLuckH1 = dice()
-        attacksLuckH2 = dice() + speedDiff
+        attacksLuckH1 = dice(100)
+        attacksLuckH2 = dice(100) + speedDiff
     }
     // If heroes have same speed, they just launch a dice (1-100)
     else if (speedDiff == 0) {
-        attacksLuckH1 = dice()
-        attacksLuckH2 = dice()
+        attacksLuckH1 = dice(100)
+        attacksLuckH2 = dice(100)
     }
     // Return hero with hightest "speed" value
     if (attacksLuckH1 > attacksLuckH2) {
@@ -242,19 +253,19 @@ function getMostSpeedHero(hero1, hero2) {
 // Define "defense" value
 // Add a random value to hero "defense" value 
 function defenseScore(hero) {
-    return hero.powerstats.combat + dice();
+    return hero.powerstats.combat + dice(100);
 }
 
 // Define "strength" value
 // Add a random value to defender "strength" value 
 function attackDefenserScore(hero) {
-    return hero.powerstats.strength + dice();
+    return hero.powerstats.strength + dice(100);
 }
 
 // Define "strength" value
 // Add a random value to attacker "strength" value 
 function attackScore(hero) {
-    return hero.powerstats.strength + dice();
+    return hero.powerstats.strength + dice(100);
 }
 
 /**
@@ -271,12 +282,14 @@ function executeFight(attacker, defender) {
 
     if (damagesAttack > shieldDefense) {
         defender.powerstats.durability -= damagesAttack;
-        setTimeout(() => {
-            document.querySelector('.selection__img').classList.add("position-attack-1");
-        }, "500");
-        setTimeout(() => {
-            document.querySelector('.selection__img').classList.remove("position-attack-1");
-        }, "500");
+        console.log(hero1HTML.querySelector('.selection__img'));
+        // setTimeout(() => {
+        //     hero1HTML.querySelector('.selection-container').style.left = "30vw";
+        //     // hero1HTML.querySelector('.selection-container').classList.add("position-attack-1");
+        // }, "1000");
+        // setTimeout(() => {
+        //     hero1HTML.querySelector('.selection-container').classList.remove("position-attack-1");
+        // }, "1000");
 
         document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} a attaqué ${defender.name} et lui a infligé ${damagesAttack}`;
         document.querySelector('.selection_combat_text').innerHTML += `<br> Il reste ${defender.powerstats.durability}hp a ${defender.name}.<br>`;

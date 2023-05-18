@@ -620,7 +620,6 @@ input[type=text]:focus {
 
     .progress-life {
         width: 27rem;
-        height: 1.5rem;
         background-color: #fff;
         display: none;
         align-items: flex-end;
@@ -666,6 +665,8 @@ input[type=text]:focus {
 
 .selection-container {
     position: relative;
+    transition: left 1s ease;
+    transition: right 1s ease;
 }
 
 .selection__img {
@@ -738,15 +739,17 @@ input[type=text]:focus {
     left: 30vw;
     transition: left .1s ease;
 }
+
 .position-attack-2 {
     right: 30vw;
-    transition: left .1s ease;
+    transition: right .1s ease;
 }
 
 @media screen and (min-width:1000px) {
     .position-attack-1 {
         left: 45vw;
     }
+
     .position-attack-2 {
         right: 45vw;
     }
