@@ -81,6 +81,8 @@ function addHero(hero, heroHtml) {
     verifyTheHeroes(hero1, hero2);
 }
 
+
+
 /**
  * Remove Hero
  * This function is used to delete a hero                          
@@ -156,6 +158,7 @@ function displayNames(array) {
                 if (hero1Name.textContent === "") {
                     hero1 = element;
                     addHero(element, hero1HTML);
+                    console.log(hero1);
                 }
 
                 // If the first hero is already chosen and the second hero is not chosen then the selected hero becomes hero 2
@@ -170,10 +173,34 @@ function displayNames(array) {
                 }
             });
             count++;
+
         });
     });
+    // If we click on the random button next to the search list then we add him as a new random fighter
+    const buttonRandom = document.querySelector("#btn-random")
+    buttonRandom.addEventListener('click', function (e) {
+        let id = dice(heroes.length);
+        const hero1Name = hero1HTML.querySelector(".selection__heroe-name");
+        const hero2Name = hero2HTML.querySelector(".selection__heroe-name");
+    
+        // If the first hero is not chosen then the selected hero becomes hero 1
+        if (hero1Name.textContent === "") {
+            hero1 = heroes[id];
+            addHero(heroes[id], hero1HTML);
+        }
+    
+        // If the first hero is already chosen and the second hero is not chosen then the selected hero becomes hero 2
+        else if (hero2Name.textContent === "") {
+            hero2 = heroes[id];
+            addHero(heroes[id], hero2HTML);
+        }
+    
+        // If the 2 heroes are selected then nothing is done
+        else {
+            console.log('Both hero zones are full');
+        }
+    });
 }
-
 
 
 // Function use to call JSON data
@@ -187,14 +214,7 @@ function dice(number) {
     return parseInt(Math.random() * number);
 }
 
-// Add random hero
-// buttonRandom = document.querySelector("#btn-random");
-// function addRandomHero {
-//     buttonRandom.addEventListener('click', function (e) {
-//         dice(heroes.length)
 
-//     })
-// }
 
 
 
@@ -203,6 +223,7 @@ function dice(number) {
 // function speedScore(hero) {
 //     return hero.powerstats.speed + dice();
 // }
+
 // Define the difference of speed of selected heroes
 function getMostSpeedHero(hero1, hero2) {
     const speedHero1 = hero1.powerstats.speed;
@@ -218,7 +239,7 @@ function getMostSpeedHero(hero1, hero2) {
     // If Hero2 have more speed, he win the difference and add a dice (1-100)
     else if (speedDiff < 0) {
         attacksLuckH1 = dice(100)
-        attacksLuckH2 = dice(100) + speedDiff
+        attacksLuckH2 = dice(100) - speedDiff // speedDiff = negative score (ex: 100 - (-50) = 150)
     }
     // If heroes have same speed, they just launch a dice (1-100)
     else if (speedDiff == 0) {
@@ -343,6 +364,8 @@ function battle(hero1, hero2) {
             // hero2HTML.querySelector('.progress-life').textContent = `${hero2.powerstats.durability}/${hero2Life}`; // Display number of the life of hero 2 in life-bar
             hero1HTML.querySelector('.life-combat').style.width = Math.max(hero1LifeAfterDamage, 0) + `%`; // Reduce life-bar of hero 1 in terms of his remaining life 
             hero2HTML.querySelector('.life-combat').style.width = Math.max(hero2LifeAfterDamage, 0) + `%`; // Reduce life-bar of hero 2 in terms of his remaining life 
+            hero1HTML.querySelector('.health-point').textContent = `${hero1.powerstats.durability}/${hero1Life}`
+            hero2HTML.querySelector('.health-point').textContent = `${hero2.powerstats.durability}/${hero2Life}`
 
             if (hero1LifeAfterDamage < 60) {
                 hero1HTML.querySelector('.selection__heroe-life').style.backgroundColor = "orange";
@@ -357,13 +380,13 @@ function battle(hero1, hero2) {
                 hero2HTML.querySelector('.selection__heroe-life').style.backgroundColor = "red";
             }
             if (hero1.powerstats.durability <= 0) {
-                hero1HTML.querySelector('.selection__heroe-life').textContent = `0`
+                // hero1HTML.querySelector('.selection__heroe-life').textContent = `0`
                 hero1HTML.querySelector('.life-combat').style.width = `0%`;
                 // hero1HTML.querySelector('.img-cross').classList.remove("display-none")
                 hero1HTML.querySelector('.img-cross-1').classList.add("img-cross-1-display")
             }
             else if (hero2.powerstats.durability <= 0) {
-                hero2HTML.querySelector('.selection__heroe-life').textContent = `0`
+                // hero2HTML.querySelector('.selection__heroe-life').textContent = `0`
                 hero2HTML.querySelector('.life-combat').style.width = `0%`;
                 // hero2HTML.querySelector('.img-cross').classList.remove("display-none")
                 hero2HTML.querySelector('.img-cross-2').classList.add("img-cross-2-display")
