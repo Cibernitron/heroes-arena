@@ -214,16 +214,6 @@ function dice(number) {
     return parseInt(Math.random() * number);
 }
 
-
-
-
-
-// // Define "speed" value
-// Add a random value to hero "speed" value 
-// function speedScore(hero) {
-//     return hero.powerstats.speed + dice();
-// }
-
 // Define the difference of speed of selected heroes
 function getMostSpeedHero(hero1, hero2) {
     const speedHero1 = hero1.powerstats.speed;
@@ -250,26 +240,19 @@ function getMostSpeedHero(hero1, hero2) {
     if (attacksLuckH1 > attacksLuckH2) {
         attacker = hero1;
         defender = hero2;
-        document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} à obtenu un score de vitesse (${attacksLuckH1}) plus important que celui de ${defender.name} (${attacksLuckH2})`;
+        document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} a obtenu un score de vitesse (${attacksLuckH1}) plus important que celui de ${defender.name} (${attacksLuckH2})`;
         return hero1.name;
     }
     else if (attacksLuckH1 < attacksLuckH2) {
         attacker = hero2;
         defender = hero1;
-        document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} à obtenu un score de vitesse (${attacksLuckH2}) plus important que celui de ${defender.name} (${attacksLuckH1})`;
+        document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} a obtenu un score de vitesse (${attacksLuckH2}) plus important que celui de ${defender.name} (${attacksLuckH1})`;
         return hero2.name;
     }
     else {
         return
     }
-
 }
-
-
-// function whoStartToFight(hero1, hero2) {
-
-// }
-
 
 // Define "defense" value
 // Add a random value to hero "defense" value 
@@ -382,12 +365,14 @@ function battle(hero1, hero2) {
             if (hero1.powerstats.durability <= 0) {
                 // hero1HTML.querySelector('.selection__heroe-life').textContent = `0`
                 hero1HTML.querySelector('.life-combat').style.width = `0%`;
+                hero1HTML.querySelector('.health-point').textContent = `0/${hero1Life}`
                 // hero1HTML.querySelector('.img-cross').classList.remove("display-none")
                 hero1HTML.querySelector('.img-cross-1').classList.add("img-cross-1-display")
             }
             else if (hero2.powerstats.durability <= 0) {
                 // hero2HTML.querySelector('.selection__heroe-life').textContent = `0`
                 hero2HTML.querySelector('.life-combat').style.width = `0%`;
+                hero2HTML.querySelector('.health-point').textContent = `0/${hero2Life}`
                 // hero2HTML.querySelector('.img-cross').classList.remove("display-none")
                 hero2HTML.querySelector('.img-cross-2').classList.add("img-cross-2-display")
             }

@@ -339,7 +339,7 @@ input[type=text]:focus {
     align-items: center;
 }
 
-.button-random{
+.button-random {
     align-self: center;
     background: linear-gradient(var(--primary-color), #790909, var(--primary-color));
     padding: 0.5rem 0.75rem;
@@ -355,6 +355,7 @@ input[type=text]:focus {
 .button-random--active {
     background: linear-gradient(var(--primary-color), #818479, var(--primary-color));
 }
+
 .flex-wrap {
     flex-wrap: wrap;
 }
@@ -422,12 +423,15 @@ input[type=text]:focus {
     display: flex;
     /* align-items: center; */
     /* justify-content: center; */
-    width: 100%;
+    width: 90%;
 }
+
 .progress-container {
     display: flex;
     flex-direction: column;
     width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .fight__ttl {
@@ -585,26 +589,59 @@ input[type=text]:focus {
     /* border: 1px solid var(--primary-color); */
 }
 
-.health-point {
-    color: red;
-    background-color: #171A21;
-    text-align: center;
-    font-size: xx-small;
-    font-weight: 700;
-}
-
 .progress-life {
     width: 100%;
     height: .5rem;
     background-color: #fff;
     display: none;
     align-items: flex-end;
-    margin: auto 0;
+    /* margin: auto 0; */
     border-radius: 1rem;
     top: 0;
     /* border: 1px solid var(--primary-color); */
-
+    
 }
+
+.health-point {
+    color: red;
+    position: absolute;
+    text-align: center;
+    font-size: xx-small;
+    font-weight: 700;
+}
+@media screen and (min-width:1000px) {
+
+    .life-combat {
+        height: 1rem;
+        border-radius: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1px;
+        transition: ease 0.5s;
+        top: 0;
+        /* border: 1px solid var(--primary-color); */
+    }
+
+    .progress-life {
+        width: 100%;
+        height: 1rem;
+        background-color: #fff;
+        display: none;
+        align-items: flex-end;
+        /* margin: auto 0; */
+        border-radius: 1rem;
+        top: 0;
+        /* border: 1px solid var(--primary-color); */
+
+    }
+
+    .health-point {
+        font-size: 1rem;
+    }
+}
+
+
 
 .progress-val-life {
     background-color: rgb(36, 202, 36);
@@ -638,16 +675,6 @@ input[type=text]:focus {
         height: 1rem;
         background-color: #fff;
         display: flex;
-        align-items: flex-end;
-        border-radius: 2rem;
-        border: 2px solid var(--primary-color);
-        padding-top: 1rem;
-    }
-
-    .progress-life {
-        width: 27rem;
-        background-color: #fff;
-        display: none;
         align-items: flex-end;
         border-radius: 2rem;
         border: 2px solid var(--primary-color);
