@@ -264,29 +264,30 @@ input[type=text]:focus {
 .header {
     display: flex;
     align-items: center;
-    background-color: var(--fifth-color);
-    height: 61px;
+    /* background-color: var(--fifth-color); */
+    height: 100px;
 }
 
 .header__link {
-    max-width: 25vw;
-    font-size: 0;
-    max-height: 61px;
+    /* position: absolute; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 8rem;
+    /* font-size: 0; */
+    /* max-height: 61px; */
+    /* left: calc(50%-50vw); */
+    margin: 0 auto;
+
 }
 
 .header__logo {
     width: 100%;
-    height: 61px;
+    
+
 
 }
 
-.header__ttl {
-    max-width: 75vw;
-    height: auto;
-    margin: 0 auto;
-    font-size: 0;
-    max-height: 61px;
-}
 
 
 /* SECTION SELECTION */
