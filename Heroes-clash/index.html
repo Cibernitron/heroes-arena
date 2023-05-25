@@ -13,30 +13,34 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="body ">
+<body class="body">
+    <div class="body__background"></div>
     <header class="header">
+        <div class="header__band"></div>
+        <div class="header__background"></div>
         <a class="header__link" href="index.html">
             <img class="header__logo" src="img/logo heroes-arena.png" alt="logo">
         </a>
         
     </header>
-    <main class="combat-design">
+    <main >
+        <!-- Search -->
+        <div class="character__srch">
+            <section id="search" class="search display-none">
+                <h2 id="selection-ttl" class="section__ttl">Selection</h2>
+                <input type="text" id="name" name="name" placeholder="Selectionnez un héro" required
+                    minlength="3" size="30">
+                <ul id="search-list" class="characters__list"></ul>
+                <button id="btn-random" class="button button-random">Random</button>
+            </section>
+        </div>
+        <!-- Selection Heroes -->
         <div id="selection-background">
-            <section class="selection" id="selection">
-                <!-- Search -->
-                <div class="character__srch">
-                    <section id="search" class="search display-none">
-                        <h2 id="selection-ttl" class="section__ttl">Selection</h2>
-                        <input type="text" id="name" name="name" placeholder="Selectionnez un héro" required
-                            minlength="3" size="30">
-                        <ul id="search-list" class="characters__list"></ul>
-                        <button id="btn-random" class="button button-random">Random</button>
-                    </section>
-                </div>
-                <!-- Selection Hero -->
+            <section class="selection combat-design" id="selection">
+                <div class="combat_background display-none"></div>
                 <div class="selection__heroes">
-                    <!-- Selection Hero1 -->
                     <div class="container-heros">
+                        <!-- Selection Hero1 -->
                         <div id="hero1" class="selection__heroe ">
                             <p id="cross" class="display-none selection__heroe-name selection__heroe-name-cross"></p>
                             <div class="life-container">
@@ -83,6 +87,7 @@
                             <ul class="display-none character-card"></ul>
                         </div>
                     </div>
+                     <!-- Resume fight -->
                     <div class="resume">
                         <button class="button-resume display-none"><strong> Resumé du combat</strong></button>
                         <p id="selection-combat-text" class="selection_combat_text display-none">
@@ -94,12 +99,12 @@
         </div>
         <span class="margin-bottom" id="margin-bottom"></span>
     </main>
-    <footer class="footer">
+    <!-- <footer class="footer">
         <img class="footer__ttl" src="img/Heroesjaune.png" alt="">
         <a class="footer__link" href="index.html">
             <img class="footer__logo" src="img/logo.png" alt="logo">
         </a>
-    </footer>
+    </footer> -->
 </body>
 <script src="script.js"></script>
 

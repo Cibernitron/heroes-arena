@@ -107,6 +107,7 @@ function removeHero(heroHtml) {
 
     // Remove hero character-card with hero information
     heroHtml.querySelector('.character-card').innerHTML = '';
+    heroHtml.querySelector('.character-card').classList.add('display-none');
 
     if (heroHtml.id === 'hero1') {
         hero1 = undefined;
@@ -368,6 +369,7 @@ function battle(hero1, hero2) {
                 hero1HTML.querySelector('.health-point').textContent = `0/${hero1Life}`
                 // hero1HTML.querySelector('.img-cross').classList.remove("display-none")
                 hero1HTML.querySelector('.img-cross-1').classList.add("img-cross-1-display")
+                document.querySelector(".combat_background").classList.toggle("display-none")
             }
             else if (hero2.powerstats.durability <= 0) {
                 // hero2HTML.querySelector('.selection__heroe-life').textContent = `0`
@@ -375,6 +377,7 @@ function battle(hero1, hero2) {
                 hero2HTML.querySelector('.health-point').textContent = `0/${hero2Life}`
                 // hero2HTML.querySelector('.img-cross').classList.remove("display-none")
                 hero2HTML.querySelector('.img-cross-2').classList.add("img-cross-2-display")
+                document.querySelector(".combat_background").classList.toggle("display-none")
             }
 
             if (attacker.powerstats.durability <= 0) { // If attacker have not life, defender win, and the fight is close 
@@ -456,6 +459,7 @@ function preparHeroToCombat(heroHTML) {
     heroHTML.querySelector(".progress-life").style.display = "flex";
     document.querySelector(".health-img-1").classList.remove("display-none");
     document.querySelector(".health-img-2").classList.remove("display-none");
+    document.querySelector(".body__background").style.opacity = "0%";
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -512,7 +516,8 @@ buttonCombat.addEventListener('click', function (event) {
     }
     preparHeroToCombat(hero1HTML)
     preparHeroToCombat(hero2HTML)
-    combatArea.style.backgroundImage = "url(img/fond_combat.png)"
+    combatArea.style.backgroundImage = "url(img/damier.jpg)"
+    document.querySelector(".combat_background").classList.toggle("display-none")
     resumeCbt.classList.toggle("display-none")
     // disabled remove heros
     // hero1HTML.querySelector('.selection__heroe-name').removeEventListener('click', function(e){removeHero(hero1HTML)});

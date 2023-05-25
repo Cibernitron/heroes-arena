@@ -2,9 +2,11 @@
     font-size: 16px;
     font-family: 'roboto', 'Helvetica Neue', sans-serif;
     --primary-color: #171A21;
-    --secondary-color: rgb(168, 36, 49);
+    --secondary-color: rgb(255, 0, 0);
+    --secondary-color-dark: rgb(158, 1, 1);
     --third-color: #818479;
-    --fourth-color: #F4D35E;
+    --fourth-color: rgb(255, 234, 0);
+    --fourth-color-dark: rgb(226, 182, 22);
     --fifth-color: #007AB8;
     --sixth-color: #fff;
 }
@@ -59,7 +61,7 @@ input[type=text]:focus {
 .button__lnk {
     width: 100%;
     border: none;
-
+    z-index: 100;
     font-size: 16px;
     background-color: var(--sixth-color);
 }
@@ -67,10 +69,11 @@ input[type=text]:focus {
 .button__lnk:hover {
     background-color: var(--fifth-color);
     color: var(--fourth-color);
+    z-index: 100;
 }
 
 .search {
-    margin: 3rem 0;
+    margin: 1rem 0;
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -172,7 +175,21 @@ input[type=text]:focus {
     border-radius: 5px;
     border: 1px var(--primary-color) solid;
     padding: 1rem;
-    width: 40vw;
+    width: 100%;
+}
+
+
+.character__features {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.bio {
+    display: flex;
+    flex-direction: column;
+    font-size: 4vw;
 }
 
 @media screen and (min-width:1000px) {
@@ -186,18 +203,10 @@ input[type=text]:focus {
     .character-card {
         width: 20vw;
     }
-}
 
-.character__features {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    flex-direction: column;
-}
-
-.bio {
-    display: flex;
-    flex-direction: column;
+    .bio {
+        font-size: medium;
+    }
 }
 
 .text__title__bio {
@@ -254,40 +263,58 @@ input[type=text]:focus {
 /* BODY */
 
 .body {
-    background-color: var(--fourth-color);
+    background-image: url(img/c0bee589f5c4f34f44885771c2f80ee7.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 100vh;
+}
+
+.body__background {
+    /* background: linear-gradient(to right, var(--fourth-color-dark), var(--secondary-color-dark)); */
+    background: linear-gradient(to right, black, white);
+    opacity: 80%;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
 }
 
 
 /* HEADER */
 
 .header {
-    display: flex;
-    align-items: center;
-    /* background-color: var(--fifth-color); */
     height: 100px;
+    top: 0;
+}
+
+.header__band {
+    background: linear-gradient(to bottom, var(--fourth-color), var(--fourth-color-dark));
+    width: 100%;
+    height: 1.2rem;
+    position: absolute;
+    top: 3.2rem;
+    z-index: -1;
 }
 
 .header__link {
-    /* position: absolute; */
     display: flex;
-    align-items: center;
-    justify-content: center;
     width: 8rem;
-    /* font-size: 0; */
-    /* max-height: 61px; */
-    /* left: calc(50%-50vw); */
     margin: 0 auto;
-
 }
 
 .header__logo {
     width: 100%;
-    
-
-
 }
 
+.header__background {
+    background-color: var(--primary-color);
+    opacity: 40%;
+    position: absolute;
+    width: 100%;
+    height: 7rem;
+    z-index: -10;
+}
 
 
 /* SECTION SELECTION */
@@ -315,15 +342,17 @@ input[type=text]:focus {
 
 .container-heros {
     display: flex;
+    justify-content: center;
+    margin: 0 1rem;
 }
 
 .selection__heroe {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    margin-right: 1rem;
-    margin-left: 1rem;
+    /* gap: 1rem; */
+    /* margin-right: 1rem;
+    margin-left: 1rem; */
     width: 30vw;
     position: relative;
 }
@@ -338,6 +367,7 @@ input[type=text]:focus {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 100;
 }
 
 .button-random {
@@ -350,11 +380,13 @@ input[type=text]:focus {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 2rem;
+    z-index: 100;
+    /* margin-top: 2rem; */
 }
 
 .button-random--active {
     background: linear-gradient(var(--primary-color), #818479, var(--primary-color));
+    z-index: 100;
 }
 
 .flex-wrap {
@@ -363,6 +395,7 @@ input[type=text]:focus {
 
 .button--active {
     background: linear-gradient(var(--primary-color), #790909, var(--primary-color));
+    z-index: 100;
 }
 
 
@@ -398,12 +431,26 @@ input[type=text]:focus {
     background-image: url(img/—Pngtree—colorful\ and\ rich\ yellow\ black_1338586.jpg);
     background-position: center;
     background-repeat: no-repeat;
-    margin: 0;
     background-size: cover;
-    width: 100vw;
+    margin: 2rem auto;
+    width: 90vw;
     padding-bottom: 2rem;
     padding-top: 3rem;
+    position: relative;
+    z-index: 0;
+}
 
+.combat_background {
+    background-image: url(img/anime-punch-VFX-high.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 50%;
+    z-index: -100;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
 }
 
 .name-combat {
@@ -471,7 +518,7 @@ input[type=text]:focus {
 
 .button-resume {
     position: absolute;
-
+    z-index: 100;
 }
 
 .resume {
@@ -600,7 +647,7 @@ input[type=text]:focus {
     border-radius: 1rem;
     top: 0;
     /* border: 1px solid var(--primary-color); */
-    
+
 }
 
 .health-point {
@@ -610,6 +657,7 @@ input[type=text]:focus {
     font-size: xx-small;
     font-weight: 700;
 }
+
 @media screen and (min-width:1000px) {
 
     .life-combat {
