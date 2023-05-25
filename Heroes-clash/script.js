@@ -22,6 +22,8 @@ const margin = document.querySelector("#margin-bottom");
 const imgVS = document.querySelector('.selection__img-versus')
 const selectionDivHeroes = document.querySelector('.selection__heroes')
 const resumeCbt = document.querySelector('.button-resume')
+const hero1Name = hero1HTML.querySelector(".selection__heroe-name");
+const hero2Name = hero2HTML.querySelector(".selection__heroe-name");
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*
                          +------------------------------------------+
@@ -49,6 +51,14 @@ function verifyTheHeroes(hero1, hero2) {
     }
 }
 
+// function verifyTheHeroes2(hero, heroHTML) {
+//     if (hero == !undefined) {
+//         heroHTML.querySelector('.selection-container').addEventListener('click', function (e) {
+//             displayOrNotCharacterCard(hero1HTML)})
+//             console.log(hero == !undefined);
+//     }
+// }
+
 
 
 /**
@@ -73,14 +83,23 @@ function addHero(hero, heroHtml) {
     heroHtml.querySelector('.selection__img').src = hero.images.md;
 
     // Display stat button of the hero
-    heroHtml.querySelector('.btn-stat').classList.remove('display-none');
+    // heroHtml.querySelector('.selection-container').classList.remove('display-none');
 
     // Fill the hero caracter-card
     heroHtml.querySelector('.character-card').innerHTML = displayCards(hero);
 
+    // Display or not character-card in the place of picture on click on this last one
+
     verifyTheHeroes(hero1, hero2);
 }
+// Display or not character-card in the place of picture on click on this last one
+function displayOrNotCharacterCard(heroHtml) {
+    // display character-card in the place of picture on click on this last one
+    heroHtml.querySelector('.character-card').classList.toggle('display-none')
+    heroHtml.querySelector('.selection__img').classList.toggle('display-none')
 
+}
+   
 
 
 /**
@@ -103,11 +122,12 @@ function removeHero(heroHtml) {
     heroHtml.querySelector('.selection__img').src = "img/Choix perso mobile.png";
 
     // Hide stat button
-    heroHtml.querySelector('.btn-stat').classList.add('display-none');
+    // heroHtml.querySelector('.selection-container').classList.add('display-none');
 
     // Remove hero character-card with hero information
     heroHtml.querySelector('.character-card').innerHTML = '';
     heroHtml.querySelector('.character-card').classList.add('display-none');
+
 
     if (heroHtml.id === 'hero1') {
         hero1 = undefined;
@@ -149,23 +169,27 @@ function displayNames(array) {
             buttonLiHeroes.setAttribute("id", `${element.id}`);
             buttonLiHeroes.innerText = element.name;
 
+
+
+
+
             // If we click on the name of a hero in the search list then we add him as a new fighter
             const buttonHeroes = document.getElementById(`${element.id}`);
             buttonHeroes.addEventListener('click', function (e) {
-                const hero1Name = hero1HTML.querySelector(".selection__heroe-name");
-                const hero2Name = hero2HTML.querySelector(".selection__heroe-name");
+
 
                 // If the first hero is not chosen then the selected hero becomes hero 1
                 if (hero1Name.textContent === "") {
                     hero1 = element;
                     addHero(element, hero1HTML);
-                    console.log(hero1);
+
                 }
 
                 // If the first hero is already chosen and the second hero is not chosen then the selected hero becomes hero 2
                 else if (hero2Name.textContent === "") {
                     hero2 = element;
                     addHero(element, hero2HTML);
+
                 }
 
                 // If the 2 heroes are selected then nothing is done
@@ -183,19 +207,19 @@ function displayNames(array) {
         let id = dice(heroes.length);
         const hero1Name = hero1HTML.querySelector(".selection__heroe-name");
         const hero2Name = hero2HTML.querySelector(".selection__heroe-name");
-    
+
         // If the first hero is not chosen then the selected hero becomes hero 1
         if (hero1Name.textContent === "") {
             hero1 = heroes[id];
             addHero(heroes[id], hero1HTML);
         }
-    
+
         // If the first hero is already chosen and the second hero is not chosen then the selected hero becomes hero 2
         else if (hero2Name.textContent === "") {
             hero2 = heroes[id];
             addHero(heroes[id], hero2HTML);
         }
-    
+
         // If the 2 heroes are selected then nothing is done
         else {
             console.log('Both hero zones are full');
@@ -209,6 +233,7 @@ async function waitingForResponse() {
     const response = await fetch("https://akabab.github.io/superhero-api/api/all.json");
     heroes = await response.json();
     displayNames(heroes);
+
 }
 
 function dice(number) {
@@ -473,8 +498,8 @@ function preparHeroToCombat(heroHTML) {
 waitingForResponse();
 
 // Display the character-card of hero 1 if you click on the Stats button of hero 1
-hero1HTML.querySelector('.btn-stat').addEventListener('click', function (e) {
-    hero1HTML.querySelector('.character-card').classList.toggle('display-none');
+hero1HTML.querySelector('.selection-container').addEventListener('click', function (e) {
+    displayOrNotCharacterCard(hero1HTML) 
     // Associate stats of hero 1 to progress-bar width
     hero1HTML.querySelector('.progress-val-atq').style.width = hero1.powerstats.strength + '%'
     hero1HTML.querySelector('.progress-val-life').style.width = hero1.powerstats.durability + '%'
@@ -482,15 +507,20 @@ hero1HTML.querySelector('.btn-stat').addEventListener('click', function (e) {
     hero1HTML.querySelector('.progress-val-speed').style.width = hero1.powerstats.speed + '%'
 });
 
+// verifyTheHeroes2(hero1, hero1HTML)
+// verifyTheHeroes2(hero2, hero2HTML)
+
 // Display the character-card of hero 2 if you click on the Stats button of hero 2
-hero2HTML.querySelector('.btn-stat').addEventListener('click', function (e) {
-    hero2HTML.querySelector('.character-card').classList.toggle('display-none');
+hero2HTML.querySelector('.selection-container').addEventListener('click', function (e) {
+    displayOrNotCharacterCard(hero2HTML) 
     // Associate stats of hero 2 to progress-bar width
     hero2HTML.querySelector('.progress-val-atq').style.width = hero2.powerstats.strength + '%'
     hero2HTML.querySelector('.progress-val-life').style.width = hero2.powerstats.durability + '%'
     hero2HTML.querySelector('.progress-val-shield').style.width = hero2.powerstats.combat + '%'
     hero2HTML.querySelector('.progress-val-speed').style.width = hero2.powerstats.speed + '%'
 });
+
+
 resumeCbt.addEventListener('click', function (e) {
     combatText.classList.toggle("display-none")
 });
@@ -500,6 +530,7 @@ hero1HTML.querySelector('.selection__heroe-name').addEventListener('click', func
 
 // Remove hero 2 if you click on his name
 hero2HTML.querySelector('.selection__heroe-name').addEventListener('click', function (e) { removeHero(hero2HTML) });
+
 
 // On click of button "combat", fight starting
 buttonCombat.addEventListener('click', function (event) {

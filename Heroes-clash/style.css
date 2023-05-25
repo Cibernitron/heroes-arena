@@ -172,10 +172,12 @@ input[type=text]:focus {
 
 .character-card {
     background-color: var(--fifth-color);
-    border-radius: 5px;
-    border: 1px var(--primary-color) solid;
     padding: 1rem;
-    width: 100%;
+    width: 30vw;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border: black 2px solid;
+    border-radius: 2vw;
 }
 
 
@@ -773,11 +775,19 @@ input[type=text]:focus {
 
 .selection__img {
     width: 30vw;
+    aspect-ratio: 1/1;
     object-fit: cover;
     border: black 2px solid;
     border-radius: 2vw;
-    aspect-ratio: 1/1;
 }
+
+/* .selection-container:hover {
+    background-image: url(img/stats-perso.png) ;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 10000;
+} */
 
 .selection__img-fight {
     width: 0%;
