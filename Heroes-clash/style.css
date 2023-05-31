@@ -83,6 +83,11 @@ input[type=text]:focus {
 
 
 /* CHARACTER FEATURE */
+
+.character__card-title {
+    font-size: 3vw;
+}
+
 .characters__list {
     display: flex;
     flex-direction: column;
@@ -425,6 +430,21 @@ input[type=text]:focus {
     opacity: 1;
 }
 
+.name-combat {
+    background-color: var(--sixth-color);
+    border: .5vw solid var(--primary-color);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: var(--primary-color);
+    font-family: 'marvel';
+    font-weight: bold;
+    font-size: 2vw;
+    margin-bottom: 1rem;
+}
+
 
 
 /* SECTION COMBAT */
@@ -455,19 +475,7 @@ input[type=text]:focus {
     top: 0;
 }
 
-.name-combat {
-    background-color: var(--sixth-color);
-    border: .5vw solid var(--primary-color);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    color: var(--primary-color);
-    font-family: 'marvel';
-    font-weight: bold;
-    font-size: 3vw
-}
+
 
 .life-container {
     display: flex;
@@ -769,8 +777,7 @@ input[type=text]:focus {
 
 .selection-container {
     position: relative;
-    transition: left 1s ease;
-    transition: right 1s ease;
+    
 }
 
 .selection__img {
@@ -779,6 +786,7 @@ input[type=text]:focus {
     object-fit: cover;
     border: black 2px solid;
     border-radius: 2vw;
+    background-color: var(--sixth-color);
 }
 
 /* .selection-container:hover {

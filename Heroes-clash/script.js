@@ -60,15 +60,16 @@ function verifyTheHeroes(hero1, hero2) {
 }
 
 // Display or not character-card in the place of picture on click on this last one
-function displayOrNotCharacterCard(heroHtml) {
+function displayOrNotCharacterCard(heroHtml, number) {
     // display character-card in the place of picture on click on this last one
     heroHtml.querySelector('.character-card').classList.toggle('display-none')
     heroHtml.querySelector('.selection__img').classList.toggle('display-none')
+    heroHtml.querySelector(`.img-cross-${number}-display`).classList.toggle('display-none')
 }
 
-function verifyTheHeroes2(hero, heroHTML) {
+function verifyTheHeroes2(hero, heroHTML, number) {
     if (hero === undefined) { return; }
-    displayOrNotCharacterCard(heroHTML)
+    displayOrNotCharacterCard(heroHTML, number)
 }
 
 
@@ -122,6 +123,7 @@ function removeHero(heroHtml) {
     heroHtml.querySelector('.selection__heroe-life').textContent = '';
 
     // Remove hero picture
+    heroHtml.querySelector('.selection__img').classList.remove('display-none');
     heroHtml.querySelector('.selection__img').src = "img/Choix perso mobile.png";
 
     // Hide stat button
@@ -360,7 +362,7 @@ function battle(hero1, hero2) {
     let hero2LifeAfterDamage;
     setTimeout(() => {
         document.querySelector('.selection__img-fight').style.width = "20%";
-        document.querySelector('.selection__img-fight').style.top = "5rem";
+        document.querySelector('.selection__img-fight').style.top = "3rem";
     }, "1000");
 
     // Executing fight, turn by turn all the 2 sec
@@ -481,6 +483,7 @@ function displayCards(hero) {
  */
 function preparHeroToCombat(heroHTML) {
     heroHTML.querySelector(".selection__heroe-name").classList.add("name-combat");
+    heroHTML.querySelector(".name-combat").style.marginBottom = "0";
     heroHTML.querySelector(".selection__heroe-life").classList.add("life-combat");
     heroHTML.querySelector(".selection__heroe-life").classList.remove("display-none");
     heroHTML.querySelector(".progress").style.display = "flex";
@@ -523,10 +526,10 @@ hero2HTML.querySelector('.selection-container').addEventListener('click', functi
 });
 
 hero1HTML.querySelector('.selection-container').addEventListener('click', function (e) {
-    verifyTheHeroes2(hero1, hero1HTML)
+    verifyTheHeroes2(hero1, hero1HTML, 1)
 });
 hero2HTML.querySelector('.selection-container').addEventListener('click', function (e) {
-    verifyTheHeroes2(hero2, hero2HTML)
+    verifyTheHeroes2(hero2, hero2HTML, 2)
 });
 
 resumeCbt.addEventListener('click', function (e) {
