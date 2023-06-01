@@ -25,11 +25,12 @@ const selectionTitle = document.querySelector("#selection-ttl");
 const fightTitle = document.querySelector("#fight-ttl");
 const search = document.querySelector("#search");
 const margin = document.querySelector("#margin-bottom");
-const imgVS = document.querySelector('.selection__img-versus')
-const selectionDivHeroes = document.querySelector('.selection__heroes')
-const resumeCbt = document.querySelector('.button-resume')
-const hero1Name = hero1HTML.querySelector(".selection__heroe-name");
-const hero2Name = hero2HTML.querySelector(".selection__heroe-name");
+const imgVS = document.querySelector('.versus__img')
+const selectionHeroes = document.querySelector('.selection__heroes')
+const resumeCbt = document.querySelector('.resume__button')
+const hero1Name = hero1HTML.querySelector(".hero__name");
+const hero2Name = hero2HTML.querySelector(".hero__name");
+const resumeText = document.querySelector('.resume__text')
 // const controller = new AbortController();
 // const signal = controller.signal;
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -43,7 +44,7 @@ const hero2Name = hero2HTML.querySelector(".selection__heroe-name");
  * Change color of button "combat" if it can not be used
  * @param {string} hero1 is the parent HTML tag where we will add the hero                            
  * @param {string} hero2 is the parent HTML tag where we will add the hero                            
- * @return {string} if 2 heros are selected, the button "combat" is active, else it is not
+ * @return {string} if 2 heroes are selected, the button "combat" is active, else it is not
  */
 function verifyTheHeroes(hero1, hero2) {
     if (hero1 == undefined || hero2 == undefined) {
@@ -62,9 +63,9 @@ function verifyTheHeroes(hero1, hero2) {
 // Display or not character-card in the place of picture on click on this last one
 function displayOrNotCharacterCard(heroHtml, number) {
     // display character-card in the place of picture on click on this last one
-    heroHtml.querySelector('.character-card').classList.toggle('display-none')
-    heroHtml.querySelector('.selection__img').classList.toggle('display-none')
-    heroHtml.querySelector(`.img-cross-${number}-display`).classList.toggle('display-none')
+    heroHtml.querySelector('.hero__character-card').classList.toggle('display-none')
+    heroHtml.querySelector('.hero__img').classList.toggle('display-none')
+    heroHtml.querySelector(`.hero__cross-${number}-display`).classList.toggle('display-none')
 }
 
 function verifyTheHeroes2(hero, heroHTML, number) {
@@ -84,21 +85,21 @@ function verifyTheHeroes2(hero, heroHTML, number) {
 function addHero(hero, heroHtml) {
 
     // Add and display the name of the hero
-    heroHtml.querySelector(".selection__heroe-name").textContent = hero.name;
-    heroHtml.querySelector(".selection__heroe-name").classList.remove('display-none');
-    heroHtml.querySelector(".selection__heroe-name").classList.add("name-combat");
+    heroHtml.querySelector(".hero__name").textContent = hero.name;
+    heroHtml.querySelector(".hero__name").classList.remove('display-none');
+    heroHtml.querySelector(".hero__name").classList.add("name-combat");
 
     // Display the life points of the hero
-    // heroHtml.querySelector('.selection__heroe-life').textContent = `${hero.powerstats.durability}`;
+    // heroHtml.querySelector('.life-bar__modular').textContent = `${hero.powerstats.durability}`;
 
     // Display the picture of the hero
-    heroHtml.querySelector('.selection__img').src = hero.images.md;
+    heroHtml.querySelector('.hero__img').src = hero.images.md;
 
     // Display stat button of the hero
-    // heroHtml.querySelector('.selection-container').classList.remove('display-none');
+    // heroHtml.querySelector('.hero__container').classList.remove('display-none');
 
     // Fill the hero caracter-card
-    heroHtml.querySelector('.character-card').innerHTML = displayCards(hero);
+    heroHtml.querySelector('.hero__character-card').innerHTML = displayCards(hero);
 
     // Display or not character-card in the place of picture on click on this last one
 
@@ -115,23 +116,23 @@ function addHero(hero, heroHtml) {
 function removeHero(heroHtml) {
 
     // Remove and hide the hero name
-    heroHtml.querySelector(".selection__heroe-name").textContent = '';
-    heroHtml.querySelector(".selection__heroe-name").classList.remove('name-combat');
-    heroHtml.querySelector(".selection__heroe-name").classList.add('display-none');
+    heroHtml.querySelector(".hero__name").textContent = '';
+    heroHtml.querySelector(".hero__name").classList.remove('name-combat');
+    heroHtml.querySelector(".hero__name").classList.add('display-none');
 
     // Remove health point
-    heroHtml.querySelector('.selection__heroe-life').textContent = '';
+    heroHtml.querySelector('.life-bar__modular').textContent = '';
 
     // Remove hero picture
-    heroHtml.querySelector('.selection__img').classList.remove('display-none');
-    heroHtml.querySelector('.selection__img').src = "img/Choix perso mobile.png";
+    heroHtml.querySelector('.hero__img').classList.remove('display-none');
+    heroHtml.querySelector('.hero__img').src = "img/Choix perso mobile.png";
 
     // Hide stat button
-    // heroHtml.querySelector('.selection-container').classList.add('display-none');
+    // heroHtml.querySelector('.hero__container').classList.add('display-none');
 
     // Remove hero character-card with hero information
-    heroHtml.querySelector('.character-card').innerHTML = '';
-    heroHtml.querySelector('.character-card').classList.add('display-none');
+    heroHtml.querySelector('.hero__character-card').innerHTML = '';
+    heroHtml.querySelector('.hero__character-card').classList.add('display-none');
 
 
     if (heroHtml.id === 'hero1') {
@@ -210,8 +211,8 @@ function displayNames(array) {
     const buttonRandom = document.querySelector("#btn-random")
     buttonRandom.addEventListener('click', function (e) {
         let id = dice(heroes.length);
-        const hero1Name = hero1HTML.querySelector(".selection__heroe-name");
-        const hero2Name = hero2HTML.querySelector(".selection__heroe-name");
+        const hero1Name = hero1HTML.querySelector(".hero__name");
+        const hero2Name = hero2HTML.querySelector(".hero__name");
 
         // If the first hero is not chosen then the selected hero becomes hero 1
         if (hero1Name.textContent === "") {
@@ -271,13 +272,13 @@ function getMostSpeedHero(hero1, hero2) {
     if (attacksLuckH1 > attacksLuckH2) {
         attacker = hero1;
         defender = hero2;
-        document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} a obtenu un score de vitesse (${attacksLuckH1}) plus important que celui de ${defender.name} (${attacksLuckH2})`;
+        resumeText.innerHTML += `<br> ${attacker.name} a obtenu un score de vitesse (${attacksLuckH1}) plus important que celui de ${defender.name} (${attacksLuckH2})`;
         return hero1.name;
     }
     else if (attacksLuckH1 < attacksLuckH2) {
         attacker = hero2;
         defender = hero1;
-        document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} a obtenu un score de vitesse (${attacksLuckH2}) plus important que celui de ${defender.name} (${attacksLuckH1})`;
+        resumeText.innerHTML += `<br> ${attacker.name} a obtenu un score de vitesse (${attacksLuckH2}) plus important que celui de ${defender.name} (${attacksLuckH1})`;
         return hero2.name;
     }
     else {
@@ -317,38 +318,38 @@ function executeFight(attacker, defender) {
 
     if (damagesAttack > shieldDefense) {
         defender.powerstats.durability -= damagesAttack;
-        console.log(hero1HTML.querySelector('.selection__img'));
+
         // setTimeout(() => {
-        //     hero1HTML.querySelector('.selection-container').style.left = "30vw";
-        //     // hero1HTML.querySelector('.selection-container').classList.add("position-attack-1");
+        //     hero1HTML.querySelector('.hero__container').style.left = "30vw";
+        //     // hero1HTML.querySelector('.hero__container').classList.add("position-attack-1");
         // }, "1000");
         // setTimeout(() => {
-        //     hero1HTML.querySelector('.selection-container').classList.remove("position-attack-1");
+        //     hero1HTML.querySelector('.hero__container').classList.remove("position-attack-1");
         // }, "1000");
 
-        document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} a attaqué ${defender.name} et lui a infligé ${damagesAttack}`;
-        document.querySelector('.selection_combat_text').innerHTML += `<br> Il reste ${defender.powerstats.durability}hp a ${defender.name}.<br>`;
+        resumeText.innerHTML += `<br> ${attacker.name} a attaqué ${defender.name} et lui a infligé ${damagesAttack}`;
+        resumeText.innerHTML += `<br> Il reste ${defender.powerstats.durability}hp a ${defender.name}.<br>`;
 
         if (defender.powerstats.durability <= 0) {
-            document.querySelector('.selection_combat_text').innerHTML += `<br> ${defender.name} est K.O`;
+            resumeText.innerHTML += `<br> ${defender.name} est K.O`;
         }
     }
 
     else if (damagesAttack < shieldDefense) {
         // attacker == defender && defender == attacker
         // executeFight(attacker, defender)
-        attacker.powerstats.durability -= defenseCounterAttack;
+        // attacker.powerstats.durability -= defenseCounterAttack;
 
-        document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} loupe son attaque.`;
-        document.querySelector('.selection_combat_text').innerHTML += `<br> ${defender.name} riposte et inflige ${defenseCounterAttack} points de dégâts à ${attacker.name}.`;
-        document.querySelector('.selection_combat_text').innerHTML += `<br> Il reste ${attacker.powerstats.durability}hp à ${attacker.name}.<br>`;
+        resumeText.innerHTML += `<br> ${defender.name} arrive à se défendre, ${attacker.name} n'inflige aucun dégat.`;
+        // resumeText.innerHTML += `<br> ${defender.name} riposte et inflige ${defenseCounterAttack} points de dégâts à ${attacker.name}.`;
+        // resumeText.innerHTML += `<br> Il reste ${attacker.powerstats.durability}hp à ${attacker.name}.<br>`;
         if (attacker.powerstats.durability <= 0) {
-            document.querySelector('.selection_combat_text').innerHTML += `<br> ${attacker.name} est K.O`;
+            resumeText.innerHTML += `<br> ${attacker.name} est K.O`;
             attacker.powerstats.durability = 0
         }
     }
     else {
-        document.querySelector('.selection_combat_text').innerHTML += `<br> Il y a égalité!`;
+        resumeText.innerHTML += `<br> Il y a égalité!`;
     }
 
 }
@@ -361,8 +362,8 @@ function battle(hero1, hero2) {
     let hero1LifeAfterDamage;
     let hero2LifeAfterDamage;
     setTimeout(() => {
-        document.querySelector('.selection__img-fight').style.width = "20%";
-        document.querySelector('.selection__img-fight').style.top = "3rem";
+        document.querySelector('.fight__img').style.width = "20%";
+        document.querySelector('.fight__img').style.top = "3rem";
     }, "1000");
 
     // Executing fight, turn by turn all the 2 sec
@@ -374,51 +375,50 @@ function battle(hero1, hero2) {
             getMostSpeedHero(hero1, hero2)
             // whoStartToFight(hero1, hero2)
             executeFight(attacker, defender); // Do 1 turn of the fight
-            // hero1HTML.querySelector('.progress-life').textContent = `${hero1.powerstats.durability}/${hero1Life}`; // Display number of the life of hero 1 in life-bar
-            // hero2HTML.querySelector('.progress-life').textContent = `${hero2.powerstats.durability}/${hero2Life}`; // Display number of the life of hero 2 in life-bar
+            // hero1HTML.querySelector('.progress__life-bar').textContent = `${hero1.powerstats.durability}/${hero1Life}`; // Display number of the life of hero 1 in life-bar
+            // hero2HTML.querySelector('.progress__life-bar').textContent = `${hero2.powerstats.durability}/${hero2Life}`; // Display number of the life of hero 2 in life-bar
             hero1HTML.querySelector('.life-combat').style.width = Math.max(hero1LifeAfterDamage, 0) + `%`; // Reduce life-bar of hero 1 in terms of his remaining life 
             hero2HTML.querySelector('.life-combat').style.width = Math.max(hero2LifeAfterDamage, 0) + `%`; // Reduce life-bar of hero 2 in terms of his remaining life 
-            hero1HTML.querySelector('.health-point').textContent = `${hero1.powerstats.durability}/${hero1Life}`
-            hero2HTML.querySelector('.health-point').textContent = `${hero2.powerstats.durability}/${hero2Life}`
+            hero1HTML.querySelector('.progress__life-point').textContent = `${hero1.powerstats.durability}/${hero1Life}`
+            hero2HTML.querySelector('.progress__life-point').textContent = `${hero2.powerstats.durability}/${hero2Life}`
 
             if (hero1LifeAfterDamage < 60) {
-                hero1HTML.querySelector('.selection__heroe-life').style.backgroundColor = "orange";
+                hero1HTML.querySelector('.life-bar__modular').style.backgroundColor = "orange";
             }
             if (hero2LifeAfterDamage < 60) {
-                hero2HTML.querySelector('.selection__heroe-life').style.backgroundColor = "orange";
+                hero2HTML.querySelector('.life-bar__modular').style.backgroundColor = "orange";
             }
             if (hero1LifeAfterDamage < 30) {
-                hero1HTML.querySelector('.selection__heroe-life').style.backgroundColor = "red";
+                hero1HTML.querySelector('.life-bar__modular').style.backgroundColor = "red";
             }
             if (hero2LifeAfterDamage < 30) {
-                hero2HTML.querySelector('.selection__heroe-life').style.backgroundColor = "red";
+                hero2HTML.querySelector('.life-bar__modular').style.backgroundColor = "red";
             }
             if (hero1.powerstats.durability <= 0) {
-                // hero1HTML.querySelector('.selection__heroe-life').textContent = `0`
+                // hero1HTML.querySelector('.life-bar__modular').textContent = `0`
                 hero1HTML.querySelector('.life-combat').style.width = `0%`;
-                hero1HTML.querySelector('.health-point').textContent = `0/${hero1Life}`
-                // hero1HTML.querySelector('.img-cross').classList.remove("display-none")
-                hero1HTML.querySelector('.img-cross-1').classList.add("img-cross-1-display")
-                document.querySelector(".combat_background").classList.toggle("display-none")
+                hero1HTML.querySelector('.progress__life-point').textContent = `0/${hero1Life}`
+                // hero1HTML.querySelector('.hero__cross').classList.remove("display-none")
+                hero1HTML.querySelector('.hero__cross-1').classList.add("hero__cross-1-display")
+                document.querySelector(".combat-background").classList.toggle("display-none")
             }
             else if (hero2.powerstats.durability <= 0) {
-                // hero2HTML.querySelector('.selection__heroe-life').textContent = `0`
+                // hero2HTML.querySelector('.life-bar__modular').textContent = `0`
                 hero2HTML.querySelector('.life-combat').style.width = `0%`;
-                hero2HTML.querySelector('.health-point').textContent = `0/${hero2Life}`
-                // hero2HTML.querySelector('.img-cross').classList.remove("display-none")
-                hero2HTML.querySelector('.img-cross-2').classList.add("img-cross-2-display")
-                document.querySelector(".combat_background").classList.toggle("display-none")
+                hero2HTML.querySelector('.progress__life-point').textContent = `0/${hero2Life}`
+                // hero2HTML.querySelector('.hero__cross').classList.remove("display-none")
+                hero2HTML.querySelector('.hero__cross-2').classList.add("hero__cross-2-display")
+                document.querySelector(".combat-background").classList.toggle("display-none")
             }
 
             if (attacker.powerstats.durability <= 0) { // If attacker have not life, defender win, and the fight is close 
                 winner = defender.name;
                 clearInterval(timer);
-                document.querySelector('.selection_combat_text').innerHTML += `<br><br><strong>${winner} gagne le combat !</strong>`
+                resumeText.innerHTML += `<br><br><strong>${winner} gagne le combat !</strong>`
             } else if (defender.powerstats.durability <= 0) {// If defender have not life, attacker win, and the fight is close 
                 winner = attacker.name;
-                console.log(defender.powerstats.durability);
                 clearInterval(timer);
-                document.querySelector('.selection_combat_text').innerHTML += `<br><br><strong>${winner} gagne le combat !</strong>`
+                resumeText.innerHTML += `<br><br><strong>${winner} gagne le combat !</strong>`
             };
             document.getElementById('selection-combat-text').scrollTop = document.getElementById('selection-combat-text').scrollHeight; // automatic scroll of text of fight
         }, 2000)
@@ -432,45 +432,45 @@ function battle(hero1, hero2) {
  */
 function displayCards(hero) {
     return `
-        <li class="character__card__list">
-            <div class="character__card__top">
-                <div class="character__card__top-title">
-                    <img class="character__card__img" src="${hero.images.sm}">
-                    <h2 class="character__card-title">${hero.name}</h2>
+        <li class="character-card__list">
+            <div class="character-card__top">
+                <div class="character-card__top-title">
+                    <img class="character-card__img" src="${hero.images.sm}">
+                    <h2 class="character-card__title">${hero.name}</h2>
                 </div>
-                <div class="character__features">
-                        <li class="flex-progress abilities">  
-                            <p class="character__features__text">Attack:</p>
+                <div class="character-card__features">
+                        <li class="character-card__progress abilities">  
+                            <p class="character-card__features__text">Attack:</p>
                             <div class="progress">
-                                <div class="progress-val progress-val-atq">${hero.powerstats.strength}</div>
+                                <div class="progress__val progress__val-atq">${hero.powerstats.strength}</div>
                             </div>
                         </li>
-                        <li class="flex-progress abilities">  
-                            <p class="character__features__text">Shield:</p>
+                        <li class="character-card__progress abilities">  
+                            <p class="character-card__features__text">Shield:</p>
                             <div class="progress">
-                                <div class="progress-val progress-val-shield">${hero.powerstats.combat}</div>
+                                <div class="progress__val progress__val-shield">${hero.powerstats.combat}</div>
                             </div>
                         </li>
-                        <li class="flex-progress abilities">  
-                            <p class="character__features__text">Speed:</p>
+                        <li class="character-card__progress abilities">  
+                            <p class="character-card__features__text">Speed:</p>
                             <div class="progress">
-                                <div class="progress-val progress-val-speed">${hero.powerstats.speed}</div>
+                                <div class="progress__val progress__val-speed">${hero.powerstats.speed}</div>
                             </div>
                         </li>
-                        <li class="flex-progress abilities">  
-                            <p class="character__features__text">Health:</p>
+                        <li class="character-card__progress abilities">  
+                            <p class="character-card__features__text">Health:</p>
                             <div class="progress">
-                                <div class="progress-val progress-val-life">${hero.powerstats.durability}</div>
+                                <div class="progress__val progress__val-life">${hero.powerstats.durability}</div>
                             </div>
                         </li> 
                 </div>
             </div>
-            <div class="bio">
-                <p class="title__bio">Biography:</p>
-                <p class="text__bio"><span class="text__title__bio">Real-Name:</span> ${hero.biography.fullName}</p>
-                <p class="text__bio"><span class="text__title__bio">Place of Birth:</span> ${hero.biography.placeOfBirth}</p>
-                <p class="text__bio"><span class="text__title__bio">Alignement:</span> ${hero.biography.alignment}</p>
-                <p class="text__bio"><span class="text__title__bio">Universe:</span> ${hero.biography.publisher}</p>
+            <div class="character-card__bio">
+                <p class="bio__title">Biography:</p>
+                <p class="bio__text"><span class="bio__text-title">Real-Name:</span> ${hero.biography.fullName}</p>
+                <p class="bio__text"><span class="bio__text-title">Place of Birth:</span> ${hero.biography.placeOfBirth}</p>
+                <p class="bio__text"><span class="bio__text-title">Alignement:</span> ${hero.biography.alignment}</p>
+                <p class="bio__text"><span class="bio__text-title">Universe:</span> ${hero.biography.publisher}</p>
             </div>
         </li>`;
 };
@@ -482,12 +482,12 @@ function displayCards(hero) {
  *  @return {string} return modification of css                                         
  */
 function preparHeroToCombat(heroHTML) {
-    heroHTML.querySelector(".selection__heroe-name").classList.add("name-combat");
+    heroHTML.querySelector(".hero__name").classList.add("name-combat");
     heroHTML.querySelector(".name-combat").style.marginBottom = "0";
-    heroHTML.querySelector(".selection__heroe-life").classList.add("life-combat");
-    heroHTML.querySelector(".selection__heroe-life").classList.remove("display-none");
+    heroHTML.querySelector(".life-bar__modular").classList.add("life-combat");
+    heroHTML.querySelector(".life-bar__modular").classList.remove("display-none");
     heroHTML.querySelector(".progress").style.display = "flex";
-    heroHTML.querySelector(".progress-life").style.display = "flex";
+    heroHTML.querySelector(".progress__life-bar").style.display = "flex";
     document.querySelector(".health-img-1").classList.remove("display-none");
     document.querySelector(".health-img-2").classList.remove("display-none");
     document.querySelector(".body__background").style.opacity = "0%";
@@ -504,31 +504,31 @@ function preparHeroToCombat(heroHTML) {
 waitingForResponse();
 
 // Display the character-card of hero 1 if you click on the Stats button of hero 1
-hero1HTML.querySelector('.selection-container').addEventListener('click', function (e) {
+hero1HTML.querySelector('.hero__container').addEventListener('click', function (e) {
     if (hero1 === undefined) { return };
     // displayOrNotCharacterCard(hero1HTML)
     // Associate stats of hero 1 to progress-bar width
-    hero1HTML.querySelector('.progress-val-atq').style.width = hero1.powerstats.strength + '%'
-    hero1HTML.querySelector('.progress-val-life').style.width = hero1.powerstats.durability + '%'
-    hero1HTML.querySelector('.progress-val-shield').style.width = hero1.powerstats.combat + '%'
-    hero1HTML.querySelector('.progress-val-speed').style.width = hero1.powerstats.speed + '%'
+    hero1HTML.querySelector('.progress__val-atq').style.width = hero1.powerstats.strength + '%'
+    hero1HTML.querySelector('.progress__val-life').style.width = hero1.powerstats.durability + '%'
+    hero1HTML.querySelector('.progress__val-shield').style.width = hero1.powerstats.combat + '%'
+    hero1HTML.querySelector('.progress__val-speed').style.width = hero1.powerstats.speed + '%'
 });
 
 // Display the character-card of hero 2 if you click on the Stats button of hero 2
-hero2HTML.querySelector('.selection-container').addEventListener('click', function (e) {
+hero2HTML.querySelector('.hero__container').addEventListener('click', function (e) {
     if (hero2 === undefined) { return };
     // displayOrNotCharacterCard(hero2HTML)
     // Associate stats of hero 2 to progress-bar width
-    hero2HTML.querySelector('.progress-val-atq').style.width = hero2.powerstats.strength + '%'
-    hero2HTML.querySelector('.progress-val-life').style.width = hero2.powerstats.durability + '%'
-    hero2HTML.querySelector('.progress-val-shield').style.width = hero2.powerstats.combat + '%'
-    hero2HTML.querySelector('.progress-val-speed').style.width = hero2.powerstats.speed + '%'
+    hero2HTML.querySelector('.progress__val-atq').style.width = hero2.powerstats.strength + '%'
+    hero2HTML.querySelector('.progress__val-life').style.width = hero2.powerstats.durability + '%'
+    hero2HTML.querySelector('.progress__val-shield').style.width = hero2.powerstats.combat + '%'
+    hero2HTML.querySelector('.progress__val-speed').style.width = hero2.powerstats.speed + '%'
 });
 
-hero1HTML.querySelector('.selection-container').addEventListener('click', function (e) {
+hero1HTML.querySelector('.hero__container').addEventListener('click', function (e) {
     verifyTheHeroes2(hero1, hero1HTML, 1)
 });
-hero2HTML.querySelector('.selection-container').addEventListener('click', function (e) {
+hero2HTML.querySelector('.hero__container').addEventListener('click', function (e) {
     verifyTheHeroes2(hero2, hero2HTML, 2)
 });
 
@@ -537,10 +537,10 @@ resumeCbt.addEventListener('click', function (e) {
 });
 
 // Remove hero 1 if you click on his name
-hero1HTML.querySelector('.selection__heroe-name').addEventListener('click', function (e) { removeHero(hero1HTML) }, true);
+hero1HTML.querySelector('.hero__name').addEventListener('click', function (e) { removeHero(hero1HTML) }, true);
 
 // Remove hero 2 if you click on his name
-hero2HTML.querySelector('.selection__heroe-name').addEventListener('click', function (e) { removeHero(hero2HTML) }, true);
+hero2HTML.querySelector('.hero__name').addEventListener('click', function (e) { removeHero(hero2HTML) }, true);
 
 // Remove addEventListener for removeHero
 
@@ -549,12 +549,12 @@ hero2HTML.querySelector('.selection__heroe-name').addEventListener('click', func
 // });
 
 // if (combatArea.style.backgroundImage = "url(img/damier.jpg)"){
-    // hero1HTML.querySelector('.selection__heroe-name').removeEventListener('click', function (e) { removeHero(hero1HTML) }, true);
+// hero1HTML.querySelector('.hero__name').removeEventListener('click', function (e) { removeHero(hero1HTML) }, true);
 // }
 
 // On click of button "combat", fight starting
 buttonCombat.addEventListener('click', function (event) {
-    
+
     // If hero 1 or héro 2 is not selected, so the fight don't start
     if (hero1 == undefined || hero2 == undefined) {
         return;
@@ -567,25 +567,25 @@ buttonCombat.addEventListener('click', function (event) {
     preparHeroToCombat(hero1HTML)
     preparHeroToCombat(hero2HTML)
     combatArea.style.backgroundImage = "url(img/damier.jpg)"
-    document.querySelector(".combat_background").classList.toggle("display-none")
+    document.querySelector(".combat-background").classList.toggle("display-none")
     resumeCbt.classList.toggle("display-none")
-    // disabled remove heros
-    // hero1HTML.querySelector('.selection__heroe-name').removeEventListener('click', function(e){removeHero(hero1HTML)});
-    // hero2HTML.querySelector('.selection__heroe-name').removeEventListener('click', function(e){removeHero(hero2HTML)});
+    // disabled remove heroes
+    // hero1HTML.querySelector('.hero__name').removeEventListener('click', function(e){removeHero(hero1HTML)});
+    // hero2HTML.querySelector('.hero__name').removeEventListener('click', function(e){removeHero(hero2HTML)});
 
     // combatArea.classList.add("combat-design")
     buttonCombat.style.display = "none"
 
     selectionTitle.classList.toggle("display-none")
     // fightTitle.classList.toggle("display-none")
-    // hero1HTML.querySelector('.selection__heroe-name-cross').style.display = "none"
-    // hero2HTML.querySelector('.selection__heroe-name-cross').style.display = "none"
+    // hero1HTML.querySelector('.hero__name-cross').style.display = "none"
+    // hero2HTML.querySelector('.hero__name-cross').style.display = "none"
     search.style.display = "none"
     margin.classList.toggle("margin-bottom")
     imgVS.classList.toggle("display-none")
-    document.querySelector(".selection__img-fight").style.width = "80%";
-    document.querySelector(".selection__img-fight").style.top = "1vw";
-    selectionDivHeroes.classList.toggle("flex-wrap")
+    document.querySelector(".fight__img").style.width = "80%";
+    document.querySelector(".fight__img").style.top = "1vw";
+    selectionHeroes.classList.toggle("flex-wrap")
     hero2.powerstats.durability *= 10;
     hero1.powerstats.durability *= 10;
     battle(hero1, hero2);
