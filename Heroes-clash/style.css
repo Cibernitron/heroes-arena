@@ -2,11 +2,11 @@
     font-size: 16px;
     font-family: 'roboto', 'Helvetica Neue', sans-serif;
     --primary-color: #171A21;
-    --secondary-color: rgb(255, 0, 0);
-    --secondary-color-dark: rgb(158, 1, 1);
+    --secondary-color: #ff0000;
+    --secondary-color-dark: #9e0101;
     --third-color: #818479;
-    --fourth-color: rgb(255, 234, 0);
-    --fourth-color-dark: rgb(226, 182, 22);
+    --fourth-color: #ffea00;
+    --fourth-color-dark: #e2b616;
     --fifth-color: #007AB8;
     --sixth-color: #fff;
 }
@@ -134,7 +134,7 @@ input[type=text]:focus {
 
 .heroes__container {
     display: flex;
-    justify-content: center;
+    justify-content:space-between;
     margin: 0 1rem;
 }
 
@@ -612,7 +612,7 @@ input[type=text]:focus {
     background-size: cover;
     margin: 2rem auto;
     width: 90vw;
-    height: 35rem;
+    height: 80vh;
     padding-bottom: 2rem;
     padding-top: 3rem;
     position: relative;
