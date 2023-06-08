@@ -1,8 +1,7 @@
 /*
 les tutos de guillaume :
 
-deplacer les images de combattant pdt cbt : position relative et a l'attaque right ou left tant de %
-enlever l'add event listener : faire que la fonction de l'add event listener soit une fonction nommée pour pouvoir la rappeler dans le remove event listener (ligne 542)
+l.510 : ajouter un effet de vitesse sur le 'animate'
  */
 /*
                          +------------------------------------------+
@@ -31,6 +30,9 @@ const resumeCbt = document.querySelector('.resume__button')
 const hero1Name = hero1HTML.querySelector(".hero__name");
 const hero2Name = hero2HTML.querySelector(".hero__name");
 const resumeText = document.querySelector('.resume__text')
+const hero1Container = document.querySelector('.hero__container-1')
+const hero2Container = document.querySelector('.hero__container-2')
+
 // const controller = new AbortController();
 // const signal = controller.signal;
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -39,6 +41,8 @@ const resumeText = document.querySelector('.resume__text')
                          |                Functions                 |
                          +------------------------------------------+ 
  */
+
+
 
 /**
  * Change color of button "combat" if it can not be used
@@ -88,6 +92,7 @@ function addHero(hero, heroHtml) {
     heroHtml.querySelector(".hero__name").textContent = hero.name;
     heroHtml.querySelector(".hero__name").classList.remove('display-none');
     heroHtml.querySelector(".hero__name").classList.add("name-combat");
+    heroHtml.querySelector(".hero__delete").style.display = 'flex';
 
     // Display the life points of the hero
     // heroHtml.querySelector('.life-bar__modular').textContent = `${hero.powerstats.durability}`;
@@ -119,6 +124,7 @@ function removeHero(heroHtml) {
     heroHtml.querySelector(".hero__name").textContent = '';
     heroHtml.querySelector(".hero__name").classList.remove('name-combat');
     heroHtml.querySelector(".hero__name").classList.add('display-none');
+    heroHtml.querySelector(".hero__delete").style.display = 'none';
 
     // Remove health point
     heroHtml.querySelector('.life-bar__modular').textContent = '';
@@ -282,7 +288,7 @@ function getMostSpeedHero(hero1, hero2) {
         return hero2.name;
     }
     else {
-        return
+        getMostSpeedHero(hero1, hero2)
     }
 }
 
@@ -329,6 +335,11 @@ function executeFight(attacker, defender) {
 
         resumeText.innerHTML += `<br> ${attacker.name} a attaqué ${defender.name} et lui a infligé ${damagesAttack}`;
         resumeText.innerHTML += `<br> Il reste ${defender.powerstats.durability}hp a ${defender.name}.<br>`;
+        if (attacker === hero1){
+        hitHero1(hero1Container)}
+
+        else if (attacker === hero2){
+        hitHero2(hero2Container)}
 
         if (defender.powerstats.durability <= 0) {
             resumeText.innerHTML += `<br> ${defender.name} est K.O`;
@@ -363,7 +374,8 @@ function battle(hero1, hero2) {
     let hero2LifeAfterDamage;
     setTimeout(() => {
         document.querySelector('.fight__img').style.width = "20%";
-        document.querySelector('.fight__img').style.top = "3rem";
+        document.querySelector('.fight__img').style.maxWidth = "160px";
+        document.querySelector('.fight__img').style.top = "0";
     }, "1000");
 
     // Executing fight, turn by turn all the 2 sec
@@ -372,15 +384,12 @@ function battle(hero1, hero2) {
         function () {
             hero1LifeAfterDamage = (hero1.powerstats.durability / hero1Life) * 100 // Give percent of life remaining of hero 1
             hero2LifeAfterDamage = (hero2.powerstats.durability / hero2Life) * 100 // Give percent of life remaining of hero 2
-            getMostSpeedHero(hero1, hero2)
-            // whoStartToFight(hero1, hero2)
-            executeFight(attacker, defender); // Do 1 turn of the fight
-            // hero1HTML.querySelector('.progress__life-bar').textContent = `${hero1.powerstats.durability}/${hero1Life}`; // Display number of the life of hero 1 in life-bar
-            // hero2HTML.querySelector('.progress__life-bar').textContent = `${hero2.powerstats.durability}/${hero2Life}`; // Display number of the life of hero 2 in life-bar
             hero1HTML.querySelector('.life-combat').style.width = Math.max(hero1LifeAfterDamage, 0) + `%`; // Reduce life-bar of hero 1 in terms of his remaining life 
             hero2HTML.querySelector('.life-combat').style.width = Math.max(hero2LifeAfterDamage, 0) + `%`; // Reduce life-bar of hero 2 in terms of his remaining life 
             hero1HTML.querySelector('.progress__life-point').textContent = `${hero1.powerstats.durability}/${hero1Life}`
             hero2HTML.querySelector('.progress__life-point').textContent = `${hero2.powerstats.durability}/${hero2Life}`
+            getMostSpeedHero(hero1, hero2)
+            executeFight(attacker, defender); // Do 1 turn of the fight
 
             if (hero1LifeAfterDamage < 60) {
                 hero1HTML.querySelector('.life-bar__modular').style.backgroundColor = "orange";
@@ -491,7 +500,25 @@ function preparHeroToCombat(heroHTML) {
     document.querySelector(".health-img-1").classList.remove("display-none");
     document.querySelector(".health-img-2").classList.remove("display-none");
     document.querySelector(".body__background").style.opacity = "0%";
+    heroHTML.querySelector(".hero__delete").style.display = 'none';
 }
+
+function hitHero1(hero1Container) {
+    hero1Container.animate([
+    {transform: 'translateX(0)' },
+    {transform: 'translateX(75%)' }
+    ],{
+    duration: 500
+    })};
+
+function hitHero2(hero2Container) {
+    hero2Container.animate([
+    {transform: 'translateX(0)' },
+    {transform: 'translateX(-75%)' }
+    ],{
+    duration: 500
+    })};
+
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -537,10 +564,10 @@ resumeCbt.addEventListener('click', function (e) {
 });
 
 // Remove hero 1 if you click on his name
-hero1HTML.querySelector('.hero__name').addEventListener('click', function (e) { removeHero(hero1HTML) }, true);
+hero1HTML.querySelector('.hero__delete').addEventListener('click', function (e) { removeHero(hero1HTML) }, true);
 
 // Remove hero 2 if you click on his name
-hero2HTML.querySelector('.hero__name').addEventListener('click', function (e) { removeHero(hero2HTML) }, true);
+hero2HTML.querySelector('.hero__delete').addEventListener('click', function (e) { removeHero(hero2HTML) }, true);
 
 // Remove addEventListener for removeHero
 

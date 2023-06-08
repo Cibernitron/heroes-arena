@@ -64,7 +64,7 @@ input[type=text]:focus {
 /* BODY */
 
 .body {
-    background-image: url(img/c0bee589f5c4f34f44885771c2f80ee7.jpg);
+    background-color: var(--primary-color);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -201,6 +201,18 @@ input[type=text]:focus {
     z-index: 100;
 }
 
+.delete__button {
+    width: 10vw;
+    height: 2vw;
+    color: var(--sixth-color);
+    background-color: var(--secondary-color-dark);
+    font-size: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
 /* SEARCH-BAR */
 .search {
     margin: 1rem 0;
@@ -237,7 +249,7 @@ input[type=text]:focus {
 
 /* SECTION HERO */
 
-.hero__name-cross::after,
+/* .hero__name-cross::after,
 .hero__name-cross::before {
     content: "❌";
     opacity: 0;
@@ -253,7 +265,7 @@ input[type=text]:focus {
 .hero__name-cross:hover::after,
 .hero__name-cross:hover::before {
     opacity: 1;
-}
+} */
 
 .name-combat {
     background-color: var(--sixth-color);
@@ -267,7 +279,18 @@ input[type=text]:focus {
     font-family: 'marvel';
     font-weight: bold;
     font-size: 2vw;
-    margin-bottom: 1rem;
+}
+
+.hero__delete {
+
+    color: var(--secondary-color);
+    font-size: xx-small;
+    font-weight: 700;
+    right: 0;
+    display: none;
+    justify-content:right;
+    width: 100%;
+
 }
 
 .hero__cross-1 {
@@ -296,15 +319,38 @@ input[type=text]:focus {
     opacity: 1;
 }
 
-.hero__container {
+.hero__container-1 {
     position: relative;
+    animation: 1s ease 0s move-fight;
 }
+
+@keyframes move-fight-1 {
+    from {
+      right: 0;
+    }
+    to {
+      right: 75%;
+    }
+  }
+.hero__container-2 {
+    position: relative;
+    animation: 1s ease 0s move-fight;
+}
+
+@keyframes move-fight-2 {
+    from {
+      left: 0;
+    }
+    to {
+      left: 75%;
+    }
+  }
 
 .hero__img {
     width: 30vw;
     aspect-ratio: 1/1;
     object-fit: cover;
-    border: black 2px solid;
+    border: white 2px solid;
     border-radius: 2vw;
     background-color: var(--sixth-color);
 }
@@ -331,6 +377,11 @@ input[type=text]:focus {
 }
 
 @media screen and (min-width:1000px) {
+
+    .hero__delete {
+        justify-content:center;
+    }
+
     .fight__img {
         width: 0%;
         position: absolute;
@@ -606,7 +657,7 @@ input[type=text]:focus {
 
 /* SECTION COMBAT */
 .combat-design {
-    background-image: url(img/—Pngtree—colorful\ and\ rich\ yellow\ black_1338586.jpg);
+    background-image: url(img/fond-rouge.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -746,30 +797,36 @@ input[type=text]:focus {
 
 /* SECTION FOOTER */
 .footer {
-    display: flex;
-    align-items: center;
-    background-color: var(--fifth-color);
-    height: 61px;
+    height: 100px;
+    top: 0;
+}
+
+.footer__band {
+    background: linear-gradient(to bottom, var(--fourth-color), var(--fourth-color-dark));
+    width: 100%;
+    height: 1.2rem;
+    bottom: -4.4rem;
+    z-index: -1;
+    position: relative;
 }
 
 .footer__link {
-    max-width: 25vw;
-    font-size: 0;
-    max-height: 61px;
+    display: flex;
+    width: 8rem;
+    margin: 0 auto;
 }
 
 .footer__logo {
     width: 100%;
-    height: 61px;
-
 }
 
-.footer__ttl {
-    max-width: 75vw;
-    height: auto;
-    margin: 0 auto;
-    font-size: 0;
-    max-height: 61px;
+.footer__background {
+    background-color: var(--primary-color);
+    opacity: 40%;
+    position: absolute;
+    width: 100%;
+    height: 7rem;
+    z-index: -10;
 }
 
 

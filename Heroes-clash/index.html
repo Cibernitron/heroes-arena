@@ -21,7 +21,6 @@
         <a class="header__link" href="index.html">
             <img class="header__logo" src="img/logo heroes-arena.png" alt="logo">
         </a>
-
     </header>
     <main>
         <!-- Search -->
@@ -42,7 +41,7 @@
                 <div class="heroes__container">
                     <!-- Selection Hero1 -->
                     <div id="hero1" class="selection__hero">
-                        <p id="cross" class="display-none hero__name hero__name-cross"></p>
+                        <p id="cross" class="display-none hero__name"></p>
                         <div class="hero__life-container">
                             <img class="health-img-1 display-none" src="img/coeur.png">
                             <div class="life__progress-container">
@@ -52,10 +51,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="hero__container">
+                        <div class="hero__container hero__container-1">
                             <img id="anim1" class=" hero__img" src="img/Choix perso mobile.png" alt="">
                             <img src="img/pngegg.png" class="hero__cross-1" alt="">
                             <ul id="character-card" class="display-none hero__character-card"></ul>
+                        </div>
+                        <div class="hero__delete">
+                            <button class="delete__button">Delete Hero</button>
                         </div>
                         <!-- <button class="display-none btn-stat">Stats</button> -->
                     </div>
@@ -69,7 +71,7 @@
                     </div>
                     <!-- Selection Hero2 -->
                     <div id="hero2" class="selection__hero">
-                        <p id="cross" class="display-none hero__name hero__name-cross"></p>
+                        <p id="cross" class="display-none hero__name"></p>
                         <div class="hero__life-container display-none">
                             <img class="health-img-2 display-none" src="img/coeur.png">
                             <div class="life__progress-container">
@@ -79,10 +81,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="hero__container">
+                        <div class="hero__container hero__container-2">
                             <img id="anim2" class="hero__img" src="img/Choix perso mobile.png" alt="">
                             <img src="img/pngegg.png" class="hero__cross-2" alt="">
                             <ul id="character-card" class="display-none hero__character-card"></ul>
+                        </div>
+                        <div class="hero__delete">
+                            <button class="delete__button">Delete Hero</button>
                         </div>
                         <!-- <button class="display-none btn-stat">Stats</button> -->
                     </div>
@@ -100,12 +105,13 @@
         <!-- </div> -->
         <span class="margin-bottom" id="margin-bottom"></span>
     </main>
-    <!-- <footer class="footer">
-        <img class="footer__ttl" src="img/Heroesjaune.png" alt="">
+    <footer class="footer">
+        <div class="footer__band"></div>
+        <div class="footer__background"></div>
         <a class="footer__link" href="index.html">
-            <img class="footer__logo" src="img/logo.png" alt="logo">
+            <img class="footer__logo" src="img/logo heroes-arena.png" alt="logo">
         </a>
-    </footer> -->
+    </footer>
 </body>
 <script src="script.js"></script>
 
