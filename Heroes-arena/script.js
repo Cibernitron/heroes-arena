@@ -506,17 +506,17 @@ function preparHeroToCombat(heroHTML) {
 function hitHero1(hero1Container) {
     hero1Container.animate([
     {transform: 'translateX(0)' },
-    {transform: 'translateX(75%)' }
+    {transform: 'translateX(180%)' }
     ],{
-    duration: 500
+    duration: 250
     })};
 
 function hitHero2(hero2Container) {
     hero2Container.animate([
     {transform: 'translateX(0)' },
-    {transform: 'translateX(-75%)' }
+    {transform: 'translateX(-180%)' }
     ],{
-    duration: 500
+    duration: 250
     })};
 
 
