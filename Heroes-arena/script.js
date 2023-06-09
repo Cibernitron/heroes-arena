@@ -336,10 +336,30 @@ function executeFight(attacker, defender) {
         resumeText.innerHTML += `<br> ${attacker.name} a attaqué ${defender.name} et lui a infligé ${damagesAttack}`;
         resumeText.innerHTML += `<br> Il reste ${defender.powerstats.durability}hp a ${defender.name}.<br>`;
         if (attacker === hero1){
-        hitHero1(hero1Container)}
-
+        setTimeout(() => {
+            document.querySelector('#hero1-container').classList.add("hero__container-1")
+        }, "250")
+        setTimeout(() => {
+            document.querySelector('#aargh-hero2').classList.toggle("display-none")
+            document.querySelector('#bam-hero2').classList.toggle("display-none")
+        }, "1000")
+        
+        document.querySelector('#hero1-container').classList.remove("hero__container-1")
+        document.querySelector('#aargh-hero2').classList.toggle("display-none")
+        document.querySelector('#bam-hero2').classList.toggle("display-none")}
         else if (attacker === hero2){
-        hitHero2(hero2Container)}
+            setTimeout(() => {
+                document.querySelector('#hero2-container').classList.add("hero__container-2")
+            }, "250",)
+            setTimeout(() => {
+                document.querySelector('#aargh-hero1').classList.toggle("display-none")
+                document.querySelector('#bam-hero1').classList.toggle("display-none")
+            }, "1000")
+            document.querySelector('#hero2-container').classList.remove("hero__container-2")            
+            document.querySelector('#aargh-hero1').classList.toggle("display-none")
+            document.querySelector('#bam-hero1').classList.toggle("display-none")
+        }
+    
 
         if (defender.powerstats.durability <= 0) {
             resumeText.innerHTML += `<br> ${defender.name} est K.O`;
@@ -347,17 +367,14 @@ function executeFight(attacker, defender) {
     }
 
     else if (damagesAttack < shieldDefense) {
-        // attacker == defender && defender == attacker
-        // executeFight(attacker, defender)
+        attacker == defender && defender == attacker
         // attacker.powerstats.durability -= defenseCounterAttack;
-
+        
         resumeText.innerHTML += `<br> ${defender.name} arrive à se défendre, ${attacker.name} n'inflige aucun dégat.`;
+        executeFight(attacker, defender)
         // resumeText.innerHTML += `<br> ${defender.name} riposte et inflige ${defenseCounterAttack} points de dégâts à ${attacker.name}.`;
         // resumeText.innerHTML += `<br> Il reste ${attacker.powerstats.durability}hp à ${attacker.name}.<br>`;
-        if (attacker.powerstats.durability <= 0) {
-            resumeText.innerHTML += `<br> ${attacker.name} est K.O`;
-            attacker.powerstats.durability = 0
-        }
+
     }
     else {
         resumeText.innerHTML += `<br> Il y a égalité!`;
@@ -503,21 +520,21 @@ function preparHeroToCombat(heroHTML) {
     heroHTML.querySelector(".hero__delete").style.display = 'none';
 }
 
-function hitHero1(hero1Container) {
-    hero1Container.animate([
-    {transform: 'translateX(0)' },
-    {transform: 'translateX(180%)' }
-    ],{
-    duration: 250
-    })};
+// function hitHero1(hero1Container) {
+//     hero1Container.animate([
+//     {transform: 'translateX(0)' },
+//     {transform: 'translateX(180%)' }
+//     ],{
+//     duration: 250
+//     })};
 
-function hitHero2(hero2Container) {
-    hero2Container.animate([
-    {transform: 'translateX(0)' },
-    {transform: 'translateX(-180%)' }
-    ],{
-    duration: 250
-    })};
+// function hitHero2(hero2Container) {
+//     hero2Container.animate([
+//     {transform: 'translateX(0)' },
+//     {transform: 'translateX(-180%)' }
+//     ],{
+//     duration: 250
+//     })};
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

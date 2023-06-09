@@ -134,7 +134,7 @@ input[type=text]:focus {
 
 .heroes__container {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     margin: 0 1rem;
 }
 
@@ -210,7 +210,7 @@ input[type=text]:focus {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
 }
 
 /* SEARCH-BAR */
@@ -288,7 +288,7 @@ input[type=text]:focus {
     font-weight: 700;
     right: 0;
     display: none;
-    justify-content:right;
+    justify-content: right;
     width: 100%;
 
 }
@@ -319,32 +319,53 @@ input[type=text]:focus {
     opacity: 1;
 }
 
-.hero__container-1 {
-    position: relative;
-    animation: 1s ease 0s move-fight;
-}
 
 @keyframes move-fight-1 {
-    from {
-      right: 0;
+    0% {
+        left: 0;
+
     }
-    to {
-      right: 75%;
+    80% {
+        transform: rotate3d(0,0,1,0deg);
     }
-  }
-.hero__container-2 {
+
+    100% {
+        left: 40vw;
+        transform: rotate3d(0,0,.1,45deg)
+    }
+}
+
+.hero__container-1 {
     position: relative;
-    animation: 1s ease 0s move-fight;
+    animation-timing-function: cubic-bezier(1,-0.09,1,1.38);
+    animation-name: move-fight-1;
+    animation-duration: .75s;
+    z-index: 1000;
 }
 
 @keyframes move-fight-2 {
-    from {
-      left: 0;
+    0% {
+        right: 0;
+
     }
-    to {
-      left: 75%;
+    80% {
+        transform: rotate3d(0,0,.1,0deg);
     }
-  }
+
+    100% {
+        right: 40vw;
+        transform: rotate3d(0,0,1,-45deg)
+    }
+}
+
+.hero__container-2 {
+    position: relative;
+    animation-timing-function: cubic-bezier(1,-0.09,1,1.38);
+    animation-name: move-fight-2;
+    animation-duration: .75s;
+    z-index: 1000;
+}
+
 
 .hero__img {
     width: 30vw;
@@ -379,9 +400,9 @@ input[type=text]:focus {
 @media screen and (min-width:1000px) {
 
     .hero__delete {
-        justify-content:center;
+        justify-content: center;
     }
-
+    
     .fight__img {
         width: 0%;
         position: absolute;
@@ -396,6 +417,70 @@ input[type=text]:focus {
     }
 }
 
+/* HERO IMG ANIM */
+.hero__anim{
+position: absolute;
+
+}
+
+.anim__aargh-1{
+    position: relative;
+    width: 20vw;
+    rotate: -30deg;
+    top: -5vw;
+    left: -7vw;
+}
+
+.anim__aargh-2{
+    position: relative;
+    width: 20vw;
+    rotate: 45deg;
+    top: -5vw;
+    right: -20vw;
+}
+
+.anim__bam-1, .anim__bang-1, .anim__oops-1{
+    position: relative;
+    width: 20vw;
+    top: -5vw;
+    left: 20vw;
+}
+.anim__bam-2, .anim__bang-2, .anim__oops-2{
+    position: relative;
+    width: 20vw;
+    top: -5vw;
+    right: 10vw;
+}
+
+@media screen and (min-width:1000px) {
+.anim__aargh-1{
+    position: relative;
+    width: 15vw;
+    rotate: -30deg;
+    top: -3vw;
+    left: -7vw;
+}
+
+.anim__aargh-2{
+    position: relative;
+    width: 15vw;
+    rotate: 45deg;
+    top: -3vw;
+    right: -12vw;
+}
+.anim__bam-1, .anim__bang-1, .anim__oops-1{
+    position: relative;
+    width: 20vw;
+    top: -5vw;
+    left: 10vw;
+}
+.anim__bam-2, .anim__bang-2, .anim__oops-2{
+    position: relative;
+    width: 20vw;
+    top: -5vw;
+    right: 10vw;
+}
+}
 /* CHARACTER CARD */
 
 .hero__character-card {
