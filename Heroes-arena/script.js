@@ -1,7 +1,7 @@
 /*
 les tutos de guillaume :
 
-l.510 : ajouter un effet de vitesse sur le 'animate'
+decaller les emotes pour qu'elles apparaissent quand le heros qui attaque touche l'autre
  */
 /*
                          +------------------------------------------+
@@ -310,6 +310,7 @@ function attackScore(hero) {
     return hero.powerstats.strength + dice(100);
 }
 
+
 /**
  * Execute Fight
  * This function is used to give the fight result.                                      
@@ -325,41 +326,38 @@ function executeFight(attacker, defender) {
     if (damagesAttack > shieldDefense) {
         defender.powerstats.durability -= damagesAttack;
 
-        // setTimeout(() => {
-        //     hero1HTML.querySelector('.hero__container').style.left = "30vw";
-        //     // hero1HTML.querySelector('.hero__container').classList.add("position-attack-1");
-        // }, "1000");
-        // setTimeout(() => {
-        //     hero1HTML.querySelector('.hero__container').classList.remove("position-attack-1");
-        // }, "1000");
-
         resumeText.innerHTML += `<br> ${attacker.name} a attaqué ${defender.name} et lui a infligé ${damagesAttack}`;
         resumeText.innerHTML += `<br> Il reste ${defender.powerstats.durability}hp a ${defender.name}.<br>`;
-        if (attacker === hero1){
-        setTimeout(() => {
-            document.querySelector('#hero1-container').classList.add("hero__container-1")
-        }, "250")
-        setTimeout(() => {
+        if (attacker === hero1) {
+            
+            setTimeout(() => {
+                document.querySelector('#hero1-container').classList.add("hero__container-1")
+            }, "250")
+            
+            setTimeout(() => {
+                document.querySelector('#aargh-hero2').classList.toggle("display-none")
+                document.querySelector('#bam-hero2').classList.toggle("display-none")
+            }, "500")
+
+
+            document.querySelector('#hero1-container').classList.remove("hero__container-1")
             document.querySelector('#aargh-hero2').classList.toggle("display-none")
             document.querySelector('#bam-hero2').classList.toggle("display-none")
-        }, "1000")
-        
-        document.querySelector('#hero1-container').classList.remove("hero__container-1")
-        document.querySelector('#aargh-hero2').classList.toggle("display-none")
-        document.querySelector('#bam-hero2').classList.toggle("display-none")}
-        else if (attacker === hero2){
+        }
+        else if (attacker === hero2) {
             setTimeout(() => {
                 document.querySelector('#hero2-container').classList.add("hero__container-2")
             }, "250",)
+            
             setTimeout(() => {
                 document.querySelector('#aargh-hero1').classList.toggle("display-none")
                 document.querySelector('#bam-hero1').classList.toggle("display-none")
-            }, "1000")
-            document.querySelector('#hero2-container').classList.remove("hero__container-2")            
+            }, "500")
+            document.querySelector('#hero2-container').classList.remove("hero__container-2")
             document.querySelector('#aargh-hero1').classList.toggle("display-none")
             document.querySelector('#bam-hero1').classList.toggle("display-none")
         }
-    
+
 
         if (defender.powerstats.durability <= 0) {
             resumeText.innerHTML += `<br> ${defender.name} est K.O`;
@@ -368,12 +366,11 @@ function executeFight(attacker, defender) {
 
     else if (damagesAttack < shieldDefense) {
         attacker == defender && defender == attacker
-        // attacker.powerstats.durability -= defenseCounterAttack;
-        
+
         resumeText.innerHTML += `<br> ${defender.name} arrive à se défendre, ${attacker.name} n'inflige aucun dégat.`;
-        executeFight(attacker, defender)
-        // resumeText.innerHTML += `<br> ${defender.name} riposte et inflige ${defenseCounterAttack} points de dégâts à ${attacker.name}.`;
-        // resumeText.innerHTML += `<br> Il reste ${attacker.powerstats.durability}hp à ${attacker.name}.<br>`;
+
+        getMostSpeedHero(hero1, hero2)
+        executeFight(attacker, defender);
 
     }
     else {
@@ -395,7 +392,7 @@ function battle(hero1, hero2) {
         document.querySelector('.fight__img').style.top = "0";
     }, "1000");
 
-    // Executing fight, turn by turn all the 2 sec
+    // Executing fight, turn by turn all the 1 sec
     const timer = setInterval(
 
         function () {
@@ -421,18 +418,14 @@ function battle(hero1, hero2) {
                 hero2HTML.querySelector('.life-bar__modular').style.backgroundColor = "red";
             }
             if (hero1.powerstats.durability <= 0) {
-                // hero1HTML.querySelector('.life-bar__modular').textContent = `0`
                 hero1HTML.querySelector('.life-combat').style.width = `0%`;
                 hero1HTML.querySelector('.progress__life-point').textContent = `0/${hero1Life}`
-                // hero1HTML.querySelector('.hero__cross').classList.remove("display-none")
                 hero1HTML.querySelector('.hero__cross-1').classList.add("hero__cross-1-display")
                 document.querySelector(".combat-background").classList.toggle("display-none")
             }
             else if (hero2.powerstats.durability <= 0) {
-                // hero2HTML.querySelector('.life-bar__modular').textContent = `0`
                 hero2HTML.querySelector('.life-combat').style.width = `0%`;
                 hero2HTML.querySelector('.progress__life-point').textContent = `0/${hero2Life}`
-                // hero2HTML.querySelector('.hero__cross').classList.remove("display-none")
                 hero2HTML.querySelector('.hero__cross-2').classList.add("hero__cross-2-display")
                 document.querySelector(".combat-background").classList.toggle("display-none")
             }
@@ -447,7 +440,7 @@ function battle(hero1, hero2) {
                 resumeText.innerHTML += `<br><br><strong>${winner} gagne le combat !</strong>`
             };
             document.getElementById('selection-combat-text').scrollTop = document.getElementById('selection-combat-text').scrollHeight; // automatic scroll of text of fight
-        }, 2000)
+        }, 1000)
 }
 
 /**
@@ -520,22 +513,6 @@ function preparHeroToCombat(heroHTML) {
     heroHTML.querySelector(".hero__delete").style.display = 'none';
 }
 
-// function hitHero1(hero1Container) {
-//     hero1Container.animate([
-//     {transform: 'translateX(0)' },
-//     {transform: 'translateX(180%)' }
-//     ],{
-//     duration: 250
-//     })};
-
-// function hitHero2(hero2Container) {
-//     hero2Container.animate([
-//     {transform: 'translateX(0)' },
-//     {transform: 'translateX(-180%)' }
-//     ],{
-//     duration: 250
-//     })};
-
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -550,8 +527,6 @@ waitingForResponse();
 // Display the character-card of hero 1 if you click on the Stats button of hero 1
 hero1HTML.querySelector('.hero__container').addEventListener('click', function (e) {
     if (hero1 === undefined) { return };
-    // displayOrNotCharacterCard(hero1HTML)
-    // Associate stats of hero 1 to progress-bar width
     hero1HTML.querySelector('.progress__val-atq').style.width = hero1.powerstats.strength + '%'
     hero1HTML.querySelector('.progress__val-life').style.width = hero1.powerstats.durability + '%'
     hero1HTML.querySelector('.progress__val-shield').style.width = hero1.powerstats.combat + '%'
@@ -561,8 +536,6 @@ hero1HTML.querySelector('.hero__container').addEventListener('click', function (
 // Display the character-card of hero 2 if you click on the Stats button of hero 2
 hero2HTML.querySelector('.hero__container').addEventListener('click', function (e) {
     if (hero2 === undefined) { return };
-    // displayOrNotCharacterCard(hero2HTML)
-    // Associate stats of hero 2 to progress-bar width
     hero2HTML.querySelector('.progress__val-atq').style.width = hero2.powerstats.strength + '%'
     hero2HTML.querySelector('.progress__val-life').style.width = hero2.powerstats.durability + '%'
     hero2HTML.querySelector('.progress__val-shield').style.width = hero2.powerstats.combat + '%'
@@ -586,16 +559,6 @@ hero1HTML.querySelector('.hero__delete').addEventListener('click', function (e) 
 // Remove hero 2 if you click on his name
 hero2HTML.querySelector('.hero__delete').addEventListener('click', function (e) { removeHero(hero2HTML) }, true);
 
-// Remove addEventListener for removeHero
-
-// buttonCombat.addEventListener("click", () => {
-//     controller.abort();
-// });
-
-// if (combatArea.style.backgroundImage = "url(img/damier.jpg)"){
-// hero1HTML.querySelector('.hero__name').removeEventListener('click', function (e) { removeHero(hero1HTML) }, true);
-// }
-
 // On click of button "combat", fight starting
 buttonCombat.addEventListener('click', function (event) {
 
@@ -613,17 +576,8 @@ buttonCombat.addEventListener('click', function (event) {
     combatArea.style.backgroundImage = "url(img/damier.jpg)"
     document.querySelector(".combat-background").classList.toggle("display-none")
     resumeCbt.classList.toggle("display-none")
-    // disabled remove heroes
-    // hero1HTML.querySelector('.hero__name').removeEventListener('click', function(e){removeHero(hero1HTML)});
-    // hero2HTML.querySelector('.hero__name').removeEventListener('click', function(e){removeHero(hero2HTML)});
-
-    // combatArea.classList.add("combat-design")
     buttonCombat.style.display = "none"
-
     selectionTitle.classList.toggle("display-none")
-    // fightTitle.classList.toggle("display-none")
-    // hero1HTML.querySelector('.hero__name-cross').style.display = "none"
-    // hero2HTML.querySelector('.hero__name-cross').style.display = "none"
     search.style.display = "none"
     margin.classList.toggle("margin-bottom")
     imgVS.classList.toggle("display-none")
