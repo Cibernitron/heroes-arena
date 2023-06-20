@@ -249,23 +249,9 @@ input[type=text]:focus {
 
 /* SECTION HERO */
 
-/* .hero__name-cross::after,
-.hero__name-cross::before {
-    content: "❌";
-    opacity: 0;
-    transition: opacity .3s ease-in-out;
+.hero__container {
+    position: relative;
 }
-
-.hero__name:hover {
-    background-color: var(--third-color);
-    color: var(--white);
-    cursor: pointer;
-}
-
-.hero__name-cross:hover::after,
-.hero__name-cross:hover::before {
-    opacity: 1;
-} */
 
 .name-combat {
     background-color: var(--sixth-color);
@@ -300,6 +286,7 @@ input[type=text]:focus {
     opacity: 0;
     transition: opacity 5s ease;
     aspect-ratio: 1/1;
+    z-index: -10;
 }
 
 .hero__cross-2 {
@@ -309,29 +296,35 @@ input[type=text]:focus {
     transition: opacity 5s ease;
     right: 0;
     aspect-ratio: 1/1;
+    z-index: -10;
 }
 
 .hero__cross-1-display {
     opacity: 1;
+    z-index: 100000;
 }
 
 .hero__cross-2-display {
     opacity: 1;
+    z-index: 100000;
 }
 
 
 @keyframes move-fight-1 {
     0% {
         left: 0;
+        z-index: 10000;
 
     }
     80% {
         transform: rotate3d(0,0,1,0deg);
+        z-index: 10000;
     }
 
     100% {
         left: 40vw;
-        transform: rotate3d(0,0,.1,45deg)
+        transform: rotate3d(0,0,.1,45deg);
+        z-index: 10000;
     }
 }
 
@@ -340,21 +333,23 @@ input[type=text]:focus {
     animation-timing-function: cubic-bezier(1,-0.09,1,1.38);
     animation-name: move-fight-1;
     animation-duration: .75s;
-    z-index: 1000;
 }
 
 @keyframes move-fight-2 {
     0% {
         right: 0;
-
+        z-index: 10000;
+        
     }
     80% {
         transform: rotate3d(0,0,.1,0deg);
+        z-index: 10000;
     }
-
+    
     100% {
         right: 40vw;
-        transform: rotate3d(0,0,1,-45deg)
+        transform: rotate3d(0,0,1,-45deg);
+        z-index: 10000;
     }
 }
 
@@ -363,10 +358,61 @@ input[type=text]:focus {
     animation-timing-function: cubic-bezier(1,-0.09,1,1.38);
     animation-name: move-fight-2;
     animation-duration: .75s;
-    z-index: 1000;
+    
 }
 
+@keyframes move-fight-miss-1 {
+    0% {
+        transform: rotate3d(0,0,1,0deg);
+        left: 0;
+        z-index: 10000;
 
+    }
+    50% {
+        transform: rotate3d(0,0,1,-225deg);
+        z-index: 10000;
+    }
+
+    100% {
+        left: 40vw;
+        transform: rotate3d(0,0,.1,450deg);
+        z-index: 10000;
+    }
+}
+
+.hero__container-miss-1 {
+    position: relative;
+    animation-timing-function: cubic-bezier(1,-0.09,1,1.38);
+    animation-name: move-fight-miss-1;
+    animation-duration: .75s;
+}
+
+@keyframes move-fight-miss-2 {
+    0% {
+        transform: rotate3d(0,0,.1,0deg);
+        right: 0;
+        z-index: 10000;
+        
+    }
+    50% {
+        transform: rotate3d(0,0,1,-225deg);
+        z-index: 10000;
+    }
+    
+    100% {
+        right: 40vw;
+        transform: rotate3d(0,0,1,-450deg);
+        z-index: 10000;
+    }
+}
+
+.hero__container-miss-2 {
+    position: relative;
+    animation-timing-function: cubic-bezier(1,-0.09,1,1.38);
+    animation-name: move-fight-miss-2;
+    animation-duration: .75s;
+    
+}
 .hero__img {
     width: 30vw;
     aspect-ratio: 1/1;
@@ -421,6 +467,19 @@ input[type=text]:focus {
 .hero__anim{
 position: absolute;
 
+}
+.anim__miss-1 {
+    position: relative;
+    width: 20vw;
+    top: -5vw;
+    left: 20vw;
+}
+
+.anim__miss-2{
+    position: relative;
+    width: 20vw;
+    top: -5vw;
+    right: 20vw;
 }
 
 .anim__aargh-1{
@@ -491,6 +550,9 @@ position: absolute;
     border-radius: 2vw;
     background-color: var(--fifth-color);
     padding: 1rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .character-card__list {
@@ -748,7 +810,7 @@ position: absolute;
     background-size: cover;
     margin: 2rem auto;
     width: 90vw;
-    height: 80vh;
+    /* height: 80vh; */
     padding-bottom: 2rem;
     padding-top: 3rem;
     position: relative;

@@ -1,7 +1,9 @@
 /*
 les tutos de guillaume :
 
-decaller les emotes pour qu'elles apparaissent quand le heros qui attaque touche l'autre
+comment parser un fichier json en php
+comment lire le fichier, recuperer son contenus, pour sortir les requetes a mettre en SQL 
+et créer un modele sql 
  */
 /*
                          +------------------------------------------+
@@ -65,18 +67,34 @@ function verifyTheHeroes(hero1, hero2) {
 }
 
 // Display or not character-card in the place of picture on click on this last one
-function displayOrNotCharacterCard(heroHtml, number) {
+function displayOrNotCharacterCard(hero, heroHtml, number) {
     // display character-card in the place of picture on click on this last one
     heroHtml.querySelector('.hero__character-card').classList.toggle('display-none')
     heroHtml.querySelector('.hero__img').classList.toggle('display-none')
-    heroHtml.querySelector(`.hero__cross-${number}-display`).classList.toggle('display-none')
+    if (hero.powerstats.durability <= 0 && hero.powerstats.durability <= 0) {
+        heroHtml.querySelector(`.hero__cross-${number}-display`).classList.toggle('display-none')
+    }
 }
 
+/**
+ * Verify if heroes are defined, 
+ * @param {string} hero is the hero in API                           
+ * @param {string} heroHTML is the parent HTML tag where we will add the hero                            
+ * @param {string} number is number of the place of hero (1 or 2)                            
+ * @return {string} if the hero is selected, we can click for display character card
+ */
 function verifyTheHeroes2(hero, heroHTML, number) {
     if (hero === undefined) { return; }
-    displayOrNotCharacterCard(heroHTML, number)
+    displayOrNotCharacterCard(hero, heroHTML, number)
 }
 
+// function displayPicture(hero) {
+//     return `
+//     <picture>
+//     <source srcset="${hero.images.lg}" media="(min-width: 1200px)">
+//     <img class=" hero__img" src="${hero.images.md}">
+//    </picture>`
+// }
 
 /**
  * Add Hero
@@ -98,7 +116,9 @@ function addHero(hero, heroHtml) {
     // heroHtml.querySelector('.life-bar__modular').textContent = `${hero.powerstats.durability}`;
 
     // Display the picture of the hero
-    heroHtml.querySelector('.hero__img').src = hero.images.md;
+    heroHtml.querySelector('.hero__img').src = hero.images.lg;
+    // heroHtml.querySelector('.hero__container').innerHTML = displayPicture(hero);
+
 
     // Display stat button of the hero
     // heroHtml.querySelector('.hero__container').classList.remove('display-none');
@@ -132,6 +152,7 @@ function removeHero(heroHtml) {
     // Remove hero picture
     heroHtml.querySelector('.hero__img').classList.remove('display-none');
     heroHtml.querySelector('.hero__img').src = "img/Choix perso mobile.png";
+    // heroHtml.querySelector('.hero__container').innerHTML = "";
 
     // Hide stat button
     // heroHtml.querySelector('.hero__container').classList.add('display-none');
@@ -321,57 +342,66 @@ function attackScore(hero) {
 function executeFight(attacker, defender) {
     let shieldDefense = defenseScore(defender);
     let damagesAttack = attackScore(attacker);
-    let defenseCounterAttack = attackDefenserScore(defender);
+    // let defenseCounterAttack = attackDefenserScore(defender);
 
     if (damagesAttack > shieldDefense) {
         defender.powerstats.durability -= damagesAttack;
-
+        if (defender.powerstats.durability <= 0) {
+            resumeText.innerHTML += `<br> ${defender.name} est K.O`;
+            return
+        }
         resumeText.innerHTML += `<br> ${attacker.name} a attaqué ${defender.name} et lui a infligé ${damagesAttack}`;
         resumeText.innerHTML += `<br> Il reste ${defender.powerstats.durability}hp a ${defender.name}.<br>`;
         if (attacker === hero1) {
-            
+
             setTimeout(() => {
                 document.querySelector('#hero1-container').classList.add("hero__container-1")
-            }, "250")
-            
-            setTimeout(() => {
-                document.querySelector('#aargh-hero2').classList.toggle("display-none")
-                document.querySelector('#bam-hero2').classList.toggle("display-none")
-            }, "500")
+                setTimeout(() => {
+                    document.querySelector('#bam-hero2').classList.remove("display-none")
+                    if (defender.powerstats.durability <= 0) {
+                        document.querySelector('#aargh-hero2').classList.remove("display-none")
+                    }
+                    setTimeout(() => {
+                        document.querySelector('#aargh-hero2').classList.add("display-none")
+                        document.querySelector('#bam-hero2').classList.add("display-none")
+                    }, "1000")
+                }, "750")
 
+            }, "1000")
 
             document.querySelector('#hero1-container').classList.remove("hero__container-1")
-            document.querySelector('#aargh-hero2').classList.toggle("display-none")
-            document.querySelector('#bam-hero2').classList.toggle("display-none")
         }
         else if (attacker === hero2) {
             setTimeout(() => {
                 document.querySelector('#hero2-container').classList.add("hero__container-2")
-            }, "250",)
-            
-            setTimeout(() => {
-                document.querySelector('#aargh-hero1').classList.toggle("display-none")
-                document.querySelector('#bam-hero1').classList.toggle("display-none")
-            }, "500")
+                setTimeout(() => {
+                    document.querySelector('#bam-hero1').classList.remove("display-none")
+                    if (defender.powerstats.durability <= 0) {
+                        document.querySelector('#aargh-hero1').classList.remove("display-none")
+                    }
+                    setTimeout(() => {
+                        document.querySelector('#aargh-hero1').classList.add("display-none")
+                        document.querySelector('#bam-hero1').classList.add("display-none")
+                    }, "1000")
+                }, "750")
+
+            }, "1000",)
+
             document.querySelector('#hero2-container').classList.remove("hero__container-2")
-            document.querySelector('#aargh-hero1').classList.toggle("display-none")
-            document.querySelector('#bam-hero1').classList.toggle("display-none")
-        }
-
-
-        if (defender.powerstats.durability <= 0) {
-            resumeText.innerHTML += `<br> ${defender.name} est K.O`;
         }
     }
 
     else if (damagesAttack < shieldDefense) {
-        attacker == defender && defender == attacker
-
+        if (defender.powerstats.durability <= 0) {
+            resumeText.innerHTML += `<br> ${defender.name} est K.O`;
+            return
+        }
         resumeText.innerHTML += `<br> ${defender.name} arrive à se défendre, ${attacker.name} n'inflige aucun dégat.`;
+
+        attacker == defender && defender == attacker
 
         getMostSpeedHero(hero1, hero2)
         executeFight(attacker, defender);
-
     }
     else {
         resumeText.innerHTML += `<br> Il y a égalité!`;
@@ -440,8 +470,10 @@ function battle(hero1, hero2) {
                 resumeText.innerHTML += `<br><br><strong>${winner} gagne le combat !</strong>`
             };
             document.getElementById('selection-combat-text').scrollTop = document.getElementById('selection-combat-text').scrollHeight; // automatic scroll of text of fight
-        }, 1000)
+        }, 2000)
 }
+
+
 
 /**
  * Display Character Card
@@ -487,12 +519,12 @@ function displayCards(hero) {
             <div class="character-card__bio">
                 <p class="bio__title">Biography:</p>
                 <p class="bio__text"><span class="bio__text-title">Real-Name:</span> ${hero.biography.fullName}</p>
-                <p class="bio__text"><span class="bio__text-title">Place of Birth:</span> ${hero.biography.placeOfBirth}</p>
                 <p class="bio__text"><span class="bio__text-title">Alignement:</span> ${hero.biography.alignment}</p>
                 <p class="bio__text"><span class="bio__text-title">Universe:</span> ${hero.biography.publisher}</p>
-            </div>
-        </li>`;
-};
+                </div>
+                </li>`;
+            };
+            // <p class="bio__text"><span class="bio__text-title">Place of Birth:</span> ${hero.biography.placeOfBirth}</p>
 
 /**
  * Customize page for fight
@@ -573,7 +605,7 @@ buttonCombat.addEventListener('click', function (event) {
     }
     preparHeroToCombat(hero1HTML)
     preparHeroToCombat(hero2HTML)
-    combatArea.style.backgroundImage = "url(img/damier.jpg)"
+    combatArea.style.backgroundImage = "url(img/Arena_Background.webp)"
     document.querySelector(".combat-background").classList.toggle("display-none")
     resumeCbt.classList.toggle("display-none")
     buttonCombat.style.display = "none"
