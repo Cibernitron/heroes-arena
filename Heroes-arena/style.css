@@ -35,6 +35,10 @@ h6 {
     display: none;
 }
 
+.margin-right {
+    margin-right: .5rem;
+}
+
 .margin-bottom {
     display: block;
     margin-bottom: 3rem;
@@ -157,6 +161,34 @@ input[type=text]:focus {
     align-items: center;
     z-index: 100;
 }
+
+.speed__selection{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    width: 3rem;
+    height: 2rem;
+}
+
+.play__button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2rem;
+    z-index: 100;
+
+    
+}
+
+.speed__button {
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    width: 2rem;
+    z-index: 100;
+}
+
 
 .button--active {
     background: linear-gradient(var(--primary-color), #790909, var(--primary-color));
