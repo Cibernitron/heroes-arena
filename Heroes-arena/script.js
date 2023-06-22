@@ -412,13 +412,42 @@ function executeFight(attacker, defender) {
             return
         }
         resumeText.innerHTML += `<br> ${defender.name} arrive à se défendre, ${attacker.name} n'inflige aucun dégat.`;
+        if (attacker === hero1) {
+            // if hero1 is attacker, image of hero go to hero2 and display bubble 
+            setTimeout(() => {
+                document.querySelector('#hero1-container').classList.add("hero__container-1")
+                setTimeout(() => {
+                    document.querySelector('#oops-hero2').classList.remove("display-none")
+                    setTimeout(() => {
+                        document.querySelector('#oops-hero2').classList.add("display-none")
+                    }, speed1000)
+                }, speed750)
 
-        attacker == defender && defender == attacker
+            }, speed1000)
 
-        executeFight(attacker, defender);
+            document.querySelector('#hero1-container').classList.remove("hero__container-1")
+        }
+        else if (attacker === hero2) {
+            // if hero2 is attacker, image of hero go to hero1 and display bubble 
+            setTimeout(() => {
+                document.querySelector('#hero2-container').classList.add("hero__container-2")
+                setTimeout(() => {
+                    document.querySelector('#oops-hero1').classList.remove("display-none")
+                    setTimeout(() => {
+                        document.querySelector('#oops-hero1').classList.add("display-none")
+                    }, speed1000)
+                }, speed750)
+
+            }, speed1000,)
+
+            document.querySelector('#hero2-container').classList.remove("hero__container-2")
+        }
+        // attacker == defender && defender == attacker
+
+        // executeFight(attacker, defender);
     }
     else {
-        resumeText.innerHTML += `<br> Il y a égalité!`;
+        resumeText.innerHTML += `<br> Il y a égalité ! Rien ne se passe.`;
     }
 }
 

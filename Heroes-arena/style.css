@@ -393,7 +393,7 @@ input[type=text]:focus {
     
 }
 
-@keyframes move-fight-miss-1 {
+/* @keyframes move-fight-miss-1 {
     0% {
         transform: rotate3d(0,0,1,0deg);
         left: 0;
@@ -444,7 +444,7 @@ input[type=text]:focus {
     animation-name: move-fight-miss-2;
     animation-duration: .75s;
     
-}
+} */
 .hero__img {
     width: 30vw;
     aspect-ratio: 1/1;
@@ -501,75 +501,79 @@ position: absolute;
 
 }
 .anim__miss-1 {
-    position: relative;
+    position: absolute;
     width: 20vw;
     top: -5vw;
     left: 20vw;
 }
 
 .anim__miss-2{
-    position: relative;
+    position: absolute;
     width: 20vw;
     top: -5vw;
     right: 20vw;
 }
 
 .anim__aargh-1{
-    position: relative;
-    width: 20vw;
-    rotate: -30deg;
-    top: -5vw;
-    left: -7vw;
+    position: absolute;
+    width: 40vw;
+    rotate: 30deg;
+    top: -3vw;
+    left: -3vw;
 }
 
 .anim__aargh-2{
-    position: relative;
-    width: 20vw;
-    rotate: 45deg;
-    top: -5vw;
-    right: -20vw;
+    position: absolute;
+    width: 40vw;
+    rotate: 30deg;
+    top: -3vw;
+    right: -37vw;
 }
 
 .anim__bam-1, .anim__bang-1, .anim__oops-1{
-    position: relative;
-    width: 20vw;
-    top: -5vw;
-    left: 20vw;
+    position: absolute;
+    width: 30vw;
+    top: 5vw;
+    left: 0vw;
+    rotate: -30deg;
 }
 .anim__bam-2, .anim__bang-2, .anim__oops-2{
-    position: relative;
-    width: 20vw;
-    top: -5vw;
-    right: 10vw;
+    position: absolute;
+    width: 30vw;
+    top: 5vw;
+    right: -30vw;
+    rotate: 30deg;
 }
 
 @media screen and (min-width:1000px) {
 .anim__aargh-1{
-    position: relative;
-    width: 15vw;
-    rotate: -30deg;
-    top: -3vw;
-    left: -7vw;
+    position: absolute;
+    width: 25vw;
+    rotate: 30deg;
+    top: -2vw;
+    left: -2vw;
 }
 
 .anim__aargh-2{
-    position: relative;
-    width: 15vw;
-    rotate: 45deg;
-    top: -3vw;
-    right: -12vw;
+    position: absolute;
+    width: 25vw;
+    rotate: 30deg;
+    top: -2vw;
+    right: 2vw;
 }
 .anim__bam-1, .anim__bang-1, .anim__oops-1{
-    position: relative;
+    position: absolute;
     width: 20vw;
-    top: -5vw;
-    left: 10vw;
+    top: 5vw;
+    left: 0vw;
+    rotate: -20deg;
 }
 .anim__bam-2, .anim__bang-2, .anim__oops-2{
-    position: relative;
+    position: absolute;
     width: 20vw;
-    top: -5vw;
-    right: 10vw;
+    top: 5vw;
+    right: -20vw;
+    rotate: 30deg;
 }
 }
 /* CHARACTER CARD */
