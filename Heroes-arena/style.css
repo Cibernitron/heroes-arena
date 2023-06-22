@@ -76,7 +76,11 @@ input[type=text]:focus {
 }
 
 .body__background {
-    background: linear-gradient(to right, black, white);
+    background-image: url(img/entrance.gif);
+    /* background: linear-gradient(to right, black, white); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     opacity: 80%;
     position: fixed;
     width: 100%;
@@ -559,7 +563,7 @@ position: absolute;
     width: 25vw;
     rotate: 30deg;
     top: -2vw;
-    right: 2vw;
+    right: -23vw;
 }
 .anim__bam-1, .anim__bang-1, .anim__oops-1{
     position: absolute;
@@ -840,7 +844,7 @@ position: absolute;
 
 /* SECTION COMBAT */
 .combat-design {
-    background-image: url(img/fond-rouge.jpg);
+    /* background-image: url(img/entrance.gif); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

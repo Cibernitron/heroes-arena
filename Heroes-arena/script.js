@@ -358,7 +358,7 @@ function executeFight(attacker, defender) {
     let damagesAttack = attackScore(attacker);
     // if Attack of attacker is higher than defense of defender, defender take damage 
     if (damagesAttack > shieldDefense) {
-        let damage = damagesAttack - shieldDefense;
+        let damage = (damagesAttack - shieldDefense)*10;
         if (defender.powerstats.durability <= 0) {
             resumeText.innerHTML += `<br> ${defender.name} est K.O`;
             return
@@ -370,8 +370,10 @@ function executeFight(attacker, defender) {
             setTimeout(() => {
                 document.querySelector('#hero1-container').classList.add("hero__container-1")
                 setTimeout(() => {
+                    if (defender.powerstats.durability > 0) {
                     document.querySelector('#bam-hero2').classList.remove("display-none")
-                    if (defender.powerstats.durability <= 0) {
+                }
+                    else if (defender.powerstats.durability <= 0) {
                         document.querySelector('#aargh-hero2').classList.remove("display-none")
                     }
                     setTimeout(() => {
@@ -389,8 +391,10 @@ function executeFight(attacker, defender) {
             setTimeout(() => {
                 document.querySelector('#hero2-container').classList.add("hero__container-2")
                 setTimeout(() => {
-                    document.querySelector('#bam-hero1').classList.remove("display-none")
-                    if (defender.powerstats.durability <= 0) {
+                    if (defender.powerstats.durability > 0) {
+                        document.querySelector('#bam-hero1').classList.remove("display-none")
+                    }
+                    else if (defender.powerstats.durability <= 0) {
                         document.querySelector('#aargh-hero1').classList.remove("display-none")
                     }
                     setTimeout(() => {
