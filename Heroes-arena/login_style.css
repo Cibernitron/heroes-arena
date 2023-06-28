@@ -1,0 +1,48 @@
+:root {
+    font-size: 16px;
+    font-family: 'roboto', 'Helvetica Neue', sans-serif;
+    --primary-color: #171A21;
+    --secondary-color: #ff0000;
+    --secondary-color-dark: #9e0101;
+    --third-color: #818479;
+    --fourth-color: #ffea00;
+    --fourth-color-dark: #e2b616;
+    --fifth-color: #007AB8;
+    --sixth-color: #fff;
+}
+
+* {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body,
+ul,
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    padding: 0;
+    margin: 0 0;
+}
+
+.form-flex, .nav-justified {
+margin: auto;
+   max-width: 50rem;
+   width: 50vw;
+}
+
+.nav-justified{
+    margin-top: 5rem;
+}
+
+.register-background{
+    background-image: url(img/super&bat.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
