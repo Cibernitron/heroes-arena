@@ -1,0 +1,62 @@
+.list_img {
+    width: 100%;
+}
+
+.heroes-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.hero_information {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20rem;
+    list-style: none;
+    background-color: var(--third-color);
+}
+
+.character-card {
+    
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.container-heros {
+    list-style: none;
+    width: 20rem;
+    background-color: var(--third-color);
+}
+
+.character-card__list {
+    width: 10rem;
+}
+.character-card__list{
+    width: 100%;
+    padding: 2rem;
+}
+.character-card__progress{
+    width: 100%;
+}
+.character-card__top-title{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.character-card__features{
+    margin-top: 2rem;
+}
+
+.character-card__bio{
+    gap: .5rem;
+    margin-top: 2rem;
+}
+
+/* UTILITIES */
+.display-none {
+    display: none;
+}

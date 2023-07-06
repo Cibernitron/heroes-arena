@@ -41,7 +41,7 @@ margin: auto;
 }
 
 .register-background{
-    background-image: url(img/super&bat.gif);
+    background-image: url(../img/super&bat.gif);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

@@ -1,13 +1,16 @@
 CREATE DATABASE heroes_arena
 
-CREATE TABLE IF NOT EXISTS users (
-id_user INTEGER AUTO_INCREMENT, 
-user_pseudo VARCHAR(100) NOT NULL UNIQUE,
-user_password_user VARCHAR(100),-- à crypter
-user_email_user VARCHAR(255) NOT NULL UNIQUE,
-user_currency INTEGER NOT NULL,
-PRIMARY KEY(id_user)
-);
+ DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id_user` int NOT NULL AUTO_INCREMENT,
+  `user_pseudo` varchar(100) NOT NULL,
+  `user_password` varchar(100) DEFAULT NULL,
+  `user_email` varchar(255) NOT NULL,
+  `user_currency` int NOT NULL,
+  PRIMARY KEY (`id_user`),
+  UNIQUE KEY `user_pseudo` (`user_pseudo`),
+  UNIQUE KEY `user_email` (`user_email`)
+) 
 
 CREATE TABLE IF NOT EXISTS heroes (
   id_hero INT AUTO_INCREMENT,
