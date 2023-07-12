@@ -25,7 +25,7 @@ $_SESSION['token'] = md5(uniqid(mt_rand(), true));
         <div class="header__band"></div>
         <div class="header__background"></div>
         <a class="header__link" href="index.html">
-            <img class="header__logo" src="img/logo heroes-arena.png" alt="logo">
+            <img class="header__logo" src="../img/logo heroes-arena.png" alt="logo">
         </a>
     </header>
 
@@ -34,7 +34,7 @@ $_SESSION['token'] = md5(uniqid(mt_rand(), true));
         <h1 class="menu_title">Create New Character</h1>
         <div class="menu_informations">
             <form action="" class="informations_form"><input type="text" class="form_name" placeholder="Enter name of your Hero"></form>
-            <div class="informations_picture"><img src="img/1-a-bomb.jpg" alt="" class="picture_hero"></div>
+            <div class="informations_picture"><img src="../img/1-a-bomb.jpg" alt="" class="picture_hero"></div>
             <div class="informations_stats">
                 <div class="stats_stat">
                     <h3 class="stat_name">Stat Name</h3>
@@ -95,7 +95,7 @@ $_SESSION['token'] = md5(uniqid(mt_rand(), true));
         <div class="footer__band"></div>
         <div class="footer__background"></div>
         <a class="footer__link" href="index.html">
-            <img class="footer__logo" src="img/logo heroes-arena.png" alt="logo">
+            <img class="footer__logo" src="../img/logo heroes-arena.png" alt="logo">
         </a>
     </footer>
 </body>

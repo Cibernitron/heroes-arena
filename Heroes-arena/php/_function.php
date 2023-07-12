@@ -18,12 +18,10 @@ function isValid($bool)
  */
 function getList($array)
 {
-
-    $li = '<ul class="heroes-list">';
+    $li = "";
     foreach ($array as $hero) {
         $li .= '<li class="container-heros">'.displayCards($hero).'</li>';
     }
-    $li .= '</ul>';
     return $li;
 }
 
@@ -45,7 +43,7 @@ function displayLists()
 function displayCards($hero)
 {
     return '
-    <div class="hero_information"><h3 class"name-hero">' . $hero['hero_name'] . '</h3><img class="list_img" src="' . $hero['hero_lg'] . '"></div>
+    <div class="hero_information"><h3 class="name-hero">' . $hero['hero_name'] . '</h3><img class="list_img" src="' . $hero['hero_sm'] . '"></div>
 
         <div class="display-none character-card__list">
             <div class="character-card__top">
@@ -57,34 +55,28 @@ function displayCards($hero)
                         <li class="character-card__progress abilities">  
                             <p class="character-card__features__text">Attack:</p>
                             <div class="progress">
-                                <div class="progress__val progress__val-atq">' . $hero['hero_strength'] . '</div>
+                                <div class="progress__val progress__val-atq"><p class="strength-value">' . $hero['hero_strength'] . '</p></div>
                             </div>
                         </li>
                         <li class="character-card__progress abilities">  
                             <p class="character-card__features__text">Shield:</p>
                             <div class="progress">
-                                <div class="progress__val progress__val-shield">' . $hero['hero_combat'] . '</div>
+                                <div class="progress__val progress__val-shield"><p class="combat-value">' . $hero['hero_combat'] . '</p></div>
                             </div>
                         </li>
                         <li class="character-card__progress abilities">  
                             <p class="character-card__features__text">Speed:</p>
                             <div class="progress">
-                                <div class="progress__val progress__val-speed">' . $hero['hero_speed'] . '</div>
+                                <div class="progress__val progress__val-speed"><p class="speed-value">' . $hero['hero_speed'] . '</p></div>
                             </div>
                         </li>
                         <li class="character-card__progress abilities">  
                             <p class="character-card__features__text">Health:</p>
                             <div class="progress">
-                                <div class="progress__val progress__val-life">' . $hero['hero_durability'] . '</div>
+                                <div class="progress__val progress__val-life"><p class="durability-value">' . $hero['hero_durability'] . '</p></div>
                             </div>
                         </li> 
                 </ul>
-            </div>
-            <div class="character-card__bio">
-                <p class="bio__title">Biography:</p>
-                <p class="bio__text"><span class="bio__text-title">Real-Name:</span> ' . $hero['hero_full_name'] . '</p>
-                <p class="bio__text"><span class="bio__text-title">Alignement:</span> ' . $hero['hero_alignment'] . '</p>
-                <p class="bio__text"><span class="bio__text-title">Universe:</span> ' . $hero['hero_publisher'] . '</p>
             </div>
         </div>';
 };

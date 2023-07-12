@@ -599,7 +599,6 @@ function preparCharacterCard(hero, heroHTML) {
 
         heroHTML.querySelector('.progress__val-atq').style.width = hero.powerstats.strength + '%'
         heroHTML.querySelector('.progress__val-life').style.width = hero.powerstats.durability + '%'
-        console.log(heroHTML.querySelector('.progress__val-life').style.width);
         heroHTML.querySelector('.progress__val-shield').style.width = hero.powerstats.combat + '%'
         heroHTML.querySelector('.progress__val-speed').style.width = hero.powerstats.speed + '%'
     }
