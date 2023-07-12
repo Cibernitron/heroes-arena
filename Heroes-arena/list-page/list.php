@@ -16,7 +16,8 @@ include "../php/_function.php";
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Marvel:wght@400;700&family=Roboto:wght@100&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../list-page/style-list.css">
+    <link rel="stylesheet" href="../style.css">
+
 </head>
 <?php include "../php/_header.php"?>
 <main>

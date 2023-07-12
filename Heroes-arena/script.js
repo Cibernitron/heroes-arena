@@ -586,8 +586,8 @@ function preparHeroToCombat(heroHTML) {
     heroHTML.querySelector(".name-combat").style.marginBottom = "0";
     heroHTML.querySelector(".life-bar__modular").classList.add("life-combat");
     heroHTML.querySelector(".life-bar__modular").classList.remove("display-none");
-    heroHTML.querySelector(".progress").style.display = "flex";
-    heroHTML.querySelector(".progress__life-bar").style.display = "flex";
+    // heroHTML.querySelector(".progress").style.display = "flex";
+    heroHTML.querySelector(".hero__life-container").classList.remove("display-none");
     document.querySelector(".health-img-1").classList.remove("display-none");
     document.querySelector(".health-img-2").classList.remove("display-none");
     document.querySelector(".body__background").style.opacity = "0%";
