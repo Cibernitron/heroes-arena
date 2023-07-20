@@ -5,6 +5,57 @@ comment parser un fichier json en php
 comment lire le fichier, recuperer son contenus, pour sortir les requetes a mettre en SQL 
 et créer un modele sql 
  */
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+                         +------------------------------------------+
+                         |              Connection API              |
+                         +------------------------------------------+ 
+ */
+
+let searchBar = document.querySelector('.search__bar');
+
+searchBar.addEventListener('keyup', e => {
+    searchBar.value;
+    showName(searchBar.value)
+    .then(Response => {
+        if (!Response.result) {
+            console.error('Problème avec la requête.');
+            return;
+        }
+            displayNames(Response.hero_name);
+            // console.log(Response.hero_name);
+        });
+});
+
+function showName(word) {
+    const data = {
+        action: 'showName',
+        hero_name: word,
+        // token: getCsrfToken()
+    };
+    return callAPI('POST', data);
+}
+
+async function callAPI(method, data) {
+    try {
+        const response = await fetch("php/api.php", {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        return response.json();
+    }
+    catch (error) {
+        console.error("Unable to load datas from the server : " + error);
+    }
+}
+// function getCsrfToken() {
+//     return document.querySelector('#token-csrf').value;
+// }
 /*
                          +------------------------------------------+
                          |                Variables                 |
@@ -57,14 +108,14 @@ let speed2000 = 2000;
  */
 function verifyTheHeroes(hero1, hero2) {
     if (hero1 == undefined || hero2 == undefined) {
-        buttonCombat.classList.remove("button--active");
+        buttonCombat.classList.remove("active");
         search.style.display = "flex"
     }
     else if (hero1 == hero2) {
-        buttonCombat.classList.remove("button--active");
+        buttonCombat.classList.remove("active");
     }
     else {
-        buttonCombat.classList.add("button--active");
+        buttonCombat.classList.add("active");
         search.style.display = "none"
     }
 }
@@ -159,56 +210,58 @@ function removeHero(heroHtml) {
 function displayNames(array) {
 
     // If a key is pressed in the search bar then it offers 4 heroes corresponding to the searched text
-    button.addEventListener('keyup', function (event) {
-        const input = button.value;
-        list.innerHTML = '';
-        if (input === '') {
-            return;
-        }
-        const result = array.filter(item => item.name.toLocaleLowerCase().startsWith(input.toLocaleLowerCase()))
+    // button.addEventListener('keyup', function (event) {
+        // const input = button.value;
+        // list.innerHTML = '';
+        // if (input === '') {
+        //     return;
+        // }
+        // const result = array.filter(item => item.name.toLocaleLowerCase().startsWith(input.toLocaleLowerCase()))
         let count = 0;
 
         // Displays the first 4 heroes returned by the table after a filter
-        result.forEach(element => {
+        let buttonLiHeroes = document.createElement("button");
+        buttonLiHeroes.innerText = "";
+        array.forEach(element => {
             if (count >= 4) {
                 return;
             }
+            
 
             // Add the hero's name to the search list
             let liHeroes = document.createElement("li");
-            let buttonLiHeroes = document.createElement("button");
             buttonLiHeroes.classList.add("button__lnk")
             list.appendChild(liHeroes);
             liHeroes.appendChild(buttonLiHeroes);
-            buttonLiHeroes.setAttribute("id", `${element.id}`);
-            buttonLiHeroes.innerText = element.name;
+            // buttonLiHeroes.setAttribute("id", `${element.id}`);
+            buttonLiHeroes.innerText = element.hero_name;
 
             // If we click on the name of a hero in the search list then we add him as a new fighter
-            const buttonHeroes = document.getElementById(`${element.id}`);
-            buttonHeroes.addEventListener('click', function (e) {
+            // const buttonHeroes = document.getElementById(`${element.id}`);
+            // buttonHeroes.addEventListener('click', function (e) {
 
 
-                // If the first hero is not chosen then the selected hero becomes hero 1
-                if (hero1Name.textContent === "") {
-                    hero1 = element;
-                    addHero(element, hero1HTML);
-                }
+            //     // If the first hero is not chosen then the selected hero becomes hero 1
+            //     if (hero1Name.textContent === "") {
+            //         hero1 = element;
+            //         addHero(element, hero1HTML);
+            //     }
 
-                // If the first hero is already chosen and the second hero is not chosen then the selected hero becomes hero 2
-                else if (hero2Name.textContent === "") {
-                    hero2 = element;
-                    addHero(element, hero2HTML);
-                }
+            //     // If the first hero is already chosen and the second hero is not chosen then the selected hero becomes hero 2
+            //     else if (hero2Name.textContent === "") {
+            //         hero2 = element;
+            //         addHero(element, hero2HTML);
+            //     }
 
-                // If the 2 heroes are selected then nothing is done
-                else {
-                    console.log('Both hero zones are full');
-                }
-            });
+            //     // If the 2 heroes are selected then nothing is done
+            //     else {
+            //         console.log('Both hero zones are full');
+            //     }
+            // });
             count++;
 
         });
-    });
+
 
 
     // If we click on the random button next to the search list then we add him as a new random fighter
@@ -273,15 +326,15 @@ function displayNames(array) {
             console.log('Both hero zones are full');
         }
     })
-
 }
+
 
 // Function use to call JSON data
-async function waitingForResponse() {
-    const response = await fetch("https://akabab.github.io/superhero-api/api/all.json");
-    heroes = await response.json();
-    displayNames(heroes);
-}
+// async function waitingForResponse() {
+//     const response = await fetch("https://akabab.github.io/superhero-api/api/all.json");
+//     heroes = await response.json();
+//     displayNames(heroes);
+// }
 
 function dice(number) {
     return parseInt(Math.random() * number);
@@ -358,7 +411,7 @@ function executeFight(attacker, defender) {
     let damagesAttack = attackScore(attacker);
     // if Attack of attacker is higher than defense of defender, defender take damage 
     if (damagesAttack > shieldDefense) {
-        let damage = (damagesAttack - shieldDefense)*10;
+        let damage = (damagesAttack - shieldDefense) * 10;
         if (defender.powerstats.durability <= 0) {
             resumeText.innerHTML += `<br> ${defender.name} est K.O`;
             return
@@ -371,8 +424,8 @@ function executeFight(attacker, defender) {
                 document.querySelector('#hero1-container').classList.add("hero__container-1")
                 setTimeout(() => {
                     if (defender.powerstats.durability > 0) {
-                    document.querySelector('#bam-hero2').classList.remove("display-none")
-                }
+                        document.querySelector('#bam-hero2').classList.remove("display-none")
+                    }
                     else if (defender.powerstats.durability <= 0) {
                         document.querySelector('#aargh-hero2').classList.remove("display-none")
                     }
@@ -612,7 +665,7 @@ function preparCharacterCard(hero, heroHTML) {
                          +------------------------------------------+ 
  */
 
-waitingForResponse();
+// waitingForResponse();
 
 hero1HTML.querySelector('.hero__container').addEventListener('click', function () { preparCharacterCard(hero1, hero1HTML) })
 hero2HTML.querySelector('.hero__container').addEventListener('click', function () { preparCharacterCard(hero2, hero2HTML) })
@@ -688,3 +741,4 @@ buttonCombat.addEventListener('click', function (event) {
     hero1.powerstats.durability *= 10;
     battle(hero1, hero2);
 });
+

@@ -28,8 +28,10 @@
         <div class="character__srch">
             <section id="search" class="search">
                 <h2 id="selection-ttl" class="search__ttl">Selection</h2>
-                <input type="text" id="name" name="name" placeholder="Selectionnez un héro" required minlength="3"
-                    size="30">
+                
+                <input class="search__bar" type="text" id="name" name="name" placeholder="Selectionnez un héro" required
+                    minlength="3" size="30">
+                
                 <ul id="search-list" class="search__list"></ul>
                 <button id="btn-random" class="button search__button-random">Random</button>
             </section>

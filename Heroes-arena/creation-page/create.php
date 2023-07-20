@@ -1,5 +1,5 @@
 <?php
-require "../php/_connection-Bdd.php";
+require "../php/_connection-bdd.php";
 include "../php/_function.php";
 
 session_start();
