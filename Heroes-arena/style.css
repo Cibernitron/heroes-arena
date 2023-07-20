@@ -89,6 +89,27 @@ input[type=text]:focus {
     z-index: -10;
 }
 
+/* NAV */ 
+.header__nav{
+position: absolute;
+top: 0;
+}
+.nav{
+display: flex ;
+
+}
+.nav__list{
+margin: 1rem;
+list-style: none;
+}
+
+.nav__link {
+    background-color: var(--third-color);
+    color: var(--sixth-color);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+}
+
 /* BODY  */
 .body {
     background-color: var(--primary-color);

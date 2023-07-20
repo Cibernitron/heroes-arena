@@ -24,45 +24,37 @@ $isOk = false;
 if ($data['action'] === 'showName' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $heroName = (string)strip_tags($data['hero_name']);
-    $query = $dbCo->prepare("SELECT hero_name FROM `heroes` WHERE `hero_name` LIKE :heroname;");
+    $query = $dbCo->prepare("SELECT hero_name, id_hero FROM `heroes` WHERE `hero_name` LIKE :heroname;");
     $isOk = $query->execute([
         'heroname' => $heroName . '%' 
     ]);
     $datas = $query -> fetchAll();
     echo json_encode([
         'result' => $isOk,
-        'hero_name' => $datas
+        'hero_name' => $datas,
     ]);
     exit;
     // echo json_encode($datas);
 }
 
-if ($data['get'] === 'selectHero' && $_SERVER['REQUEST_METHOD'] === 'GET') {
-    $idHero = (int)strip_tags($data['idHero']);
-    $query = $dbCo->prepare("SELECT id_hero, hero_name, hero_intelligence hero_strength, hero_speed, hero_durability, hero_life, hero_power, hero_combat, hero_full_name, hero_publisher, hero_alignment, hero_sm FROM `heroes` WHERE `id_hero` LIKE :id_hero;");
+if ($data['action'] === 'selectHero' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    $idHero = (int)strip_tags($data['id_hero']);
+    $query = $dbCo->prepare("SELECT id_hero, hero_name, hero_intelligence, hero_strength, hero_speed, hero_durability, hero_life, hero_power, hero_combat, hero_full_name, hero_publisher, hero_alignment, hero_lg FROM `heroes` WHERE `id_hero` LIKE :id_hero;");
     $isOk = $query->execute([
         'id_hero' => $idHero,
-        'hero_name' => $heroName,
-        'hero_intelligence' => $heroIntel,
-        'hero_strength' => $heroStrength,
-        'hero_speed' => $heroSpeed,
-        'hero_durability' => $heroDurability,
-        'hero_life' => $heroLife,
-        'hero_power' => $heroPower,
-        'hero_combat' => $heroCombat,
-        'hero_full_name' => $heroFullName,
-        'hero_publisher' => $heroPublisher,
-        'hero_alignment' => $heroAlignement,
-        'hero_sm' => $heroSm,
     ]);
-
-    // $datas = [
-    //     'result' => $isOk,
-    //     'id_hero' => $idHero,
-    // ];
-
+    $datas = $query -> fetchAll();
     echo json_encode([
         'result' => $isOk,
-        'id_hero' => $idHero,
+        'hero_name' => $datas,
+    ]);
+};
+if ($data['action'] === 'giveAllId' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    $query = $dbCo->prepare("SELECT id_hero FROM `heroes` ;");
+    $isOk = $query->execute();
+    $datas = $query -> fetchAll();
+    echo json_encode([
+        'result' => $isOk,
+        'heroes_id' => $datas,
     ]);
 };

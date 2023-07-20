@@ -30,7 +30,7 @@ function displayLists()
 {
     global $dbCo;
     $query = $dbCo->prepare('SELECT * FROM heroes;');
-    $query->execute([]);
+    $query->execute();
     $result = $query->fetchAll();
     echo getList($result);
 }
@@ -44,7 +44,7 @@ function displayLists()
 function displayCards($hero)
 {
     return '
-    <div class="hero_information"><h3 class="name-hero">' . $hero['hero_name'] . '</h3><img class="list_img" src="' . $hero['hero_sm'] . '"></div>
+    <div class="hero_information"><h3 class="name-hero">' . $hero['hero_name'] . '</h3><img class="list_img" src="' . $hero['hero_md'] . '"></div>
     
     <div class="display-none list-character-card__list">
     <div class="character-card__top">

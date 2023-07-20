@@ -13,16 +13,7 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
-
-<body class="body">
-    <div class="body__background"></div>
-    <header class="header">
-        <div class="header__band"></div>
-        <div class="header__background"></div>
-        <a class="header__link" href="index.html">
-            <img class="header__logo" src="img/logo_heroes-arena.png" alt="logo">
-        </a>
-    </header>
+<?php include "php/_header.php"?>
     <main>
         <!-- Search -->
         <div class="character__srch">
@@ -135,13 +126,7 @@
         <!-- </div> -->
         <span class="margin-bottom" id="margin-bottom"></span>
     </main>
-    <footer class="footer">
-        <div class="footer__band"></div>
-        <div class="footer__background"></div>
-        <a class="footer__link" href="index.html">
-            <img class="footer__logo" src="img/logo_heroes-arena.png" alt="logo">
-        </a>
-    </footer>
+    <?=include "php/_footer.php";?>
 </body>
 <script src="script.js"></script>
 
