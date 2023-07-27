@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-require "../php/_connection-bdd.php";
+require "_connection-bdd.php";
 $data = json_decode(file_get_contents('php://input'), true);
 header('content-type:application/json');
 

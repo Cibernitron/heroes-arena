@@ -1,6 +1,6 @@
 <?php
-require "php/_connection-bdd.php";
-include "php/_function.php";
+require "../php/_connection-bdd.php";
+include "../php/_function.php";
 
 session_start();
 
@@ -17,17 +17,18 @@ $_SESSION['token'] = md5(uniqid(mt_rand(), true));
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Marvel:wght@400;700&family=Roboto:wght@100&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
-<?php include "php/_header.php" ?>
-<main>
 
+<?php include "../php/_header.php" ?>
+
+<main>
 
     <div class="create_menu">
         <h1 class="menu_title">Create New Character</h1>
         <div class="menu_informations">
             <form action="" class="informations_form"><input type="text" class="form_name" placeholder="Enter name of your Hero"></form>
-            <div class="informations_picture"><img src="img/1-a-bomb.jpg" alt="" class="picture_hero"></div>
+            <div class="informations_picture"><img src="../img/1-a-bomb.jpg" alt="" class="picture_hero"></div>
             <div class="informations_stats">
                 <div class="stats_stat">
                     <h3 class="stat_name">Stat Name</h3>
@@ -84,7 +85,10 @@ $_SESSION['token'] = md5(uniqid(mt_rand(), true));
     </div>
 
 </main>
-<?= include "php/_footer.php"; ?>
+
+
+<?= include "../php/_footer.php"; ?>
+
 </body>
 
 </html>

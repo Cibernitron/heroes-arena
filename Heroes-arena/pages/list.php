@@ -1,6 +1,6 @@
 <?php
-require "php/_connection-bdd.php";
-include "php/_function.php";
+require "../php/_connection-bdd.php";
+include "../php/_function.php";
 
 
 ?>
@@ -16,17 +16,17 @@ include "php/_function.php";
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Marvel:wght@400;700&family=Roboto:wght@100&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 
 </head>
-<?php include "php/_header.php"?>
+<?php include "../php/_header.php"?>
 <main>
 <ul class="heroes-list">
     <?= displayLists() ?>
 </ul>
 </main>
-<?=include "php/_footer.php";?>
+<?=include "../php/_footer.php";?>
 </body>
-<script src="script-list.js"></script>
+<script src="../script-list.js"></script>
 
 </html>

@@ -10,29 +10,19 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../login_style.css">
+    <link rel="stylesheet" href="login_style.css">
     <link rel="stylesheet" href="../style.css">
 </head>
-
-<body class="bg-dark">
-    <header class="header">
-        <div class="header__band"></div>
-        <div class="header__background"></div>
-        <a class="header__link" href="../index.html">
-            <img class="header__logo" src="../img/logo heroes-arena.png" alt="logo">
-        </a>
-    </header>
-
+<?php include "../php/_header.php" ?>
+<main>
     <!-- Pills navs -->
     <div class="register-background">
         <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link active " id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
-                    aria-controls="pills-login" aria-selected="true">Login</a>
+                <a class="nav-link active " id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="true">Login</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
-                    aria-controls="pills-register" aria-selected="false">Register</a>
+                <a class="nav-link" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab" aria-controls="pills-register" aria-selected="false">Register</a>
             </li>
         </ul>
         <!-- Pills navs -->
@@ -112,8 +102,7 @@
 
                 <!-- Checkbox -->
                 <div class="form-check d-flex justify-content-center mb-4">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
-                        aria-describedby="registerCheckHelpText" />
+                    <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked aria-describedby="registerCheckHelpText" />
                     <label class="form-check-label text-light" for="registerCheck">
                         I have read and agree to the terms
                     </label>
@@ -127,14 +116,9 @@
     </div>
     <!-- Pills content -->
     <!-- Pills content -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
-    <footer class="footer">
-        <div class="footer__band"></div>
-        <div class="footer__background"></div>
-        <a class="footer__link" href="../index.html">
-            <img class="footer__logo" src="../img/logo heroes-arena.png" alt="logo">
-        </a>
-    </footer>
+</main>
+<?= include "../php/_footer.php"; ?>
 </body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
 
 </html>
