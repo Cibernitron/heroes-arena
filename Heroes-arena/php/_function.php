@@ -44,9 +44,13 @@ function displayLists()
 function displayCards($hero)
 {
     return '
-    <div class="hero_information"><h3 class="name-hero">' . $hero['hero_name'] . '</h3><img class="list_img" src="' . $hero['hero_md'] . '"></div>
-    
-    <div class="display-none list-character-card__list">
+    <div class="hero-card-container" onmousemove="rotateCard(event)" onmouseout="resetCardRotation(event)">
+  <div class="hero_information hero-card">
+    <h3 class="name-hero">' . $hero['hero_name'] . '</h3>
+    <img class="list_img" src="' . $hero['hero_md'] . '">
+  </div>
+
+  <div class="display-none list-character-card__list hero-card">
     <div class="character-card__top">
     <div class="list-character-card__top-title">
     <img class="list-character-card__img" src="' . $hero['hero_sm'] . '">
@@ -78,6 +82,7 @@ function displayCards($hero)
     </div>
     </li> 
     </ul>
+    </div>
     </div>
     </div>';
 };

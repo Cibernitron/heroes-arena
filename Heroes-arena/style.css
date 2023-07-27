@@ -89,18 +89,20 @@ input[type=text]:focus {
     z-index: -10;
 }
 
-/* NAV */ 
-.header__nav{
-position: absolute;
-top: 0;
+/* NAV */
+.header__nav {
+    position: absolute;
+    top: 0;
 }
-.nav{
-display: flex ;
+
+.nav {
+    display: flex;
 
 }
-.nav__list{
-margin: 1rem;
-list-style: none;
+
+.nav__list {
+    margin: 1rem;
+    list-style: none;
 }
 
 .nav__link {
@@ -605,6 +607,42 @@ list-style: none;
 }
 
 /* CHARACTER CARD */
+
+/* Conteneur général pour les cartes de super-héros */
+.hero-card-container {
+    perspective: 1000px; /* Valeur de la perspective */
+    position: relative;
+    width: 300px; /* Ajustez la largeur selon vos besoins */
+    height: 400px; /* Ajustez la hauteur selon vos besoins */
+  }
+  
+  /* Carte de super-héros */
+  .hero-card {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-style: preserve-3d; /* Nécessaire pour le retournement 3D */
+    transition: transform 0.5s; /* Durée de la transition */
+    box-shadow: 5px 5px 2px 1px rgba(0, 0, 255, .2);
+  }
+  
+  /* Face avant de la carte */
+  .hero-card-front {
+    backface-visibility: hidden;
+    transform: rotateY(0);
+  }
+  
+  /* Face arrière de la carte */
+  .hero-card-back {
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+  }
+  
+  /* Carte retournée */
+  .hero-card-container.flipped .hero-card {
+    transform: rotateY(180deg);
+  }
 
 .hero__character-card {
     width: 30vw;
