@@ -12,6 +12,13 @@ probleme ligne 312 GET http://localhost/heroes-arena/heroes-arena/undefined
                          +------------------------------------------+ 
  */
 
+// Function use to call JSON data
+// async function waitingForResponse() {
+//     const response = await fetch("https://akabab.github.io/superhero-api/api/all.json");
+//     heroes = await response.json();
+//     displayNames(heroes);
+// }
+
 let searchBar = document.querySelector('.search__bar');
 
 searchBar.addEventListener('keyup', e => {
@@ -56,7 +63,7 @@ function giveAllId() {
 
 async function callAPI(method, data) {
     try {
-        const response = await fetch("php/api.php", {
+        const response = await fetch("../php/api.php", {
             method: method,
             headers: {
                 'Content-Type': 'application/json'
@@ -202,7 +209,7 @@ function removeHero(heroHtml) {
 
     // Remove hero picture
     heroHtml.querySelector('.hero__img').classList.remove('display-none');
-    heroHtml.querySelector('.hero__img').src = "img/Choix perso mobile.png";
+    heroHtml.querySelector('.hero__img').src = "../img/Choix perso mobile.png";
 
     // Remove hero character-card with hero information
     heroHtml.querySelector('.hero__character-card').innerHTML = '';
@@ -223,7 +230,8 @@ function removeHero(heroHtml) {
  * @param Array is list of heroes in JSON                           
  */
 function displayNames(array) {
-
+    let searchList = document.querySelector('.search__list');
+    searchList.classList.remove("display-none")
     // If a key is pressed in the search bar then it offers 4 heroes corresponding to the searched text
     let count = 0;
     document.querySelectorAll(".button__lnk").forEach(element => {
@@ -249,7 +257,6 @@ function displayNames(array) {
 
         // If we click on the name of a hero in the search list then we add him as a new fighter
         const buttonHeroes = document.getElementById(`${element.id_hero}`);
-
         buttonLiHeroes.addEventListener('click', e => {
             selectHero(element.id_hero)
                 .then(Response => {
@@ -262,11 +269,14 @@ function displayNames(array) {
                     if (hero1Name.textContent === "") {
                         hero1 = Response.hero_name[0];
                         addHero(hero1, hero1HTML);
+                        searchList.classList.add("display-none")
+                        searchBar.value = ("")
                     }
                     // If the first hero is already chosen and the second hero is not chosen then the selected hero becomes hero 2
                     else if (hero2Name.textContent === "") {
                         hero2 = Response.hero_name[0];
                         addHero(hero2, hero2HTML);
+                        searchList.classList.add("display-none")
                     }
                     // If the 2 heroes are selected then nothing is done
                     else {
@@ -318,25 +328,25 @@ buttonRandom.addEventListener('click', function (e) {
 
 
                 });
-            // Afficher l'image correspondant à l'ID aléatoire
+            // Display the image corresponding to the random ID
             addHero(heroes[id], hero1HTML);
 
             iterations--;
 
             if (iterations <= 0) {
-                clearInterval(interval); // Arrêter l'animation lorsque le nombre d'itérations est atteint
+                clearInterval(interval); // Stop animation when number of iterations is reached
 
                 let id = dice(heroes.length);
                 addHero(heroes[id], hero1HTML);
 
-                // Sélectionner un héros aléatoire
+                // Select a random hero
                 const randomIndex = Math.floor(Math.random() * heroes.length);
                 const selectedHero = heroes[randomIndex];
 
                 hero1 = selectedHero;
                 addHero(selectedHero, hero1HTML);
             }
-        }, 300)// Temps en millisecondes entre chaque itération (ajustez selon vos besoins)
+        }, 300)// Time in milliseconds between each iteration (adjust as needed)
     }
 
 
@@ -353,27 +363,27 @@ buttonRandom.addEventListener('click', function (e) {
                     hero2 = Response.hero_name[0];
                     addHero(hero2, hero2HTML);
                 });
-            // Afficher l'image correspondant à l'ID aléatoire
+            // Display the image corresponding to the random ID
             addHero(heroes[id], hero2HTML);
 
             iterations--;
 
             if (iterations <= 0) {
-                clearInterval(interval); // Arrêter l'animation lorsque le nombre d'itérations est atteint
+                clearInterval(interval); // Stop animation when number of iterations is reached
 
                 let id = dice(heroes.length);
                 addHero(heroes[id], hero2HTML);
 
-                // Sélectionner un héros aléatoire
+                // Select a random hero
                 const randomIndex = Math.floor(Math.random() * heroes.length);
                 const selectedHero = heroes[randomIndex];
 
                 hero2 = selectedHero;
                 addHero(selectedHero, hero2HTML);
             }
-        }, 300)// Temps en millisecondes entre chaque itération (ajustez selon vos besoins)
+        }, 300)//Time in milliseconds between each iteration (adjust as needed)
     }
-    // Si les deux héros sont déjà choisis, afficher un message d'erreur
+    // If both heroes are already chosen, display an error message
     else {
         console.log('Both hero zones are full');
     }
@@ -381,12 +391,7 @@ buttonRandom.addEventListener('click', function (e) {
 
 
 
-// Function use to call JSON data
-// async function waitingForResponse() {
-//     const response = await fetch("https://akabab.github.io/superhero-api/api/all.json");
-//     heroes = await response.json();
-//     displayNames(heroes);
-// }
+
 
 function dice(number) {
     return parseInt(Math.random() * number);
@@ -394,8 +399,8 @@ function dice(number) {
 
 // Define the difference of speed of selected heroes
 function getMostSpeedHero(hero1, hero2) {
-    const speedHero1 = hero1.hero_speed;
-    const speedHero2 = hero2.hero_speed;
+    const speedHero1 = parseInt(hero1.hero_speed);
+    const speedHero2 = parseInt(hero2.hero_speed);
     const speedDiff = speedHero1 - speedHero2;
     let attacksLuckH1;
     let attacksLuckH2;
@@ -435,25 +440,25 @@ function getMostSpeedHero(hero1, hero2) {
 // Define "defense" value
 // Add a random value to hero "defense" value 
 function defenseScore(hero) {
-    return hero.hero_combat + dice(100);
+    return parseInt(hero.hero_combat)+dice(100);
 }
 
 // Define "strength" value
 // Add a random value to defender "strength" value 
 function attackDefenserScore(hero) {
-    return hero.hero_strength + dice(100);
+    return parseInt(hero.hero_strength) + dice(100);
 }
 
 // Define "strength" value
 // Add a random value to attacker "strength" value 
 function attackScore(hero) {
-    return hero.hero_strength + dice(100);
+    return parseInt(hero.hero_strength) + dice(100);
 }
 
 
 /**
  * Execute Fight
- * This function is used to give the fight result.                                      
+ * This function is used to give 1 turn of fight result.                                      
  * @param {string} attacker - Hero with more "speed" (result to function "getMostSpeedHero")
  * @param {string} defender - The other hero                                            
  * @return {string} Return result of fight                                              
@@ -463,7 +468,7 @@ function executeFight(attacker, defender) {
     let damagesAttack = attackScore(attacker);
     // if Attack of attacker is higher than defense of defender, defender take damage 
     if (damagesAttack > shieldDefense) {
-        let damage = (damagesAttack - shieldDefense) * 10;
+        let damage = (damagesAttack - shieldDefense);
         if (defender.hero_durability <= 0) {
             resumeText.innerHTML += `<br> ${defender.hero_name} est K.O`;
             return
@@ -583,8 +588,8 @@ function battle(hero1, hero2) {
             hero2HTML.querySelector('.life-combat').style.width = Math.max(hero2LifeAfterDamage, 0) + `%`; // Reduce life-bar of hero 2 in terms of his remaining life 
             hero1HTML.querySelector('.progress__life-point').textContent = `${hero1.hero_durability}/${hero1Life}`
             hero2HTML.querySelector('.progress__life-point').textContent = `${hero2.hero_durability}/${hero2Life}`
-            getMostSpeedHero(hero1, hero2)
-            executeFight(attacker, defender); // Do 1 turn of the fight
+            getMostSpeedHero(hero1, hero2); //L401
+            executeFight(attacker, defender); //L460
 
             if (hero1LifeAfterDamage < 60) {
                 hero1HTML.querySelector('.life-bar__modular').style.backgroundColor = "orange";
@@ -715,7 +720,7 @@ function preparCharacterCard(hero, heroHTML) {
                          |                Execution                 |
                          +------------------------------------------+ 
  */
-
+searchBar.value = ("")
 // waitingForResponse();
 
 hero1HTML.querySelector('.hero__container').addEventListener('click', function () { preparCharacterCard(hero1, hero1HTML) })
@@ -743,22 +748,22 @@ document.querySelector('.speed__selection').addEventListener('click', function (
     document.querySelector('.play__button').classList.toggle("margin-right")
     if (speed1000 === 1000) {
         speed750 /= 5;
-        console.log(speed750);
+        
         speed1000 /= 5;
-        console.log(speed1000);
+        
         speed2000 /= 5;
-        console.log(speed2000);
+        
         hero1Container.style.animationDuration = "0.15s";
         hero2Container.style.animationDuration = "0.15s";
 
     }
     else {
         speed750 *= 5;
-        console.log(speed750);
+        
         speed1000 *= 5;
-        console.log(speed1000);
+        
         speed2000 *= 5;
-        console.log(speed2000);
+        
         hero1Container.style.animationDuration = "0.75s";
         hero2Container.style.animationDuration = "0.75s";
     }
@@ -777,7 +782,7 @@ buttonCombat.addEventListener('click', function (event) {
     }
     preparHeroToCombat(hero1HTML)
     preparHeroToCombat(hero2HTML)
-    combatArea.style.backgroundImage = "url(img/cataclysm.gif)"
+    combatArea.style.backgroundImage = "url(../img/cataclysm.gif)"
     document.querySelector(".combat-background").classList.toggle("display-none")
     resumeCbt.classList.toggle("display-none")
     buttonCombat.style.display = "none"
@@ -788,7 +793,6 @@ buttonCombat.addEventListener('click', function (event) {
     document.querySelector(".fight__img").style.width = "80%";
     document.querySelector(".fight__img").style.top = "1vw";
     selectionHeroes.classList.toggle("flex-wrap")
-    console.log(hero2);
     hero2.hero_durability *= 10;
     hero1.hero_durability *= 10;
     battle(hero1, hero2);

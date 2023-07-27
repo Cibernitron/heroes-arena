@@ -19,17 +19,9 @@ $_SESSION['token'] = md5(uniqid(mt_rand(), true));
     <link href="https://fonts.googleapis.com/css2?family=Marvel:wght@400;700&family=Roboto:wght@100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 </head>
+<?php include "../php/_header.php" ?>
 
-<body class="body">
-    <header class="header">
-        <div class="header__band"></div>
-        <div class="header__background"></div>
-        <a class="header__link" href="index.html">
-            <img class="header__logo" src="../img/logo heroes-arena.png" alt="logo">
-        </a>
-    </header>
-
-
+<main>
     <div class="create_menu">
         <h1 class="menu_title">Create New Character</h1>
         <div class="menu_informations">
@@ -90,14 +82,9 @@ $_SESSION['token'] = md5(uniqid(mt_rand(), true));
         </div>
     </div>
 
-    </main>
-    <footer class="footer">
-        <div class="footer__band"></div>
-        <div class="footer__background"></div>
-        <a class="footer__link" href="index.html">
-            <img class="footer__logo" src="../img/logo heroes-arena.png" alt="logo">
-        </a>
-    </footer>
+</main>
+
+<?= include "../php/_footer.php"; ?>
 </body>
 
 </html>

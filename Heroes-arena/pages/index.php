@@ -10,10 +10,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Marvel:wght@400;700&family=Roboto:wght@100&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 
 </head>
-<?php include "php/_header.php"?>
+<?php include "../php/_header.php"?>
     <main>
         <!-- Search -->
         <div class="character__srch">
@@ -33,8 +33,8 @@
             <div class="combat-background display-none">
             </div>
             <div class="speed__selection">
-                <img class="play__button" src="img/play.png" alt="">
-                <img class="speed__button" src="img/play.png" alt="">
+                <img class="play__button" src="../img/play.png" alt="">
+                <img class="speed__button" src="../img/play.png" alt="">
             </div>
             <div class="selection__heroes">
                 <div class="heroes__container">
@@ -42,7 +42,7 @@
                     <div id="hero1" class="selection__hero">
                         <p id="cross" class="display-none hero__name"></p>
                         <div class="hero__life-container display-none">
-                            <img class="health-img-1" src="img/coeur.png">
+                            <img class="health-img-1" src="../img/coeur.png">
                             <div class="life__progress-container">
                                 <p class="progress__life-point"></p>
                                 <div class="progress__life-bar">
@@ -53,17 +53,17 @@
                         <div id="hero1-container" class="hero__container">
 
                             <div class="hero__anim">
-                                <img id="aargh-hero1" class="anim__aargh-1 display-none" src="img/AARGH!.png" alt="">
-                                <img id="bam-hero1" class="anim__bam-1 display-none" src="img/BAM!.png" alt="">
-                                <img id="oops-hero1" class="anim__oops-1 display-none" src="img/OOPS!.png" alt="">
-                                <img id="bang-hero1" class="anim__bang-1 display-none" src="img/BANG!.png" alt="">
-                                <img id="miss-hero1" class="anim__miss-1  display-none " src="img/bulle_miss2.png"
+                                <img id="aargh-hero1" class="anim__aargh-1 display-none" src="../img/AARGH!.png" alt="">
+                                <img id="bam-hero1" class="anim__bam-1 display-none" src="../img/BAM!.png" alt="">
+                                <img id="oops-hero1" class="anim__oops-1 display-none" src="../img/OOPS!.png" alt="">
+                                <img id="bang-hero1" class="anim__bang-1 display-none" src="../img/BANG!.png" alt="">
+                                <img id="miss-hero1" class="anim__miss-1  display-none " src="../img/bulle_miss2.png"
                                     alt="">
                                 <div class="miss-1"></div>
                             </div>
                             <picture class="hero__picture"><img id="anim1" class=" hero__img"
-                                    src="img/Choix perso mobile.png" alt=""></picture>
-                            <img src="img/pngegg.png" class="hero__cross-1" alt="">
+                                    src="../img/Choix perso mobile.png" alt=""></picture>
+                            <img src="../img/pngegg.png" class="hero__cross-1" alt="">
                             <ul id="character-card" class="display-none hero__character-card"></ul>
                         </div>
                         <div class="hero__delete">
@@ -73,8 +73,8 @@
                     </div>
                     <!-- Img VS & Img Fight & Fight Text & Button -->
                     <div class="versus__container">
-                        <img id="versus" class="versus__img" src="img/logo-vs.png" alt="versus">
-                        <img id="versus" class="fight__img" src="img/fight-logo.png" alt="fight">
+                        <img id="versus" class="versus__img" src="../img/logo-vs.png" alt="versus">
+                        <img id="versus" class="fight__img" src="../img/fight-logo.png" alt="fight">
                         <button class="button" id="button-combat">
                             <p>Combat</p>
                         </button>
@@ -83,7 +83,7 @@
                     <div id="hero2" class="selection__hero">
                         <p id="cross" class="display-none hero__name"></p>
                         <div class="hero__life-container display-none">
-                            <img class="health-img-2" src="img/coeur.png">
+                            <img class="health-img-2" src="../img/coeur.png">
                             <div class="life__progress-container">
                                 <p class="progress__life-point"></p>
                                 <div class="progress__life-bar">
@@ -94,17 +94,17 @@
                         <div id="hero2-container" class="hero__container">
 
                             <div class="hero__anim">
-                                <img id="aargh-hero2" class="anim__aargh-2 display-none" src="img/AARGH!.png" alt="">
-                                <img id="bam-hero2" class="anim__bam-2 display-none" src="img/BAM!.png" alt="">
-                                <img id="oops-hero2" class="anim__oops-2 display-none" src="img/OOPS!.png" alt="">
-                                <img id="bang-hero2" class="anim__bang-2 display-none" src="img/BANG!.png" alt="">
-                                <img id="oops-hero2" class="anim__oops-2 display-none" src="img/OOPS!.png" alt="">
-                                <img id="miss-hero2" class="anim__miss-2  display-none" src="img/bulle_miss.png" alt="">
+                                <img id="aargh-hero2" class="anim__aargh-2 display-none" src="../img/AARGH!.png" alt="">
+                                <img id="bam-hero2" class="anim__bam-2 display-none" src="../img/BAM!.png" alt="">
+                                <img id="oops-hero2" class="anim__oops-2 display-none" src="../img/OOPS!.png" alt="">
+                                <img id="bang-hero2" class="anim__bang-2 display-none" src="../img/BANG!.png" alt="">
+                                <img id="oops-hero2" class="anim__oops-2 display-none" src="../img/OOPS!.png" alt="">
+                                <img id="miss-hero2" class="anim__miss-2  display-none" src="../img/bulle_miss.png" alt="">
                                 <div class="miss-2"></div>
                             </div>
                             <picture class="hero__picture"><img id="anim2" class="hero__img"
-                                    src="img/Choix perso mobile.png" alt=""></picture>
-                            <img src="img/pngegg.png" class="hero__cross-2" alt="">
+                                    src="../img/Choix perso mobile.png" alt=""></picture>
+                            <img src="../img/pngegg.png" class="hero__cross-2" alt="">
                             <ul id="character-card" class="display-none hero__character-card"></ul>
                         </div>
                         <div class="hero__delete">
@@ -126,8 +126,8 @@
         <!-- </div> -->
         <span class="margin-bottom" id="margin-bottom"></span>
     </main>
-    <?=include "php/_footer.php";?>
+    <?=include "../php/_footer.php";?>
 </body>
-<script src="script.js"></script>
+<script src="../script.js"></script>
 
 </html>
