@@ -44,13 +44,13 @@ function displayLists()
 function displayCards($hero)
 {
     return '
-    <div class="hero-card-container" onmousemove="rotateCard(event)" onmouseout="resetCardRotation(event)">
-  <div class="hero_information hero-card">
+    <div class="hero-card-container card" onmousemove="rotateCard(event)" onmouseout="resetCardRotation(event)" onclick="flipCard(this)">
+  <div class="hero_information hero-card card__face card__face--front ">
     <h3 class="name-hero">' . $hero['hero_name'] . '</h3>
     <img class="list_img" src="' . $hero['hero_md'] . '">
   </div>
 
-  <div class="display-none list-character-card__list hero-card">
+  <div class="hero_information list-character-card__list hero-card card__face card__face--back">
     <div class="character-card__top">
     <div class="list-character-card__top-title">
     <img class="list-character-card__img" src="' . $hero['hero_sm'] . '">

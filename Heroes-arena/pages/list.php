@@ -19,6 +19,8 @@ include "../php/_function.php";
     <link rel="stylesheet" href="../style.css">
 
 </head>
+<body class="body">
+    <div class="body__deco"></div>
 <?php include "../php/_header.php"?>
 <main>
 <ul class="heroes-list">

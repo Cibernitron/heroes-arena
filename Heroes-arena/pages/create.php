@@ -19,7 +19,8 @@ $_SESSION['token'] = md5(uniqid(mt_rand(), true));
     <link href="https://fonts.googleapis.com/css2?family=Marvel:wght@400;700&family=Roboto:wght@100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 </head>
-
+<body class="body">
+    <div class="body__background"></div>
 <?php include "../php/_header.php" ?>
 
 <main>

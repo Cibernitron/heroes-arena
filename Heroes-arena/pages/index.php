@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="../style.css">
 
 </head>
+<body class="body">
+    <div class="body__background"></div>
 <?php include "../php/_header.php"?>
     <main>
         <!-- Search -->

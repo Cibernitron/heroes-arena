@@ -609,40 +609,55 @@ input[type=text]:focus {
 /* CHARACTER CARD */
 
 /* Conteneur général pour les cartes de super-héros */
+.body__deco{
+    background-color: white;
+}
 .hero-card-container {
-    perspective: 1000px; /* Valeur de la perspective */
+    perspective: 1000px;
     position: relative;
-    width: 300px; /* Ajustez la largeur selon vos besoins */
-    height: 400px; /* Ajustez la hauteur selon vos besoins */
-  }
-  
-  /* Carte de super-héros */
-  .hero-card {
+}
+
+/* Carte de super-héros */
+.hero-card {
     width: 100%;
-    position: absolute;
+    height: 264px;
     top: 0;
     left: 0;
-    transform-style: preserve-3d; /* Nécessaire pour le retournement 3D */
-    transition: transform 0.5s; /* Durée de la transition */
+    transform-style: preserve-3d;
+    /* Nécessaire pour le retournement 3D */
+    transition: transform 0.5s;
+background-color: var(--third-color);
     box-shadow: 5px 5px 2px 1px rgba(0, 0, 255, .2);
+    position: relative;
+    transition: transform 0.8s;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+/*---------------------------------------*/ 
+.card {
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    /* transform-origin: center right; */
+    transition: transform 1s;
   }
   
-  /* Face avant de la carte */
-  .hero-card-front {
-    backface-visibility: hidden;
-    transform: rotateY(0);
+  .card.is-flipped {
+    transform: rotateY(-180deg);
   }
   
-  /* Face arrière de la carte */
-  .hero-card-back {
+  .card__face {
+    position: absolute;
     backface-visibility: hidden;
+  }
+  
+  .card__face--front {
+  }
+  
+  .card__face--back {
     transform: rotateY(180deg);
   }
-  
-  /* Carte retournée */
-  .hero-card-container.flipped .hero-card {
-    transform: rotateY(180deg);
-  }
+/*---------------------------------------*/  
 
 .hero__character-card {
     width: 30vw;
@@ -744,6 +759,7 @@ input[type=text]:focus {
     justify-content: center;
     margin: auto;
     padding: 0;
+    background-color: white;
 }
 
 .hero_information {
@@ -775,7 +791,7 @@ input[type=text]:focus {
 .container-heros {
     list-style: none;
     width: 10rem;
-    background-color: var(--third-color);
+    /* background-color: var(--third-color); */
     border-radius: 1rem;
     height: 16.7rem;
 }
