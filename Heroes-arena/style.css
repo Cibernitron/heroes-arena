@@ -625,13 +625,22 @@ input[type=text]:focus {
     left: 0;
     transform-style: preserve-3d;
     /* Nécessaire pour le retournement 3D */
-    transition: transform 0.5s;
-background-color: var(--third-color);
-    box-shadow: 5px 5px 2px 1px rgba(0, 0, 255, .2);
+    background-color: var(--third-color);
     position: relative;
-    transition: transform 0.8s;
-    border: 1px solid #ccc;
+    transition: transform 0.3s ease;
+    border: 1px solid #010101;
     cursor: pointer;
+}
+
+.hero-card-shadow {
+    transition: box-shadow 0s ease;
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.6);
+    perspective: 1000px;
+}
+.hero-card-shadow-2 {
+    transition: box-shadow 0s ease;
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.6);
+    perspective: 1000px;
 }
 /*---------------------------------------*/ 
 .card {
@@ -799,6 +808,7 @@ background-color: var(--third-color);
 .name-hero {
     font-size: 100%;
     margin: .25rem 0 .25rem 0;
+    text-align: center;
 }
 
 .list-character-card__list {

@@ -44,45 +44,46 @@ function displayLists()
 function displayCards($hero)
 {
     return '
-    <div class="hero-card-container card" onmousemove="rotateCard(event)" onmouseout="resetCardRotation(event)" onclick="flipCard(this)">
-  <div class="hero_information hero-card card__face card__face--front ">
-    <h3 class="name-hero">' . $hero['hero_name'] . '</h3>
-    <img class="list_img" src="' . $hero['hero_md'] . '">
-  </div>
-
-  <div class="hero_information list-character-card__list hero-card card__face card__face--back">
-    <div class="character-card__top">
-    <div class="list-character-card__top-title">
-    <img class="list-character-card__img" src="' . $hero['hero_sm'] . '">
-    <h2 class="list-character-card__title">' . $hero['hero_name'] . '</h2>
-    </div>
-    <ul class="character-card__features">
-    <li class="list-character-card__progress abilities">  
-    <p class="character-card__features__text">Attack:</p>
-    <div class="list-progress">
-    <div class="progress__val progress__val-atq"><p class="strength-value">' . $hero['hero_strength'] . '</p></div>
-    </div>
-    </li>
-    <li class="list-character-card__progress abilities">  
-    <p class="character-card__features__text">Shield:</p>
-    <div class="list-progress">
-    <div class="progress__val progress__val-shield"><p class="combat-value">' . $hero['hero_combat'] . '</p></div>
-    </div>
-    </li>
-    <li class="list-character-card__progress abilities">  
-    <p class="character-card__features__text">Speed:</p>
-    <div class="list-progress">
-    <div class="progress__val progress__val-speed"><p class="speed-value">' . $hero['hero_speed'] . '</p></div>
-    </div>
-    </li>
-    <li class="list-character-card__progress abilities">  
-    <p class="character-card__features__text">Health:</p>
-    <div class="list-progress">
-    <div class="progress__val progress__val-life"><p class="durability-value">' . $hero['hero_durability'] . '</p></div>
-    </div>
-    </li> 
-    </ul>
-    </div>
-    </div>
+    <div class="hero-card-container card">
+        <div class="hero-card hero-card-shadow card__face card__face--front hero_information">
+            <div>
+                <h3 class="name-hero">' . $hero['hero_name'] . '</h3>
+                <img class="list_img" src="' . $hero['hero_md'] . '">
+            </div>
+            <div class="hero-card hero-card-shadow-2 card__face card__face--back hero_information">
+                <div class="character-card__top">
+                    <div class="list-character-card__top-title">
+                        <img class="list-character-card__img" src="' . $hero['hero_sm'] . '">
+                        <h2 class="list-character-card__title">' . $hero['hero_name'] . '</h2>
+                    </div>
+                    <ul class="character-card__features">
+                        <li class="list-character-card__progress abilities">  
+                            <p class="character-card__features__text">Attack:</p>
+                            <div class="list-progress">
+                                <div class="progress__val progress__val-atq"><p class="strength-value">' . $hero['hero_strength'] . '</p></div>
+                            </div>
+                        </li>
+                        <li class="list-character-card__progress abilities">  
+                            <p class="character-card__features__text">Shield:</p>
+                            <div class="list-progress">
+                                <div class="progress__val progress__val-shield"><p class="combat-value">' . $hero['hero_combat'] . '</p></div>
+                            </div>
+                        </li>
+                        <li class="list-character-card__progress abilities">  
+                            <p class="character-card__features__text">Speed:</p>
+                            <div class="list-progress">
+                                <div class="progress__val progress__val-speed"><p class="speed-value">' . $hero['hero_speed'] . '</p></div>
+                            </div>
+                        </li>
+                        <li class="list-character-card__progress abilities">  
+                            <p class="character-card__features__text">Health:</p>
+                            <div class="list-progress">
+                                <div class="progress__val progress__val-life"><p class="durability-value">' . $hero['hero_durability'] . '</p></div>
+                            </div>
+                        </li> 
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>';
 };

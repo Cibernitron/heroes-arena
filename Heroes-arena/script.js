@@ -1,6 +1,13 @@
 /*
 les tutos de guillaume :
 
+numéroter les slides; 
+user story : qu'est ce qu'une user story, pourquoi ? 
+techniques : citer les languages, 
+presentation : plus rentrer dans le coté techniques, plutot que fonctionnel, parler de la connection à la bdd, 
+avancer le BEM (le corriger);
+voir pout l'orienté objet en js;
+
 probleme ligne 312 GET http://localhost/heroes-arena/heroes-arena/undefined
  */
 
@@ -433,7 +440,7 @@ function getMostSpeedHero(hero1, hero2) {
         return hero2.hero_name;
     }
     else {
-        getMostSpeedHero(hero1, hero2)
+        return getMostSpeedHero(hero1, hero2)
     }
 }
 
