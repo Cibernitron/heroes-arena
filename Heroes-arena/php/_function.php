@@ -29,7 +29,7 @@ function getList($array)
 function displayLists()
 {
     global $dbCo;
-    $query = $dbCo->prepare('SELECT * FROM heroes;');
+    $query = $dbCo->prepare('SELECT * FROM heroes ORDER BY hero_name;');
     $query->execute();
     $result = $query->fetchAll();
     echo getList($result);

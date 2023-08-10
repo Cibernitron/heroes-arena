@@ -17,10 +17,10 @@ function rotateCard(event) {
   let shadowThicknessY = rotationY * 0.3;
 
   if (event.currentTarget.classList.contains('is-flipped')) {
-    shadow2.style.boxShadow = `${(mouseX - cardCenterX) * 0.1 - 1}px ${shadowThicknessY}px 2px 1px rgba(0, 0, 0, .6)`;
+    shadow2.style.boxShadow = `${(mouseX - cardCenterX) * 0.1 - 1}px ${shadowThicknessY}px 10px 1px rgba(0, 0, 0, .6)`;
   }
   else {
-    shadow.style.boxShadow = `${shadowThicknessX}px ${shadowThicknessY}px 2px 1px rgba(0, 0, 0, .6)`;
+    shadow.style.boxShadow = `${shadowThicknessX}px ${shadowThicknessY}px 10px 1px rgba(0, 0, 0, .6)`;
   }
 }
 
@@ -49,5 +49,17 @@ cardContainers.forEach((cardContainer) => {
   cardContainer.addEventListener('click', function (event) {
     cardContainer.classList.toggle('is-flipped');
     resetCardRotation(event);
+    getStats(this);
+    console.log(this);
   });
 });
+
+function getStats(card){
+    let stats = card.querySelectorAll('.progress__val');
+    stats.forEach(stat => {
+      stat.style.width = `${stat.textContent}%`;
+      console.log(stat.textContent);
+      console.log(stat.style.width);
+     
+  });
+}
