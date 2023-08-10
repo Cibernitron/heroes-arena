@@ -59,25 +59,25 @@ function displayCards($hero)
                     <ul class="character-card__features">
                         <li class="list-character-card__progress abilities">  
                             <p class="character-card__features__text">Attack:</p>
-                            <div class="progress">
+                            <div class="progress-list">
                                 <div class="progress__val progress__val-atq">' . $hero['hero_strength'] . '</div>
                             </div>
                         </li>
                         <li class="list-character-card__progress abilities">  
                             <p class="character-card__features__text">Shield:</p>
-                            <div class="progress">
+                            <div class="progress-list">
                                 <div class="progress__val progress__val-shield">' . $hero['hero_combat'] . '</div>
                             </div>
                         </li>
                         <li class="list-character-card__progress abilities">  
                             <p class="character-card__features__text">Speed:</p>
-                            <div class="progress">
+                            <div class="progress-list">
                                 <div class="progress__val progress__val-speed">' . $hero['hero_speed'] . '</div>
                             </div>
                         </li>
                         <li class="list-character-card__progress abilities">  
                             <p class="character-card__features__text">Health:</p>
-                            <div class="progress">
+                            <div class="progress-list">
                                 <div class="progress__val progress__val-life">' . $hero['hero_durability'] . '</div>
                             </div>
                         </li> 

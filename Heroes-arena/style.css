@@ -143,13 +143,14 @@ input[type=text]:focus {
 }
 
 
-.selection__hero {
+.selection__hero1,
+.selection__hero2 {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 30vw;
-    position: relative;
 }
+
 
 .heroes__container {
     display: flex;
@@ -268,6 +269,10 @@ input[type=text]:focus {
     gap: 0;
     align-items: center;
     border-color: #171A21;
+}
+
+.search__bar {
+    margin: 1rem 0;
 }
 
 .search__ttl {
@@ -489,7 +494,7 @@ input[type=text]:focus {
 }
 
 .versus__img {
-    max-width: 15vw;
+    max-width: 25vw;
 }
 
 @media screen and (min-width:1000px) {
@@ -609,9 +614,10 @@ input[type=text]:focus {
 /* CHARACTER CARD */
 
 /* Conteneur général pour les cartes de super-héros */
-.body__deco{
+.body__deco {
     background-color: white;
 }
+
 .hero-card-container {
     perspective: 1000px;
     position: relative;
@@ -629,42 +635,44 @@ input[type=text]:focus {
     cursor: pointer;
     transition: transform 0s ease;
     transform-style: preserve-3d;
-    perspective: 1000px; 
+    perspective: 1000px;
 }
-
-    
 
 .hero-card-shadow {
     transition: box-shadow 0s ease;
-    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.6);
     perspective: 1000px;
 }
+
 .hero-card-shadow-2 {
     transition: box-shadow 0s ease;
-    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.6);
     perspective: 1000px;
 }
-/*---------------------------------------*/ 
+
+/*---------------------------------------*/
 .card {
     position: relative;
     cursor: pointer;
     transform-style: preserve-3d;
     /* transform-origin: center right; */
     transition: transform 1s ease;
-  }
-  
-  .card.is-flipped {
+}
+
+.card.is-flipped {
     transform: rotateY(-180deg);
-  }
-  
-  .card__face {
+}
+
+.card__face {
     position: absolute;
     backface-visibility: hidden;
-  }
-  .card__face--back {
+}
+
+.card__face--back {
     transform: rotateY(180deg);
-  }
-/*---------------------------------------*/  
+}
+
+/*---------------------------------------*/
 
 .hero__character-card {
     width: 30vw;
@@ -822,7 +830,7 @@ input[type=text]:focus {
 .list-character-card__img {
     width: 50%;
     aspect-ratio: 1/1;
-    object-fit:cover;
+    object-fit: cover;
     border-radius: 1rem;
     border: 1px var(--primary-color) solid;
 }
@@ -889,12 +897,24 @@ input[type=text]:focus {
     border-radius: 1rem
 }
 
+.progress-list {
+    border: 1px solid var(--primary-color);
+    z-index: 100;
+    width: 50%;
+    height: 1rem;
+    background-color: #fff;
+    border-radius: 1rem;
+}
+
 .progress__val {
     z-index: 1000;
     height: 100%;
     border-radius: 2rem;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 
 .progress__val-life {
     z-index: 10000;
@@ -1331,6 +1351,10 @@ input[type=text]:focus {
 
 .display-none {
     display: none;
+}
+
+.display-flex {
+    display: flex;
 }
 
 .margin-right {

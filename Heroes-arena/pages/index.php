@@ -42,7 +42,7 @@
                 <div class="heroes__container">
                     <!-- Selection Hero1 -->
                     <div id="hero1" class="selection__hero">
-                        <p id="cross" class="display-none hero__name"></p>
+                        <p id="cross" class="name-combat hero__name">Choose Hero</p>
                         <div class="hero__life-container display-none">
                             <img class="health-img-1" src="../img/coeur.png">
                             <div class="life__progress-container">
@@ -75,7 +75,7 @@
                     </div>
                     <!-- Img VS & Img Fight & Fight Text & Button -->
                     <div class="versus__container">
-                        <img id="versus" class="versus__img" src="../img/logo-vs.png" alt="versus">
+                        <img id="versus" class="versus__img" src="../img/vs!.png" alt="versus">
                         <img id="versus" class="fight__img" src="../img/fight-logo.png" alt="fight">
                         <button class="button" id="button-combat">
                             <p>Combat</p>
@@ -83,7 +83,7 @@
                     </div>
                     <!-- Selection Hero2 -->
                     <div id="hero2" class="selection__hero">
-                        <p id="cross" class="display-none hero__name"></p>
+                        <p id="cross" class="name-combat hero__name">Choose Hero</p>
                         <div class="hero__life-container display-none">
                             <img class="health-img-2" src="../img/coeur.png">
                             <div class="life__progress-container">

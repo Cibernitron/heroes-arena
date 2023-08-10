@@ -11,11 +11,13 @@ function rotateCard(event) {
   card.style.transform = `perspective(1000px) rotateX(${rotationY}deg) rotateY(${rotationX}deg)`;
   let shadow = event.currentTarget.querySelector('.hero-card-shadow');
   let shadow2 = event.currentTarget.querySelector('.hero-card-shadow-2');
-  let shadowThicknessX = rotationX * -0.3;
-  let shadowThicknessY = rotationY * 0.3;
+  shadow.style.transition = 'box-shadow 0s ease';
+  shadow2.style.transition = 'box-shadow 0s ease';
+  let shadowThicknessX = rotationX * -1;
+  let shadowThicknessY = rotationY * 1;
 
   if (event.currentTarget.classList.contains('is-flipped')) {
-    shadow2.style.boxShadow = `${(mouseX - cardCenterX) * 0.1 - 1}px ${shadowThicknessY}px 10px 1px rgba(0, 0, 0, .6)`;
+    shadow2.style.boxShadow = `${(mouseX - cardCenterX) * .35 - 1}px ${shadowThicknessY}px 10px 1px rgba(0, 0, 0, .6)`;
   }
   else {
     shadow.style.boxShadow = `${shadowThicknessX}px ${shadowThicknessY}px 10px 1px rgba(0, 0, 0, .6)`;
@@ -34,14 +36,13 @@ function resetCardRotation(event) {
   const card = event.currentTarget.querySelector('.hero-card');
 
   if (card) {
-    card.style.transition = 'transform 1s ease';
+    card.style.transition = 'transform 1s ease, box-shadow 1s ease';
     card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
 
     let shadow = event.currentTarget.querySelector('.hero-card-shadow');
     let shadow2 = event.currentTarget.querySelector('.hero-card-shadow-2');
-
-    shadow.style.boxShadow = '0px 0px 2px 1px rgba(0, 0, 0, .6)';
-    shadow2.style.boxShadow = '0px 0px 2px 1px rgba(0, 0, 0, .6)';
+    shadow.style.boxShadow = '0px 0px 10px 1px rgba(0, 0, 0, .6)';
+    shadow2.style.boxShadow = '0px 0px 10px 1px rgba(0, 0, 0, .6)';
 
   }
 }

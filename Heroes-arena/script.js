@@ -174,9 +174,10 @@ function verifyTheHeroes2(hero, heroHTML, number) {
 function addHero(hero, heroHtml) {
     // Add and display the name of the hero
     heroHtml.querySelector(".hero__name").textContent = hero.hero_name;
-    heroHtml.querySelector(".hero__name").classList.remove('display-none');
-    heroHtml.querySelector(".hero__name").classList.add("name-combat");
-    heroHtml.querySelector(".hero__delete").style.display = 'flex';
+    // heroHtml.querySelector(".hero__name").classList.remove('display-none');
+    // heroHtml.querySelector(".hero__name").classList.add("name-combat");
+    heroHtml.querySelector(".hero__delete").classList.remove('display-none');
+    heroHtml.querySelector(".hero__delete").classList.add('display-flex');
 
     // Display the picture of the hero
     heroHtml.querySelector('.hero__img').src = hero.hero_lg;
@@ -197,10 +198,11 @@ function addHero(hero, heroHtml) {
 function removeHero(heroHtml) {
 
     // Remove and hide the hero name
-    heroHtml.querySelector(".hero__name").textContent = '';
-    heroHtml.querySelector(".hero__name").classList.remove('name-combat');
-    heroHtml.querySelector(".hero__name").classList.add('display-none');
-    heroHtml.querySelector(".hero__delete").style.display = 'none';
+    heroHtml.querySelector(".hero__name").textContent = 'Choose Hero';
+    // heroHtml.querySelector(".hero__name").classList.remove('name-combat');
+    // heroHtml.querySelector(".hero__name").classList.add('display-none');
+    heroHtml.querySelector(".hero__delete").classList.remove('display-flex')
+    heroHtml.querySelector(".hero__delete").classList.add('display-none')
 
     // Remove health point
     heroHtml.querySelector('.life-bar__modular').textContent = '';
@@ -264,14 +266,14 @@ function displayNames(array) {
                     }
 
                     // If the first hero is not chosen then the selected hero becomes hero 1
-                    if (hero1Name.textContent === "") {
+                    if (hero1Name.textContent === "Choose Hero") {
                         hero1 = Response.hero_name[0];
                         addHero(hero1, hero1HTML);
                         searchList.classList.add("display-none")
                         searchBar.value = ("")
                     }
                     // If the first hero is already chosen and the second hero is not chosen then the selected hero becomes hero 2
-                    else if (hero2Name.textContent === "") {
+                    else if (hero2Name.textContent === "Choose Hero") {
                         hero2 = Response.hero_name[0];
                         addHero(hero2, hero2HTML);
                         searchList.classList.add("display-none")
@@ -310,10 +312,9 @@ buttonRandom.addEventListener('click', function (e) {
 
     let iterations = 10; // Nombre d'itérations avant de s'arrêter sur un héros aléatoire
 
-    if (hero1Name.textContent === "") {
+    if (hero1Name.textContent === "Choose Hero") {
         const interval = setInterval(function () {
             let id = dice(heroes.length);
-            const hero1Name = hero1HTML.querySelector(".hero__name");
             selectHero(id)
                 .then(Response => {
                     if (!Response.result) {
@@ -344,11 +345,11 @@ buttonRandom.addEventListener('click', function (e) {
                 hero1 = selectedHero;
                 addHero(selectedHero, hero1HTML);
             }
-        }, 300)// Time in milliseconds between each iteration (adjust as needed)
+        }, 150)// Time in milliseconds between each iteration (adjust as needed)
     }
 
 
-    else if (hero2Name.textContent === "") {
+    else if (hero2Name.textContent === "Choose Hero") {
         const interval = setInterval(function () {
             let id = dice(heroes.length);
             const hero2Name = hero2HTML.querySelector(".hero__name");
@@ -379,7 +380,7 @@ buttonRandom.addEventListener('click', function (e) {
                 hero2 = selectedHero;
                 addHero(selectedHero, hero2HTML);
             }
-        }, 300)//Time in milliseconds between each iteration (adjust as needed)
+        }, 150)//Time in milliseconds between each iteration (adjust as needed)
     }
     // If both heroes are already chosen, display an error message
     else {
