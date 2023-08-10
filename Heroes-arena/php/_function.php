@@ -59,26 +59,26 @@ function displayCards($hero)
                     <ul class="character-card__features">
                         <li class="list-character-card__progress abilities">  
                             <p class="character-card__features__text">Attack:</p>
-                            <div class="list-progress">
-                                <div class="progress__val progress__val-atq"><p class="strength-value">' . $hero['hero_strength'] . '</p></div>
+                            <div class="progress">
+                                <div class="progress__val progress__val-atq">' . $hero['hero_strength'] . '</div>
                             </div>
                         </li>
                         <li class="list-character-card__progress abilities">  
                             <p class="character-card__features__text">Shield:</p>
-                            <div class="list-progress">
-                                <div class="progress__val progress__val-shield"><p class="combat-value">' . $hero['hero_combat'] . '</p></div>
+                            <div class="progress">
+                                <div class="progress__val progress__val-shield">' . $hero['hero_combat'] . '</div>
                             </div>
                         </li>
                         <li class="list-character-card__progress abilities">  
                             <p class="character-card__features__text">Speed:</p>
-                            <div class="list-progress">
-                                <div class="progress__val progress__val-speed"><p class="speed-value">' . $hero['hero_speed'] . '</p></div>
+                            <div class="progress">
+                                <div class="progress__val progress__val-speed">' . $hero['hero_speed'] . '</div>
                             </div>
                         </li>
                         <li class="list-character-card__progress abilities">  
                             <p class="character-card__features__text">Health:</p>
-                            <div class="list-progress">
-                                <div class="progress__val progress__val-life"><p class="durability-value">' . $hero['hero_durability'] . '</p></div>
+                            <div class="progress">
+                                <div class="progress__val progress__val-life">' . $hero['hero_durability'] . '</div>
                             </div>
                         </li> 
                     </ul>

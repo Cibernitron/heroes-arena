@@ -6,11 +6,9 @@ function rotateCard(event) {
   const mouseX = event.clientX;
   const mouseY = event.clientY;
   let rotationX = isFlipped(event.currentTarget, cardCenterX, mouseX);
-
   const rotationY = (mouseY - cardCenterY) * 0.3;
-
+  card.style.transition = 'transform 0s ease';
   card.style.transform = `perspective(1000px) rotateX(${rotationY}deg) rotateY(${rotationX}deg)`;
-
   let shadow = event.currentTarget.querySelector('.hero-card-shadow');
   let shadow2 = event.currentTarget.querySelector('.hero-card-shadow-2');
   let shadowThicknessX = rotationX * -0.3;
@@ -26,20 +24,28 @@ function rotateCard(event) {
 
 function isFlipped(target, cardCenterX, mouseX) {
   if (target.classList.contains('is-flipped')) {
-    return (mouseX - cardCenterX) * 0.3;
+    return (mouseX - cardCenterX) * 0.5;
   } else {
     return (mouseX - cardCenterX) * -0.3;
   }
 }
 
 function resetCardRotation(event) {
-  let shadow = event.currentTarget.querySelector('.hero-card-shadow');
-  let shadow2 = event.currentTarget.querySelector('.hero-card-shadow-2');
   const card = event.currentTarget.querySelector('.hero-card');
-  card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-  shadow.style.boxShadow = '0px 0px 2px 1px rgba(0, 0, 0, .6)';
-  shadow2.style.boxShadow = '0px 0px 2px 1px rgba(0, 0, 0, .6)';
+
+  if (card) {
+    card.style.transition = 'transform 1s ease';
+    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+
+    let shadow = event.currentTarget.querySelector('.hero-card-shadow');
+    let shadow2 = event.currentTarget.querySelector('.hero-card-shadow-2');
+
+    shadow.style.boxShadow = '0px 0px 2px 1px rgba(0, 0, 0, .6)';
+    shadow2.style.boxShadow = '0px 0px 2px 1px rgba(0, 0, 0, .6)';
+
+  }
 }
+
 
 let cardContainers = document.querySelectorAll('.hero-card-container');
 
@@ -50,16 +56,12 @@ cardContainers.forEach((cardContainer) => {
     cardContainer.classList.toggle('is-flipped');
     resetCardRotation(event);
     getStats(this);
-    console.log(this);
   });
 });
 
-function getStats(card){
-    let stats = card.querySelectorAll('.progress__val');
-    stats.forEach(stat => {
-      stat.style.width = `${stat.textContent}%`;
-      console.log(stat.textContent);
-      console.log(stat.style.width);
-     
+function getStats(card) {
+  let stats = card.querySelectorAll('.progress__val');
+  stats.forEach(stat => {
+    stat.style.width = `${stat.textContent}%`;
   });
 }

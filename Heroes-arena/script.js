@@ -19,13 +19,6 @@ probleme ligne 312 GET http://localhost/heroes-arena/heroes-arena/undefined
                          +------------------------------------------+ 
  */
 
-// Function use to call JSON data
-// async function waitingForResponse() {
-//     const response = await fetch("https://akabab.github.io/superhero-api/api/all.json");
-//     heroes = await response.json();
-//     displayNames(heroes);
-// }
-
 let searchBar = document.querySelector('.search__bar');
 
 searchBar.addEventListener('keyup', e => {
@@ -37,8 +30,6 @@ searchBar.addEventListener('keyup', e => {
             }
 
             displayNames(Response.hero_name);
-
-            // console.log(Response.hero_name);
         });
 });
 

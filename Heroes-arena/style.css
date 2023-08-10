@@ -623,14 +623,16 @@ input[type=text]:focus {
     height: 264px;
     top: 0;
     left: 0;
-    transform-style: preserve-3d;
-    /* Nécessaire pour le retournement 3D */
     background-color: var(--third-color);
     position: relative;
-    transition: transform 0.3s ease;
     border: 1px solid #010101;
     cursor: pointer;
+    transition: transform 0s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px; 
 }
+
+    
 
 .hero-card-shadow {
     transition: box-shadow 0s ease;
@@ -788,9 +790,8 @@ input[type=text]:focus {
 .list-character-card__title {
     width: 100%;
     font-size: 100%;
-    margin: auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 
@@ -821,7 +822,9 @@ input[type=text]:focus {
 .list-character-card__img {
     width: 50%;
     aspect-ratio: 1/1;
-    object-fit: cover;
+    object-fit:cover;
+    border-radius: 1rem;
+    border: 1px var(--primary-color) solid;
 }
 
 .list-character-card__progress {
@@ -842,9 +845,9 @@ input[type=text]:focus {
 .list-character-card__top-title {
     display: flex;
     justify-content: space-between;
-    flex-direction: row-reverse;
-    width: 80%;
-    margin: 2rem 10% ;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
 }
 
 
@@ -878,14 +881,12 @@ input[type=text]:focus {
 }
 
 .progress {
-    width: 25vw;
-    height: 1rem;
-    background-color: #fff;
-    display: flex;
-    align-items: flex-end;
-    border-radius: 2rem;
     border: 2px solid var(--primary-color);
-    padding-top: 1rem;
+    z-index: 100;
+    width: 50%;
+    height: 1.2rem;
+    background-color: #fff;
+    border-radius: 1rem
 }
 
 .progress__val {
@@ -1274,8 +1275,10 @@ input[type=text]:focus {
 .stat_value {
     display: flex;
     justify-content: center;
-    width: 30%;
-    position: absolute;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 
 .stats_rest {
