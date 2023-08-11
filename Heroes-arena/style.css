@@ -57,7 +57,7 @@ input[type=text]:focus {
 
 
 .header {
-    height: 100px;
+    height: 9rem;
     top: 0;
 }
 
@@ -92,7 +92,7 @@ input[type=text]:focus {
 /* NAV */
 .header__nav {
     position: absolute;
-    top: 0;
+    top: 6rem;
 }
 
 .nav {
@@ -101,14 +101,27 @@ input[type=text]:focus {
 }
 
 .nav__list {
-    margin: 1rem;
+
     list-style: none;
 }
 
 .nav__link {
-    background-color: var(--third-color);
     color: var(--sixth-color);
+    font-weight: bolder;
+    font-size: large;
     padding: 0.5rem 1rem;
+    text-decoration: none;
+}
+
+.nav__link:hover {
+    background: rgb(23, 26, 33);
+    background: linear-gradient(180deg, rgba(23, 26, 33, .5) 0%, rgba(226, 182, 22, .5) 45%, rgba(226, 182, 22, .5) 55%, rgba(23, 26, 33, .5) 100%);
+    border-radius: 2rem;
+}
+
+.active {
+    background: rgb(121, 9, 9);
+    background: radial-gradient(circle, rgba(121, 9, 9, 1) 0%, rgba(23, 26, 33, 1) 100%);
     border-radius: 2rem;
 }
 
@@ -629,9 +642,10 @@ input[type=text]:focus {
     height: 264px;
     top: 0;
     left: 0;
-    background-color: var(--third-color);
+    background: rgb(121, 9, 9);
+    background: radial-gradient(circle, rgba(121, 9, 9, 1) 0%, rgba(23, 26, 33, 1) 100%);
     position: relative;
-    border: 1px solid #010101;
+    border: 1px solid var(--third-color);
     cursor: pointer;
     transition: transform 0s ease;
     transform-style: preserve-3d;
@@ -715,7 +729,7 @@ input[type=text]:focus {
 .character-card__features__text {
     margin-top: 0;
     margin-bottom: 0;
-    color: var(--primary-color);
+    color: var(--sixth-color);
     font-weight: 700;
     margin-right: .5rem;
     left: 1rem;
@@ -724,7 +738,7 @@ input[type=text]:focus {
 .character-card__features__text-2 {
     margin-top: 0;
     margin-bottom: 0;
-    color: var(--primary-color);
+    color: var(--sixth-color);
     font-weight: 700;
     margin-right: 2rem;
     left: 1rem;
@@ -764,8 +778,18 @@ input[type=text]:focus {
 /* PAGE LIST */
 
 .list_img {
-    width: 100%;
+    width: 95%;
     border-radius: 0 0 1rem 1rem;
+    border-bottom: 1px #790909 solid;
+    border-left: 1px #790909 solid;
+    border-right: 1px #790909 solid;
+}
+
+.face-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .heroes-list {
@@ -785,7 +809,7 @@ input[type=text]:focus {
     justify-content: center;
     width: 10rem;
     list-style: none;
-    background-color: var(--third-color);
+
     border-radius: 1rem;
 }
 
@@ -800,6 +824,7 @@ input[type=text]:focus {
     font-size: 100%;
     display: flex;
     justify-content: center;
+    color: var(--sixth-color);
 }
 
 
@@ -813,8 +838,19 @@ input[type=text]:focus {
 
 .name-hero {
     font-size: 100%;
-    margin: .25rem 0 .25rem 0;
     text-align: center;
+    background: rgb(121, 9, 9);
+    background: linear-gradient(180deg, rgba(121, 9, 9, 1) 0%, rgba(23, 26, 33, 1) 100%);
+    color: var(--sixth-color);
+    width: 95%;
+    height: 1.8rem;
+    border-radius: 1rem 1rem 0 0;
+    border-top: 1px #790909 solid;
+    border-left: 1px #790909 solid;
+    border-right: 1px #790909 solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .list-character-card__list {
@@ -832,7 +868,7 @@ input[type=text]:focus {
     aspect-ratio: 1/1;
     object-fit: cover;
     border-radius: 1rem;
-    border: 1px var(--primary-color) solid;
+    border: 1px #790909 solid;
 }
 
 .list-character-card__progress {
@@ -853,7 +889,7 @@ input[type=text]:focus {
 .list-character-card__top-title {
     display: flex;
     justify-content: space-between;
-    flex-direction: column;
+    flex-direction: column-reverse;
     width: 100%;
     align-items: center;
 }
@@ -898,7 +934,7 @@ input[type=text]:focus {
 }
 
 .progress-list {
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--sixth-color);
     z-index: 100;
     width: 50%;
     height: 1rem;
@@ -913,6 +949,8 @@ input[type=text]:focus {
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--primary-color);
+    font-weight: 700;
 }
 
 

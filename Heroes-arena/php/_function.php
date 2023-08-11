@@ -46,7 +46,7 @@ function displayCards($hero)
     return '
     <div class="hero-card-container card">
         <div class="hero-card hero-card-shadow card__face card__face--front hero_information">
-            <div>
+            <div class="face-card">
                 <h3 class="name-hero">' . $hero['hero_name'] . '</h3>
                 <img class="list_img" src="' . $hero['hero_md'] . '">
             </div>
