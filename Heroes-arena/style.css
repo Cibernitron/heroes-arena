@@ -639,7 +639,7 @@ input[type=text]:focus {
 /* Carte de super-héros */
 .hero-card {
     width: 100%;
-    height: 264px;
+    height: 25.05rem;
     top: 0;
     left: 0;
     background: rgb(121, 9, 9);
@@ -669,7 +669,6 @@ input[type=text]:focus {
     position: relative;
     cursor: pointer;
     transform-style: preserve-3d;
-    /* transform-origin: center right; */
     transition: transform 1s ease;
 }
 
@@ -773,6 +772,7 @@ input[type=text]:focus {
     width: 100%;
     flex-wrap: wrap;
     flex-direction: column;
+    margin-bottom: .5rem;
 }
 
 /* PAGE LIST */
@@ -795,7 +795,7 @@ input[type=text]:focus {
 .heroes-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 2rem;
     justify-content: center;
     margin: auto;
     padding: 2rem;
@@ -807,7 +807,7 @@ input[type=text]:focus {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 10rem;
+    width: 16rem;
     list-style: none;
 
     border-radius: 1rem;
@@ -825,15 +825,15 @@ input[type=text]:focus {
     display: flex;
     justify-content: center;
     color: var(--sixth-color);
+    margin-bottom: 0.25rem;
 }
 
 
 .container-heros {
     list-style: none;
-    width: 10rem;
-    /* background-color: var(--third-color); */
+    width: 16rem;
     border-radius: 1rem;
-    height: 16.7rem;
+    height: 25.05rem;
 }
 
 .name-hero {
@@ -875,7 +875,7 @@ input[type=text]:focus {
     width: 100%;
     display: flex;
     justify-content: space-around;
-    margin: .5rem 0 .5rem 0;
+    margin: .25rem 0 .25rem 0;
 }
 
 .list-progress {
@@ -892,6 +892,7 @@ input[type=text]:focus {
     flex-direction: column-reverse;
     width: 100%;
     align-items: center;
+    margin-bottom: 0.5rem;
 }
 
 
@@ -1002,16 +1003,22 @@ input[type=text]:focus {
     display: flex;
     flex-direction: column;
     font-size: medium;
+    gap: 0.25rem;
 }
 
 .bio__text-title {
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--sixth-color);
+    margin-left: 1rem;
+}
+
+.bio__text-text{
+
 }
 
 .bio__title {
     text-align: center;
-    color: var(--secondary-color-dark);
+    color: var(--sixth-color);
     font-weight: 700;
 }
 
@@ -1406,4 +1413,7 @@ input[type=text]:focus {
 
 .flex-wrap {
     flex-wrap: wrap;
+}
+.z-index {
+    z-index: 10000;
 }

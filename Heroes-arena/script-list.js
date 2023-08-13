@@ -15,6 +15,7 @@ function rotateCard(event) {
   shadow2.style.transition = 'box-shadow 0s ease';
   let shadowThicknessX = rotationX * -1;
   let shadowThicknessY = rotationY * 1;
+  event.currentTarget.classList.add('z-index');
 
   if (event.currentTarget.classList.contains('is-flipped')) {
     shadow2.style.boxShadow = `${(mouseX - cardCenterX) * .35 - 1}px ${shadowThicknessY}px 10px 1px rgba(0, 0, 0, .6)`;
@@ -36,6 +37,7 @@ function resetCardRotation(event) {
   const card = event.currentTarget.querySelector('.hero-card');
 
   if (card) {
+    event.currentTarget.classList.remove('z-index');
     card.style.transition = 'transform 1s ease, box-shadow 1s ease';
     card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
 

@@ -82,6 +82,12 @@ function displayCards($hero)
                             </div>
                         </li> 
                     </ul>
+                    <div class="character-card__bio">
+                <p class="bio__title">Biography:</p>
+                <p class="bio__text"><span class="bio__text-title">Real-Name:</span><span class="bio__text-text"> ' . $hero['hero_full_name'] . '</span></p>
+                <p class="bio__text"><span class="bio__text-title">Alignement:</span><span class="bio__text-text"> ' . $hero['hero_alignment'] . '</span></p>
+                <p class="bio__text"><span class="bio__text-title">Universe:</span><span class="bio__text-text"> ' . $hero['hero_publisher'] . '</span></p>
+                </div>
                 </div>
             </div>
         </div>
