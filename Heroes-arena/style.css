@@ -1,6 +1,11 @@
+@font-face {
+	font-family: 'SuperBrigade';
+	src: url('fonts/SuperBrigadeTitle-axXKE.otf') format('opentype');
+}
+
 :root {
     font-size: 16px;
-    font-family: 'roboto', 'Helvetica Neue', sans-serif;
+    font-family: 'roboto', 'SuperBrigade', 'Helvetica Neue', sans-serif;
     --primary-color: #171A21;
     --secondary-color: #ff0000;
     --secondary-color-dark: #9e0101;
@@ -826,6 +831,8 @@ input[type=text]:focus {
     justify-content: center;
     color: var(--sixth-color);
     margin-bottom: 0.25rem;
+    font-family: 'SuperBrigade', sans-serif;
+    text-shadow: -2px -2px 4px rgb(0, 0, 0);
 }
 
 
@@ -851,6 +858,8 @@ input[type=text]:focus {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'SuperBrigade', sans-serif;
+    text-shadow: -2px -2px 4px rgb(0, 0, 0);
 }
 
 .list-character-card__list {
