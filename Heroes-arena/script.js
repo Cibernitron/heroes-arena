@@ -680,7 +680,8 @@ function displayCards(hero) {
                 <p class="bio__text"><span class="bio__text-title">Alignement:</span> ${hero.hero_alignment}</p>
                 <p class="bio__text"><span class="bio__text-title">Universe:</span> ${hero.hero_publisher}</p>
                 </div>
-                </li>`;
+                </li>`
+                ;
 };
 
 /**

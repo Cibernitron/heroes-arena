@@ -795,7 +795,7 @@ input[type=text]:focus {
 .heroes-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 1rem;
     justify-content: center;
     margin: auto;
     padding: 2rem;
@@ -1010,10 +1010,8 @@ input[type=text]:focus {
     font-weight: 700;
     color: var(--sixth-color);
     margin-left: 1rem;
-}
-
-.bio__text-text{
-
+    display: inline-block;
+    width: 99px;
 }
 
 .bio__title {
@@ -1026,6 +1024,15 @@ input[type=text]:focus {
     margin: 0;
     font-weight: 500;
     color: var(--sixth-color);
+    display: block;
+}
+
+.bio__text-text {
+    display: inline-block;
+    max-width: calc(100% - 120px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
 }
 
 @media screen and (min-width:1000px) {
@@ -1414,6 +1421,7 @@ input[type=text]:focus {
 .flex-wrap {
     flex-wrap: wrap;
 }
+
 .z-index {
     z-index: 10000;
 }

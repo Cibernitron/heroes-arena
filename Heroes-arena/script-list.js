@@ -37,15 +37,19 @@ function resetCardRotation(event) {
   const card = event.currentTarget.querySelector('.hero-card');
 
   if (card) {
-    event.currentTarget.classList.remove('z-index');
     card.style.transition = 'transform 1s ease, box-shadow 1s ease';
     card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-
+    
     let shadow = event.currentTarget.querySelector('.hero-card-shadow');
     let shadow2 = event.currentTarget.querySelector('.hero-card-shadow-2');
     shadow.style.boxShadow = '0px 0px 10px 1px rgba(0, 0, 0, .6)';
     shadow2.style.boxShadow = '0px 0px 10px 1px rgba(0, 0, 0, .6)';
-
+    
+    setTimeout(() => {
+      card.parentElement.classList.remove('z-index');
+    }, 1000);
+    
+    
   }
 }
 
