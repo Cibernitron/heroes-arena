@@ -74,6 +74,105 @@ async function callAPI(method, data) {
         console.error("Unable to load datas from the server : " + error);
     }
 }
+
+
+/*
+                         +------------------------------------------+
+                         |             Functions Cards              |
+                         +------------------------------------------+ 
+ */
+
+function rotateCard(event) {
+    const card = event.currentTarget.querySelector('.hero-card');
+    const cardRect = card.getBoundingClientRect();
+    const cardCenterX = cardRect.left + cardRect.width / 2;
+    const cardCenterY = cardRect.top + cardRect.height / 2;
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
+    let rotationX = isFlipped(event.currentTarget, cardCenterX, mouseX);
+    const rotationY = (mouseY - cardCenterY) * 0.3;
+    card.style.transition = 'transform 0s ease';
+    card.style.transform = `perspective(1000px) rotateX(${rotationY}deg) rotateY(${rotationX}deg)`;
+    let shadow = event.currentTarget.querySelector('.hero-card-shadow');
+    let shadow2 = event.currentTarget.querySelector('.hero-card-shadow-2');
+    shadow.style.transition = 'box-shadow 0s ease';
+    shadow2.style.transition = 'box-shadow 0s ease';
+    let shadowThicknessX = rotationX * -1;
+    let shadowThicknessY = rotationY * 1;
+    event.currentTarget.classList.add('z-index');
+
+    if (event.currentTarget.classList.contains('is-flipped')) {
+        shadow2.style.boxShadow = `${(mouseX - cardCenterX) * .35 - 1}px ${shadowThicknessY}px 10px 1px rgba(0, 0, 0, .6)`;
+    }
+    else {
+        shadow.style.boxShadow = `${shadowThicknessX}px ${shadowThicknessY}px 10px 1px rgba(0, 0, 0, .6)`;
+    }
+}
+
+function isFlipped(target, cardCenterX, mouseX) {
+    if (target.classList.contains('is-flipped')) {
+        return (mouseX - cardCenterX) * 0.5;
+    } else {
+        return (mouseX - cardCenterX) * -0.3;
+    }
+}
+
+function resetCardRotation(event) {
+    const card = event.currentTarget.querySelector('.hero-card');
+
+    if (card) {
+        card.style.transition = 'transform 1s ease, box-shadow 1s ease';
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+
+        let shadow = event.currentTarget.querySelector('.hero-card-shadow');
+        let shadow2 = event.currentTarget.querySelector('.hero-card-shadow-2');
+        shadow.style.boxShadow = '0px 0px 10px 1px rgba(0, 0, 0, .6)';
+        shadow2.style.boxShadow = '0px 0px 10px 1px rgba(0, 0, 0, .6)';
+
+        setTimeout(() => {
+            card.parentElement.classList.remove('z-index');
+        }, 1000);
+
+
+    }
+}
+
+
+let cardContainers = document.querySelectorAll('.hero-card-container');
+
+cardContainers.forEach((cardContainer) => {
+    cardContainer.addEventListener('mousemove', rotateCard);
+    cardContainer.addEventListener('mouseleave', resetCardRotation);
+    cardContainer.addEventListener('click', function (event) {
+        cardContainer.classList.toggle('is-flipped');
+        resetCardRotation(event);
+        getStats(this);
+    });
+});
+
+function getStats(card) {
+    let stats = card.querySelectorAll('.progress__val');
+    stats.forEach(stat => {
+        stat.style.width = `${stat.textContent}%`;
+    });
+}
+
+function fillTheDescription(hero, heroHTML) {
+    heroHTML.querySelector('.list-character-card__title').textContent = `${hero.hero_name}`;
+    heroHTML.querySelector('.progress__val-atq').textContent = `${hero.hero_strength}`;
+    heroHTML.querySelector('.progress__val-shield').textContent = `${hero.hero_combat}`;
+    heroHTML.querySelector('.progress__val-speed').textContent = `${hero.hero_speed}`;
+    heroHTML.querySelector('.progress__val-life').textContent = `${hero.hero_durability}`;
+    heroHTML.querySelector('.bio__text-name').textContent = `${hero.hero_full_name}`;
+    heroHTML.querySelector('.bio__text-alignment').textContent = `${hero.hero_alignment}`;
+    heroHTML.querySelector('.bio__text-universe').textContent = `${hero.hero_publisher}`;
+    heroHTML.querySelector('.list-character-card__img').src = `${hero.hero_md}`;
+
+}
+
+
+
+
 // function getCsrfToken() {
 //     return document.querySelector('#token-csrf').value;
 // }
@@ -101,8 +200,8 @@ const margin = document.querySelector("#margin-bottom");
 const imgVS = document.querySelector('.versus__img')
 const selectionHeroes = document.querySelector('.selection__heroes')
 const resumeCbt = document.querySelector('.resume__button')
-const hero1Name = hero1HTML.querySelector(".hero__name");
-const hero2Name = hero2HTML.querySelector(".hero__name");
+const hero1Name = hero1HTML.querySelector(".name-hero");
+const hero2Name = hero2HTML.querySelector(".name-hero");
 const resumeText = document.querySelector('.resume__text')
 const hero1Container = document.querySelector('.hero__container-1')
 const hero2Container = document.querySelector('.hero__container-2')
@@ -141,27 +240,7 @@ function verifyTheHeroes(hero1, hero2) {
     }
 }
 
-// Display or not character-card in the place of picture on click on this last one
-function displayOrNotCharacterCard(hero, heroHtml, number) {
-    // display character-card in the place of picture on click on this last one
-    heroHtml.querySelector('.hero__character-card').classList.toggle('display-none')
-    heroHtml.querySelector('.hero__img').classList.toggle('display-none')
-    if (hero.hero_durability <= 0 && hero.hero_durability <= 0) {
-        heroHtml.querySelector(`.hero__cross-${number}-display`).classList.toggle('display-none')
-    }
-}
 
-/**
- * Verify if heroes are defined, 
- * @param {string} hero is the hero in API                           
- * @param {string} heroHTML is the parent HTML tag where we will add the hero                            
- * @param {string} number is number of the place of hero (1 or 2)                            
- * @return {string} if the hero is selected, we can click for display character card
- */
-function verifyTheHeroes2(hero, heroHTML, number) {
-    if (hero === undefined) { return; }
-    displayOrNotCharacterCard(hero, heroHTML, number)
-}
 
 /**
  * Add Hero
@@ -173,17 +252,14 @@ function verifyTheHeroes2(hero, heroHTML, number) {
 
 function addHero(hero, heroHtml) {
     // Add and display the name of the hero
-    heroHtml.querySelector(".hero__name").textContent = hero.hero_name;
-    // heroHtml.querySelector(".hero__name").classList.remove('display-none');
-    // heroHtml.querySelector(".hero__name").classList.add("name-combat");
+    heroHtml.querySelector(".name-hero").textContent = hero.hero_name;
     heroHtml.querySelector(".hero__delete").classList.remove('display-none');
     heroHtml.querySelector(".hero__delete").classList.add('display-flex');
 
     // Display the picture of the hero
-    heroHtml.querySelector('.hero__img').src = hero.hero_lg;
+    heroHtml.querySelector('.list_img').src = hero.hero_lg;
+    fillTheDescription(hero, heroHtml)
 
-    // Fill the hero caracter-card
-    heroHtml.querySelector('.hero__character-card').innerHTML = displayCards(hero);
 
     verifyTheHeroes(hero1, hero2);
 }
@@ -198,9 +274,7 @@ function addHero(hero, heroHtml) {
 function removeHero(heroHtml) {
 
     // Remove and hide the hero name
-    heroHtml.querySelector(".hero__name").textContent = 'Choose Hero';
-    // heroHtml.querySelector(".hero__name").classList.remove('name-combat');
-    // heroHtml.querySelector(".hero__name").classList.add('display-none');
+    heroHtml.querySelector(".name-hero").textContent = 'Choose Hero';
     heroHtml.querySelector(".hero__delete").classList.remove('display-flex')
     heroHtml.querySelector(".hero__delete").classList.add('display-none')
 
@@ -208,12 +282,19 @@ function removeHero(heroHtml) {
     heroHtml.querySelector('.life-bar__modular').textContent = '';
 
     // Remove hero picture
-    heroHtml.querySelector('.hero__img').classList.remove('display-none');
-    heroHtml.querySelector('.hero__img').src = "../img/Choix perso mobile.png";
+    heroHtml.querySelector('.list_img').classList.remove('display-none');
+    heroHtml.querySelector('.list_img').src = "../img/Choix perso mobile.png";
 
     // Remove hero character-card with hero information
-    heroHtml.querySelector('.hero__character-card').innerHTML = '';
-    heroHtml.querySelector('.hero__character-card').classList.add('display-none');
+    heroHtml.querySelector('.list-character-card__title').textContent = `Choose Hero`;
+    heroHtml.querySelector('.progress__val-atq').textContent = `0`;
+    heroHtml.querySelector('.progress__val-shield').textContent = `0`;
+    heroHtml.querySelector('.progress__val-speed').textContent = `0`;
+    heroHtml.querySelector('.progress__val-life').textContent = `0`;
+    heroHtml.querySelector('.bio__text-name').textContent = `Undefined`;
+    heroHtml.querySelector('.bio__text-alignment').textContent = `Undefined`;
+    heroHtml.querySelector('.bio__text-universe').textContent = `Undefined`;
+    heroHtml.querySelector('.list-character-card__img').src = `../img/Choix perso.png`;
 
 
     if (heroHtml.id === 'hero1') {
@@ -271,12 +352,14 @@ function displayNames(array) {
                         addHero(hero1, hero1HTML);
                         searchList.classList.add("display-none")
                         searchBar.value = ("")
+                        
                     }
                     // If the first hero is already chosen and the second hero is not chosen then the selected hero becomes hero 2
                     else if (hero2Name.textContent === "Choose Hero") {
                         hero2 = Response.hero_name[0];
                         addHero(hero2, hero2HTML);
                         searchList.classList.add("display-none")
+                        
                     }
                     // If the 2 heroes are selected then nothing is done
                     else {
@@ -306,7 +389,6 @@ buttonRandom.addEventListener('click', function (e) {
 
             heroes = Response.heroes_id;
 
-            // console.log(Response.hero_name);
         });
 
 
@@ -439,7 +521,7 @@ function getMostSpeedHero(hero1, hero2) {
 // Define "defense" value
 // Add a random value to hero "defense" value 
 function defenseScore(hero) {
-    return parseInt(hero.hero_combat)+dice(100);
+    return parseInt(hero.hero_combat) + dice(100);
 }
 
 // Define "strength" value
@@ -477,7 +559,7 @@ function executeFight(attacker, defender) {
         if (attacker === hero1) {
             // if hero1 is attacker, image of hero go to hero2 and display bubble 
             setTimeout(() => {
-                document.querySelector('#hero1-container').classList.add("hero__container-1")
+                document.querySelector('#hero1').classList.add("hero__container-1")
                 setTimeout(() => {
                     if (defender.hero_durability > 0) {
                         document.querySelector('#bam-hero2').classList.remove("display-none")
@@ -493,12 +575,12 @@ function executeFight(attacker, defender) {
 
             }, speed1000)
 
-            document.querySelector('#hero1-container').classList.remove("hero__container-1")
+            document.querySelector('#hero1').classList.remove("hero__container-1")
         }
         else if (attacker === hero2) {
             // if hero2 is attacker, image of hero go to hero1 and display bubble 
             setTimeout(() => {
-                document.querySelector('#hero2-container').classList.add("hero__container-2")
+                document.querySelector('#hero2').classList.add("hero__container-2")
                 setTimeout(() => {
                     if (defender.hero_durability > 0) {
                         document.querySelector('#bam-hero1').classList.remove("display-none")
@@ -514,7 +596,7 @@ function executeFight(attacker, defender) {
 
             }, speed1000,)
 
-            document.querySelector('#hero2-container').classList.remove("hero__container-2")
+            document.querySelector('#hero2').classList.remove("hero__container-2")
         }
         defender.hero_durability -= damage;
     }
@@ -528,7 +610,7 @@ function executeFight(attacker, defender) {
         if (attacker === hero1) {
             // if hero1 is attacker, image of hero go to hero2 and display bubble 
             setTimeout(() => {
-                document.querySelector('#hero1-container').classList.add("hero__container-1")
+                document.querySelector('#hero1').classList.add("hero__container-1")
                 setTimeout(() => {
                     document.querySelector('#oops-hero2').classList.remove("display-none")
                     setTimeout(() => {
@@ -538,12 +620,12 @@ function executeFight(attacker, defender) {
 
             }, speed1000)
 
-            document.querySelector('#hero1-container').classList.remove("hero__container-1")
+            document.querySelector('#hero1').classList.remove("hero__container-1")
         }
         else if (attacker === hero2) {
             // if hero2 is attacker, image of hero go to hero1 and display bubble 
             setTimeout(() => {
-                document.querySelector('#hero2-container').classList.add("hero__container-2")
+                document.querySelector('#hero2').classList.add("hero__container-2")
                 setTimeout(() => {
                     document.querySelector('#oops-hero1').classList.remove("display-none")
                     setTimeout(() => {
@@ -553,7 +635,7 @@ function executeFight(attacker, defender) {
 
             }, speed1000,)
 
-            document.querySelector('#hero2-container').classList.remove("hero__container-2")
+            document.querySelector('#hero2').classList.remove("hero__container-2")
         }
         // attacker == defender && defender == attacker
 
@@ -633,57 +715,6 @@ function battle(hero1, hero2) {
 }
 
 
-
-/**
- * Display Character Card
- * Return HTML use to display the characteristic of the hero                           
- * @param {string} hero is a JSON of selected hero                                      
- * @return {string} return characteristic card                                          
- */
-function displayCards(hero) {
-    return ` <li class="character-card__list">
-            <div class="character-card__top">
-                <div class="character-card__top-title">
-                    <img class="character-card__img" src="${hero.hero_lg}">
-                    <h2 class="character-card__title">${hero.hero_name}</h2>
-                </div>
-                <div class="character-card__features">
-                        <li class="character-card__progress abilities">  
-                            <p class="character-card__features__text">Attack:</p>
-                            <div class="progress">
-                                <div class="progress__val progress__val-atq">${hero.hero_strength}</div>
-                            </div>
-                        </li>
-                        <li class="character-card__progress abilities">  
-                            <p class="character-card__features__text">Shield:</p>
-                            <div class="progress">
-                                <div class="progress__val progress__val-shield">${hero.hero_combat}</div>
-                            </div>
-                        </li>
-                        <li class="character-card__progress abilities">  
-                            <p class="character-card__features__text">Speed:</p>
-                            <div class="progress">
-                                <div class="progress__val progress__val-speed">${hero.hero_speed}</div>
-                            </div>
-                        </li>
-                        <li class="character-card__progress abilities">  
-                            <p class="character-card__features__text">Health:</p>
-                            <div class="progress">
-                                <div class="progress__val progress__val-life">${hero.hero_durability}</div>
-                            </div>
-                        </li> 
-                </div>
-            </div>
-            <div class="character-card__bio">
-                <p class="bio__title">Biography:</p>
-                <p class="bio__text"><span class="bio__text-title">Real-Name:</span> ${hero.hero_full_name}</p>
-                <p class="bio__text"><span class="bio__text-title">Alignement:</span> ${hero.hero_alignment}</p>
-                <p class="bio__text"><span class="bio__text-title">Universe:</span> ${hero.hero_publisher}</p>
-                </div>
-                </li>`
-                ;
-};
-
 /**
  * Customize page for fight
  *  Return design for the fight page                                                    
@@ -691,11 +722,8 @@ function displayCards(hero) {
  *  @return {string} return modification of css                                         
  */
 function preparHeroToCombat(heroHTML) {
-    heroHTML.querySelector(".hero__name").classList.add("name-combat");
-    heroHTML.querySelector(".name-combat").style.marginBottom = "0";
     heroHTML.querySelector(".life-bar__modular").classList.add("life-combat");
     heroHTML.querySelector(".life-bar__modular").classList.remove("display-none");
-    // heroHTML.querySelector(".progress").style.display = "flex";
     heroHTML.querySelector(".hero__life-container").classList.remove("display-none");
     document.querySelector(".health-img-1").classList.remove("display-none");
     document.querySelector(".health-img-2").classList.remove("display-none");
@@ -723,16 +751,6 @@ function preparCharacterCard(hero, heroHTML) {
 searchBar.value = ("")
 // waitingForResponse();
 
-hero1HTML.querySelector('.hero__container').addEventListener('click', function () { preparCharacterCard(hero1, hero1HTML) })
-hero2HTML.querySelector('.hero__container').addEventListener('click', function () { preparCharacterCard(hero2, hero2HTML) })
-
-hero1HTML.querySelector('.hero__container').addEventListener('click', function (e) {
-    verifyTheHeroes2(hero1, hero1HTML, 1)
-});
-hero2HTML.querySelector('.hero__container').addEventListener('click', function (e) {
-    verifyTheHeroes2(hero2, hero2HTML, 2)
-});
-
 resumeCbt.addEventListener('click', function (e) {
     combatText.classList.toggle("display-none")
 });
@@ -748,22 +766,22 @@ document.querySelector('.speed__selection').addEventListener('click', function (
     document.querySelector('.play__button').classList.toggle("margin-right")
     if (speed1000 === 1000) {
         speed750 /= 5;
-        
+
         speed1000 /= 5;
-        
+
         speed2000 /= 5;
-        
+
         hero1Container.style.animationDuration = "0.15s";
         hero2Container.style.animationDuration = "0.15s";
 
     }
     else {
         speed750 *= 5;
-        
+
         speed1000 *= 5;
-        
+
         speed2000 *= 5;
-        
+
         hero1Container.style.animationDuration = "0.75s";
         hero2Container.style.animationDuration = "0.75s";
     }

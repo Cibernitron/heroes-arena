@@ -39,7 +39,7 @@ if ($data['action'] === 'showName' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
 if ($data['action'] === 'selectHero' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $idHero = (int)strip_tags($data['id_hero']);
-    $query = $dbCo->prepare("SELECT id_hero, hero_name, hero_intelligence, hero_strength, hero_speed, hero_durability, hero_life, hero_power, hero_combat, hero_full_name, hero_publisher, hero_alignment, hero_lg FROM `heroes` WHERE `id_hero` LIKE :id_hero;");
+    $query = $dbCo->prepare("SELECT * FROM `heroes` WHERE `id_hero` LIKE :id_hero;");
     $isOk = $query->execute([
         'id_hero' => $idHero,
     ]);

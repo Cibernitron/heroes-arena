@@ -172,8 +172,8 @@ input[type=text]:focus {
 
 .heroes__container {
     display: flex;
-    justify-content: space-between;
-    margin: 0 1rem;
+    justify-content: space-around;
+    margin: 0 5rem;
 }
 
 .selection__heroes {
@@ -538,7 +538,8 @@ input[type=text]:focus {
 /* HERO IMG ANIM */
 .hero__anim {
     position: absolute;
-
+    z-index: 100000;
+    
 }
 
 .anim__miss-1 {
@@ -546,6 +547,7 @@ input[type=text]:focus {
     width: 20vw;
     top: -5vw;
     left: 20vw;
+    z-index: 100000;
 }
 
 .anim__miss-2 {
@@ -553,6 +555,7 @@ input[type=text]:focus {
     width: 20vw;
     top: -5vw;
     right: 20vw;
+    z-index: 100000;
 }
 
 .anim__aargh-1 {
@@ -561,6 +564,7 @@ input[type=text]:focus {
     rotate: 30deg;
     top: -3vw;
     left: -3vw;
+    z-index: 100000;
 }
 
 .anim__aargh-2 {
@@ -569,6 +573,7 @@ input[type=text]:focus {
     rotate: 30deg;
     top: -3vw;
     right: -37vw;
+    z-index: 100000;
 }
 
 .anim__bam-1,
@@ -579,6 +584,7 @@ input[type=text]:focus {
     top: 5vw;
     left: 0vw;
     rotate: -30deg;
+    z-index: 100000;
 }
 
 .anim__bam-2,
@@ -589,6 +595,7 @@ input[type=text]:focus {
     top: 5vw;
     right: -30vw;
     rotate: 30deg;
+    z-index: 100000;
 }
 
 @media screen and (min-width:1000px) {
@@ -598,6 +605,7 @@ input[type=text]:focus {
         rotate: 30deg;
         top: -2vw;
         left: -2vw;
+        z-index: 100000;
     }
 
     .anim__aargh-2 {
@@ -606,6 +614,7 @@ input[type=text]:focus {
         rotate: 30deg;
         top: -2vw;
         right: -23vw;
+        z-index: 100000;
     }
 
     .anim__bam-1,
@@ -616,6 +625,7 @@ input[type=text]:focus {
         top: 5vw;
         left: 0vw;
         rotate: -20deg;
+        z-index: 100000;
     }
 
     .anim__bam-2,
@@ -626,6 +636,7 @@ input[type=text]:focus {
         top: 5vw;
         right: -20vw;
         rotate: 30deg;
+        z-index: 100000;
     }
 }
 
@@ -688,6 +699,7 @@ input[type=text]:focus {
 
 .card__face--back {
     transform: rotateY(180deg);
+    position: absolute;
 }
 
 /*---------------------------------------*/
@@ -841,6 +853,7 @@ input[type=text]:focus {
     width: 16rem;
     border-radius: 1rem;
     height: 25.05rem;
+    position: relative;
 }
 
 .name-hero {
