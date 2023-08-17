@@ -13,18 +13,17 @@ function isValid($bool)
 /**
  * Undocumented function
  *
- * @param [type] $array --the list of the tasks in the database
- * @return string -- the list of the tasks in an html list
+ * @param [type] $array --the list of heros in the database
+ * @return string -- the list of heros in an html list
  */
 function getList($array)
 {
-    $li = "";
+    $list = "";
     foreach ($array as $hero) {
-        $li .= '<li class="container-heros">' . displayCards($hero) . '</li>';
+        $list .= '<li class="container-heros">' . displayCards($hero) . '</li>';
     }
-    return $li;
+    return $list;
 }
-
 
 function displayLists()
 {
@@ -92,4 +91,18 @@ function displayCards($hero)
             </div>
         </div>
     </div>';
+};
+
+
+function displaySearchBar() {
+    return '        <div class="character__srch">
+    <section id="search" class="search">
+        <h2 id="selection-ttl" class="search__ttl">Selection</h2>
+
+        <input class="search__bar" type="text" id="name" name="name" placeholder="Selectionnez un héro" required minlength="3" size="30">
+
+        <ul id="search-list" class="search__list"></ul>
+        <button id="btn-random" class="button search__button-random">Random</button>
+    </section>
+</div>';
 };

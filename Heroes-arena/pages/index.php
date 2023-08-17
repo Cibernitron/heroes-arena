@@ -1,3 +1,10 @@
+<?php
+require "../php/_connection-bdd.php";
+include "../php/_function.php";
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -18,16 +25,7 @@
     <?php include "../php/_header.php" ?>
     <main>
         <!-- Search -->
-        <div class="character__srch">
-            <section id="search" class="search">
-                <h2 id="selection-ttl" class="search__ttl">Selection</h2>
-
-                <input class="search__bar" type="text" id="name" name="name" placeholder="Selectionnez un héro" required minlength="3" size="30">
-
-                <ul id="search-list" class="search__list"></ul>
-                <button id="btn-random" class="button search__button-random">Random</button>
-            </section>
-        </div>
+        <?= displaySearchBar() ?>
         <!-- Selection Heroes -->
         <!-- <div id="selection-heroes__background"> -->
         <section class="selection combat-design" id="selection">

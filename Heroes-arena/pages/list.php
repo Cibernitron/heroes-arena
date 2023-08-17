@@ -23,12 +23,14 @@ include "../php/_function.php";
     <div class="body__deco"></div>
 <?php include "../php/_header.php"?>
 <main>
+    <!-- Search -->
+    <?= displaySearchBar() ?>
 <ul class="heroes-list">
-    <?= displayLists() ?>
+
 </ul>
 </main>
 <?=include "../php/_footer.php";?>
 </body>
-<script src="../script-list.js"></script>
+<script src="../script.js"></script>
 
 </html>
