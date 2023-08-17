@@ -521,7 +521,7 @@ function getMostSpeedHero(hero1, hero2) {
 // Define "defense" value
 // Add a random value to hero "defense" value 
 function defenseScore(hero) {
-    return parseInt(hero.hero_combat) + dice(100);
+    return parseInt(hero.hero_combat);
 }
 
 // Define "strength" value
@@ -688,7 +688,9 @@ function battle(hero1, hero2) {
                 setTimeout(() => {
                     hero1HTML.querySelector('.life-combat').style.width = `0%`;
                     hero1HTML.querySelector('.progress__life-point').textContent = `0/${hero1Life}`
-                    hero1HTML.querySelector('.hero__cross-1').classList.add("hero__cross-1-display")
+                    hero1HTML.querySelectorAll('.filter-death').forEach(element => {
+                        element.classList.add("background-grey")
+                    });
                     document.querySelector(".combat-background").classList.toggle("display-none")
                 }, speed2000)
             }
@@ -696,7 +698,9 @@ function battle(hero1, hero2) {
                 setTimeout(() => {
                     hero2HTML.querySelector('.life-combat').style.width = `0%`;
                     hero2HTML.querySelector('.progress__life-point').textContent = `0/${hero2Life}`
-                    hero2HTML.querySelector('.hero__cross-2').classList.add("hero__cross-2-display")
+                    hero2HTML.querySelectorAll('.filter-death').forEach(element => {
+                        element.classList.add("background-grey")
+                    });
                     document.querySelector(".combat-background").classList.toggle("display-none")
                 }, speed2000)
             }

@@ -50,9 +50,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="container-heros">
-                            <img src="../img/pngegg.png" class="hero__cross-1" alt="">
-                            <div class="hero-card-container card">
+                        <div class="container-heros ">
+                            <div class="hero-card-container card ">
                                 <div class="hero__anim">
                                     <img id="aargh-hero1" class="anim__aargh-1 display-none" src="../img/AARGH!.png" alt="">
                                     <img id="bam-hero1" class="anim__bam-1 display-none" src="../img/BAM!.png" alt="">
@@ -61,12 +60,14 @@
                                     <img id="miss-hero1" class="anim__miss-1  display-none " src="../img/bulle_miss2.png" alt="">
                                     <div class="miss-1"></div>
                                 </div>
-                                <div class="hero-card hero-card-shadow card__face card__face--front hero_information">
-                                    <div class="face-card">
+                                <div class="hero-card hero-card-shadow card__face card__face--front hero_information ">
+                                    <div class="face-card ">
                                         <h3 class="name-hero">Choose Hero</h3>
-                                        <img class="list_img" src="../img/Choix perso mobile.png">
+                                        <div class="filter-death"></div>
+                                        <img class="list_img " src="../img/Choix perso mobile.png">
                                     </div>
                                     <div class="hero-card hero-card-shadow-2 card__face card__face--back hero_information">
+                                        <div class="filter-death"></div>
                                         <div class="character-card__top">
                                             <div class="list-character-card__top-title">
                                                 <img class="list-character-card__img" src="../img/Choix perso.png">
@@ -134,7 +135,6 @@
                         </div>
                         <div class="container-heros">
                             <div class="hero-card-container card">
-                                <img src="../img/pngegg.png" class="hero__cross-2" alt="">
                                 <div class="hero__anim">
                                     <img id="aargh-hero2" class="anim__aargh-2 display-none" src="../img/AARGH!.png" alt="">
                                     <img id="bam-hero2" class="anim__bam-2 display-none" src="../img/BAM!.png" alt="">
@@ -146,10 +146,12 @@
                                 <div class="hero-card hero-card-shadow card__face card__face--front hero_information">
                                     <div class="face-card">
                                         <h3 class="name-hero">Choose Hero</h3>
+                                        <div class="filter-death"></div>
                                         <img class="list_img" src="../img/Choix perso mobile.png">
                                     </div>
                                     <div class="hero-card hero-card-shadow-2 card__face card__face--back hero_information">
-                                        <div class="character-card__top">
+                                    <div class="filter-death "></div>
+                                    <div class="character-card__top">
                                             <div class="list-character-card__top-title">
                                                 <img class="list-character-card__img" src="../img/Choix perso.png">
                                                 <h2 class="list-character-card__title">Choose Hero</h2>
