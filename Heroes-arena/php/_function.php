@@ -95,14 +95,12 @@ function displayCards($hero)
 
 
 function displaySearchBar() {
-    return '        <div class="character__srch">
-    <section id="search" class="search">
-        <h2 id="selection-ttl" class="search__ttl">Selection</h2>
-
-        <input class="search__bar" type="text" id="name" name="name" placeholder="Selectionnez un héro" required minlength="3" size="30">
-
-        <ul id="search-list" class="search__list"></ul>
-        <button id="btn-random" class="button search__button-random">Random</button>
-    </section>
-</div>';
+    return '<div class="character__srch">
+                <section id="search" class="search">
+                    <h2 id="selection-ttl" class="search__ttl">Selection</h2>
+                    <input class="search__bar" type="text" id="name" name="name" placeholder="Selectionnez un héro" required minlength="3" size="30" autocomplete="off">
+                    <ul id="search-list" class="search__list"></ul>
+                    <button id="btn-random" class="button search__button-random display-none">Random</button>
+                </section>
+            </div>';
 };

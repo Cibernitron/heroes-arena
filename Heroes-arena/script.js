@@ -92,53 +92,79 @@ function rotateCard(event) {
     const mouseY = event.clientY;
     let rotationX = isFlipped(event.currentTarget, cardCenterX, mouseX);
     const rotationY = (mouseY - cardCenterY) * 0.3;
-    card.style.transition = 'transform 0s ease';
+
+    card.classList.remove("transition-1s")
+    card.classList.add("transition-0s")
     card.style.transform = `perspective(1000px) rotateX(${rotationY}deg) rotateY(${rotationX}deg)`;
+
     let shadow = event.currentTarget.querySelector('.hero-card-shadow');
     let shadow2 = event.currentTarget.querySelector('.hero-card-shadow-2');
-    shadow.style.transition = 'box-shadow 0s ease';
-    shadow2.style.transition = 'box-shadow 0s ease';
+    shadow.classList.remove("transition-1s");
+    shadow2.classList.remove("transition-1s");
+    shadow.classList.add("transition-0s");
+    shadow2.classList.add("transition-0s");
+
     let shadowThicknessX = rotationX * -1;
     let shadowThicknessY = rotationY * 1;
-    event.currentTarget.classList.add('z-index');
 
-    if (event.currentTarget.firstElementChild.classList.contains('is-flipped')) {
-        shadow2.style.boxShadow = `${(mouseX - cardCenterX) * .35 - 1}px ${shadowThicknessY}px 10px 1px rgba(0, 0, 0, .6)`;
-    }
-    else {
-        shadow.style.boxShadow = `${shadowThicknessX}px ${shadowThicknessY}px 10px 1px rgba(0, 0, 0, .6)`;
+    if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/index.php") {
+        event.currentTarget.classList.add('z-index');
+
+        if (event.currentTarget.classList.contains('is-flipped')) {
+            shadow2.style.boxShadow = `${(mouseX - cardCenterX) * .35 - 1}px ${shadowThicknessY}px 10px 1px rgba(0, 0, 0, .6)`;
+        } else {
+            shadow.style.boxShadow = `${shadowThicknessX}px ${shadowThicknessY}px 10px 1px rgba(0, 0, 0, .6)`;
+        }
+    } else {
+        if (document.querySelector('.heroes-list').childElementCount === 557) {
+            event.currentTarget.classList.add('z-index');
+        } else {
+            event.currentTarget.firstElementChild.classList.add('z-index');
+        }
+
+        if (event.currentTarget.firstElementChild.classList.contains('is-flipped')) {
+            shadow2.style.boxShadow = `${(mouseX - cardCenterX) * .35 - 1}px ${shadowThicknessY}px 10px 1px rgba(0, 0, 0, .6)`;
+        } else {
+            shadow.style.boxShadow = `${shadowThicknessX}px ${shadowThicknessY}px 10px 1px rgba(0, 0, 0, .6)`;
+        }
     }
 }
 
 function isFlipped(target, cardCenterX, mouseX) {
-    if (target.firstElementChild.classList.contains('is-flipped')) {
-        return (mouseX - cardCenterX) * 0.5;
+    if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/index.php") {
+        if (target.classList.contains('is-flipped')) {
+            return (mouseX - cardCenterX) * 0.5;
+        } else {
+            return (mouseX - cardCenterX) * -0.3;
+        }
     } else {
-        return (mouseX - cardCenterX) * -0.3;
+        if (target.firstElementChild.classList.contains('is-flipped')) {
+            return (mouseX - cardCenterX) * 0.5;
+        } else {
+            return (mouseX - cardCenterX) * -0.3;
+        }
     }
 }
 
 function resetCardRotation(event) {
-    const card = event.currentTarget.querySelector('.hero-card');
+    let card = event.currentTarget.querySelector('.hero-card');
+    let shadow = event.currentTarget.querySelector('.hero-card-shadow');
+    let shadow2 = event.currentTarget.querySelector('.hero-card-shadow-2');
 
-    if (card) {
-        card.style.transition = 'transform 1s ease, box-shadow 1s ease';
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-        console.log(event.currentTarget.querySelector('.hero-card-shadow'));
-        console.log(event.currentTarget.querySelector('.hero-card-shadow-2'));
-        let shadow = event.currentTarget.querySelector('.hero-card-shadow');
-        let shadow2 = event.currentTarget.querySelector('.hero-card-shadow-2');
-        shadow.style.boxShadow = '0px 0px 10px 1px rgba(0, 0, 0, .6)';
-        shadow2.style.boxShadow = '0px 0px 10px 1px rgba(0, 0, 0, .6)';
+    card.classList.remove('transition-0s');
+    card.classList.add('transition-1s');
+    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+    shadow2.classList.remove('transition-0s');
+    shadow.classList.remove('transition-0s');
+    shadow2.classList.add('transition-1s');
+    shadow.classList.add('transition-1s');
+    shadow2.style.boxShadow = '0px 0px 10px 1px rgba(0, 0, 0, .6)';
+    shadow.style.boxShadow = '0px 0px 10px 1px rgba(0, 0, 0, .6)';
 
-        setTimeout(() => {
-            card.parentElement.classList.remove('z-index');
-        }, 1000);
-
-
-    }
+    setTimeout(() => {
+        card.parentElement.classList.remove('z-index');
+    }, 1000);
 }
-
 
 let cardContainers = document.querySelectorAll('.hero-card-container');
 
@@ -160,26 +186,25 @@ function getStats(card) {
 }
 
 function fillTheDescription(hero, heroHTML) {
-    heroHTML.querySelector('.list-character-card__title').textContent = `${hero.hero_name}`;
-    heroHTML.querySelector('.progress__val-atq').textContent = `${hero.hero_strength}`;
-    heroHTML.querySelector('.progress__val-shield').textContent = `${hero.hero_combat}`;
-    heroHTML.querySelector('.progress__val-speed').textContent = `${hero.hero_speed}`;
-    heroHTML.querySelector('.progress__val-life').textContent = `${hero.hero_durability}`;
-    heroHTML.querySelector('.bio__text-name').textContent = `${hero.hero_full_name}`;
-    heroHTML.querySelector('.bio__text-alignment').textContent = `${hero.hero_alignment}`;
-    heroHTML.querySelector('.bio__text-universe').textContent = `${hero.hero_publisher}`;
-    heroHTML.querySelector('.list-character-card__img').src = `${hero.hero_md}`;
-
+    heroHTML.querySelector('.list-character-card__title').textContent = hero.hero_name;
+    heroHTML.querySelector('.progress__val-atq').textContent = hero.hero_strength;
+    heroHTML.querySelector('.progress__val-shield').textContent = hero.hero_combat;
+    heroHTML.querySelector('.progress__val-speed').textContent = hero.hero_speed;
+    heroHTML.querySelector('.progress__val-life').textContent = hero.hero_durability;
+    heroHTML.querySelector('.bio__text-name').textContent = hero.hero_full_name;
+    heroHTML.querySelector('.bio__text-alignment').textContent = hero.hero_alignment;
+    heroHTML.querySelector('.bio__text-universe').textContent = hero.hero_publisher;
+    heroHTML.querySelector('.list-character-card__img').src = hero.hero_md;
 }
 
 const list = document.querySelector("#search-list");
 const button = document.getElementById("name");
 
 /*
-     * Display Name
+* Display Name
      * This function is used to interact with search bar                
      * @param Array is list of heroes in JSON                           
-     */
+*/
 function displayNames(array) {
     let searchList = document.querySelector('.search__list');
     searchList.classList.remove("display-none")
@@ -245,36 +270,36 @@ function displayNames(array) {
                         newLiElement.innerHTML = `
                         <div class="hero-card-container card">
                         <div class="hero-card hero-card-shadow card__face card__face--front hero_information">
-                            <div class="face-card">
-                                <h3 class="name-hero">${hero.hero_name}</h3>
-                                <img class="list_img" src="${hero.hero_md}">
+                        <div class="face-card">
+                        <h3 class="name-hero">${hero.hero_name}</h3>
+                        <img class="list_img" src="${hero.hero_md}">
                             </div>
                             <div class="hero-card hero-card-shadow-2 card__face card__face--back hero_information">
-                                <div class="character-card__top">
-                                    <div class="list-character-card__top-title">
+                            <div class="character-card__top">
+                            <div class="list-character-card__top-title">
                                         <img class="list-character-card__img" src="${hero.hero_sm}">
-                                            <h2 class="list-character-card__title">${hero.hero_name}</h2>
+                                        <h2 class="list-character-card__title">${hero.hero_name}</h2>
                                     </div>
                                     <ul class="character-card__features">
                                         <li class="list-character-card__progress abilities">
-                                            <p class="character-card__features__text">Attack:</p>
+                                        <p class="character-card__features__text">Attack:</p>
                                             <div class="progress-list">
                                                 <div class="progress__val progress__val-atq">${hero.hero_strength}</div>
                                             </div>
+                                            </li>
+                                        <li class="list-character-card__progress abilities">
+                                        <p class="character-card__features__text">Shield:</p>
+                                        <div class="progress-list">
+                                        <div class="progress__val progress__val-shield">${hero.hero_combat}</div>
+                                        </div>
                                         </li>
                                         <li class="list-character-card__progress abilities">
-                                            <p class="character-card__features__text">Shield:</p>
-                                            <div class="progress-list">
-                                                <div class="progress__val progress__val-shield">${hero.hero_combat}</div>
-                                            </div>
-                                        </li>
-                                        <li class="list-character-card__progress abilities">
-                                            <p class="character-card__features__text">Speed:</p>
+                                        <p class="character-card__features__text">Speed:</p>
                                             <div class="progress-list">
                                                 <div class="progress__val progress__val-speed">${hero.hero_speed}</div>
-                                            </div>
-                                        </li>
-                                        <li class="list-character-card__progress abilities">
+                                                </div>
+                                                </li>
+                                                <li class="list-character-card__progress abilities">
                                             <p class="character-card__features__text">Health:</p>
                                             <div class="progress-list">
                                                 <div class="progress__val progress__val-life">${hero.hero_durability}</div>
@@ -288,7 +313,7 @@ function displayNames(array) {
                                         <p class="bio__text"><span class="bio__text-title">Universe:</span><span class="bio__text-text"> ${hero.hero_publisher}</span></p>
                                     </div>
                                 </div>
-                            </div>
+                                </div>
                             </div>
                         </div>`;
                         document.querySelector(".heroes-list").appendChild(newLiElement);
@@ -308,16 +333,14 @@ function displayNames(array) {
     })
 }
 
-console.log(document.querySelector(".heroes-list")
-);
 // function getCsrfToken() {
 //     return document.querySelector('#token-csrf').value;
 // }
 /*
-                         +------------------------------------------+
-                         |                Variables                 |
-                         +------------------------------------------+ 
-                         */
+                     +------------------------------------------+
+                     |                Variables                 |
+                     +------------------------------------------+ 
+                     */
 if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/index.php") {
     let heroes;
     let hero1;
@@ -338,6 +361,7 @@ if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/i
     const resumeCbt = document.querySelector('.resume__button')
     const hero1Name = hero1HTML.querySelector(".name-hero");
     const hero2Name = hero2HTML.querySelector(".name-hero");
+    document.getElementById("btn-random").classList.remove("display-none")
 
     const resumeText = document.querySelector('.resume__text')
     const hero1Container = document.querySelector('.hero__container-1')
@@ -366,14 +390,19 @@ if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/i
     function verifyTheHeroes(hero1, hero2) {
         if (hero1 == undefined || hero2 == undefined) {
             buttonCombat.classList.remove("active");
-            search.style.display = "flex"
+            buttonCombat.classList.add("inactive");
+            search.classList.add("display-flex");
+            search.classList.remove("display-none");
         }
         else if (hero1 == hero2) {
             buttonCombat.classList.remove("active");
+            buttonCombat.classList.add("inactive");
         }
         else {
             buttonCombat.classList.add("active");
-            search.style.display = "none"
+            buttonCombat.classList.remove("inactive");
+            search.classList.remove("display-flex");
+            search.classList.add("display-none");
         }
     }
 
@@ -726,9 +755,7 @@ if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/i
         let hero1LifeAfterDamage;
         let hero2LifeAfterDamage;
         setTimeout(() => {
-            document.querySelector('.fight__img').style.width = "20%";
-            document.querySelector('.fight__img').style.maxWidth = "160px";
-            document.querySelector('.fight__img').style.top = "0";
+            document.querySelector('.fight__img').classList.add('fight-width');
         }, "1000");
 
         // Executing fight, turn by turn all the 1 sec
@@ -745,16 +772,20 @@ if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/i
                 executeFight(attacker, defender); //L460
 
                 if (hero1LifeAfterDamage < 60) {
-                    hero1HTML.querySelector('.life-bar__modular').style.backgroundColor = "orange";
+                    hero1HTML.querySelector('.life-bar__modular').classList.remove("green")
+                    hero1HTML.querySelector('.life-bar__modular').classList.add("orange")
                 }
                 if (hero2LifeAfterDamage < 60) {
-                    hero2HTML.querySelector('.life-bar__modular').style.backgroundColor = "orange";
+                    hero2HTML.querySelector('.life-bar__modular').classList.remove("green")
+                    hero2HTML.querySelector('.life-bar__modular').classList.add("orange")
                 }
                 if (hero1LifeAfterDamage < 30) {
-                    hero1HTML.querySelector('.life-bar__modular').style.backgroundColor = "red";
+                    hero1HTML.querySelector('.life-bar__modular').classList.remove("orange")
+                    hero1HTML.querySelector('.life-bar__modular').classList.add("red")
                 }
                 if (hero2LifeAfterDamage < 30) {
-                    hero2HTML.querySelector('.life-bar__modular').style.backgroundColor = "red";
+                    hero2HTML.querySelector('.life-bar__modular').classList.remove("orange")
+                    hero2HTML.querySelector('.life-bar__modular').classList.add("red")
                 }
                 if (hero1.hero_durability <= 0) {
                     setTimeout(() => {
@@ -803,8 +834,8 @@ if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/i
         heroHTML.querySelector(".hero__life-container").classList.remove("display-none");
         document.querySelector(".health-img-1").classList.remove("display-none");
         document.querySelector(".health-img-2").classList.remove("display-none");
-        document.querySelector(".body__background").style.opacity = "0%";
-        heroHTML.querySelector(".hero__delete").style.display = 'none';
+        document.querySelector(".body__background").classList.add('opacity-0');
+        heroHTML.querySelector(".hero__delete").classList.add('display-none');
     }
 
     function preparCharacterCard(hero, heroHTML) {
@@ -874,21 +905,22 @@ if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/i
         if (hero1 == hero2) {
             return;
         }
-        preparHeroToCombat(hero1HTML)
-        preparHeroToCombat(hero2HTML)
-        combatArea.style.backgroundImage = "url(../img/cataclysm.gif)"
-        document.querySelector(".combat-background").classList.toggle("display-none")
-        resumeCbt.classList.toggle("display-none")
-        buttonCombat.style.display = "none"
-        selectionTitle.classList.toggle("display-none")
-        search.style.display = "none"
-        margin.classList.toggle("margin-bottom")
-        imgVS.classList.toggle("display-none")
-        document.querySelector(".fight__img").style.width = "80%";
-        document.querySelector(".fight__img").style.top = "1vw";
-        selectionHeroes.classList.toggle("flex-wrap")
+        preparHeroToCombat(hero1HTML);
+        preparHeroToCombat(hero2HTML);
+        combatArea.classList.add("background-fight");
+        document.querySelector(".combat-background").classList.toggle("display-none");
+        resumeCbt.classList.toggle("display-none");
+        buttonCombat.classList.add('display-none');
+        selectionTitle.classList.toggle("display-none");
+        search.classList.add('display-none');
+        margin.classList.toggle("margin-bottom");
+        imgVS.classList.toggle("display-none");
+        document.querySelector(".fight__img").classList.add("fight-transition");
+        selectionHeroes.classList.toggle("flex-wrap");
         hero2.hero_durability *= 10;
         hero1.hero_durability *= 10;
         battle(hero1, hero2);
     });
 };
+
+

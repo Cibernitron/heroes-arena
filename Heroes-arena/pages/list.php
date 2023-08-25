@@ -14,22 +14,26 @@ include "../php/_function.php";
     <title>index</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Marvel:wght@400;700&family=Roboto:wght@100&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marvel:wght@400;700&family=Roboto:wght@100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 
 </head>
+
 <body class="body">
     <div class="body__deco"></div>
-<?php include "../php/_header.php"?>
-<main>
-    <!-- Search -->
-    <?= displaySearchBar() ?>
-<ul class="heroes-list">
+    <?php include "../php/_header.php" ?>
+    <main>
+        <!-- Search -->
+        <?= displaySearchBar() ?>
+        <ul class="heroes-list">
+            <?php
 
-</ul>
-</main>
-<?=include "../php/_footer.php";?>
+                    //displayLists();
+                
+            ?>
+        </ul>
+    </main>
+    <?= include "../php/_footer.php"; ?>
 </body>
 <script src="../script.js"></script>
 

@@ -54,9 +54,6 @@ include "../php/_function.php";
                                     <img id="aargh-hero1" class="anim__aargh-1 display-none" src="../img/AARGH!.png" alt="">
                                     <img id="bam-hero1" class="anim__bam-1 display-none" src="../img/BAM!.png" alt="">
                                     <img id="oops-hero1" class="anim__oops-1 display-none" src="../img/OOPS!.png" alt="">
-                                    <img id="bang-hero1" class="anim__bang-1 display-none" src="../img/BANG!.png" alt="">
-                                    <img id="miss-hero1" class="anim__miss-1  display-none " src="../img/bulle_miss2.png" alt="">
-                                    <div class="miss-1"></div>
                                 </div>
                                 <div class="hero-card hero-card-shadow card__face card__face--front hero_information ">
                                     <div class="face-card ">
@@ -116,7 +113,7 @@ include "../php/_function.php";
                     <div class="versus__container">
                         <img id="versus" class="versus__img" src="../img/vs!.png" alt="versus">
                         <img id="versus" class="fight__img" src="../img/fight-logo.png" alt="fight">
-                        <button class="button" id="button-combat">
+                        <button class="button inactive" id="button-combat">
                             <p>Combat</p>
                         </button>
                     </div>
@@ -137,9 +134,6 @@ include "../php/_function.php";
                                     <img id="aargh-hero2" class="anim__aargh-2 display-none" src="../img/AARGH!.png" alt="">
                                     <img id="bam-hero2" class="anim__bam-2 display-none" src="../img/BAM!.png" alt="">
                                     <img id="oops-hero2" class="anim__oops-2 display-none" src="../img/OOPS!.png" alt="">
-                                    <img id="bang-hero2" class="anim__bang-2 display-none" src="../img/BANG!.png" alt="">
-                                    <img id="miss-hero2" class="anim__miss-2  display-none " src="../img/bulle_miss2.png" alt="">
-                                    <div class="miss-2"></div>
                                 </div>
                                 <div class="hero-card hero-card-shadow card__face card__face--front hero_information">
                                     <div class="face-card">

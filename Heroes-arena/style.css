@@ -1,6 +1,6 @@
 @font-face {
-	font-family: 'SuperBrigade';
-	src: url('fonts/SuperBrigadeTitle-axXKE.otf') format('opentype');
+    font-family: 'SuperBrigade';
+    src: url('fonts/SuperBrigadeTitle-axXKE.otf') format('opentype');
 }
 
 :root {
@@ -36,8 +36,6 @@ h6 {
     list-style: none;
 }
 
-
-
 /* INPUT */
 #name {
 
@@ -55,13 +53,7 @@ input[type=text]:focus {
     width: 100%;
 }
 
-
-
-
 /* HEADER  */
-
-
-
 .header {
     height: 9rem;
     top: 0;
@@ -103,11 +95,9 @@ input[type=text]:focus {
 
 .nav {
     display: flex;
-
 }
 
 .nav__list {
-
     list-style: none;
 }
 
@@ -126,9 +116,15 @@ input[type=text]:focus {
 }
 
 .active {
-    background: rgb(121, 9, 9);
     background: radial-gradient(circle, rgba(121, 9, 9, 1) 0%, rgba(23, 26, 33, 1) 100%);
     border-radius: 2rem;
+    z-index: 100;
+}
+
+.inactive {
+    background: linear-gradient(var(--primary-color), #818479, var(--primary-color));
+    border-radius: 2rem;
+    z-index: 100;
 }
 
 /* BODY  */
@@ -142,7 +138,6 @@ input[type=text]:focus {
 
 .body__background {
     background-image: url(img/entrance.gif);
-    /* background: linear-gradient(to right, black, white); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -161,16 +156,6 @@ input[type=text]:focus {
     gap: 1rem;
 }
 
-
-.selection__hero1,
-.selection__hero2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 30vw;
-}
-
-
 .heroes__container {
     display: flex;
     justify-content: space-around;
@@ -186,7 +171,6 @@ input[type=text]:focus {
 /* BUTTON */
 
 .button {
-    background: linear-gradient(var(--primary-color), #818479, var(--primary-color));
     padding: 0.5rem 0.75rem;
     border-radius: 10% 90% 10% 90% / 90% 10% 90% 10%;
     color: var(--fourth-color);
@@ -212,8 +196,6 @@ input[type=text]:focus {
     right: 0;
     width: 2rem;
     z-index: 100;
-
-
 }
 
 .speed__button {
@@ -221,12 +203,6 @@ input[type=text]:focus {
     top: 0;
     right: 1rem;
     width: 2rem;
-    z-index: 100;
-}
-
-
-.active {
-    background: linear-gradient(var(--primary-color), #790909, var(--primary-color));
     z-index: 100;
 }
 
@@ -255,7 +231,6 @@ input[type=text]:focus {
     justify-content: center;
     align-items: center;
     z-index: 100;
-    /* margin-top: 2rem; */
 }
 
 .search__button-random--active {
@@ -316,7 +291,6 @@ input[type=text]:focus {
     width: 75%;
     margin: 0 auto;
 }
-
 
 /* SECTION HERO */
 
@@ -403,58 +377,6 @@ input[type=text]:focus {
 
 }
 
-/* @keyframes move-fight-miss-1 {
-    0% {
-        transform: rotate3d(0,0,1,0deg);
-        left: 0;
-        z-index: 10000;
-
-    }
-    50% {
-        transform: rotate3d(0,0,1,-225deg);
-        z-index: 10000;
-    }
-
-    100% {
-        left: 40vw;
-        transform: rotate3d(0,0,.1,450deg);
-        z-index: 10000;
-    }
-}
-
-.hero__container-miss-1 {
-    position: relative;
-    animation-timing-function: cubic-bezier(1,-0.09,1,1.38);
-    animation-name: move-fight-miss-1;
-    animation-duration: .75s;
-}
-
-@keyframes move-fight-miss-2 {
-    0% {
-        transform: rotate3d(0,0,.1,0deg);
-        right: 0;
-        z-index: 10000;
-        
-    }
-    50% {
-        transform: rotate3d(0,0,1,-225deg);
-        z-index: 10000;
-    }
-    
-    100% {
-        right: 40vw;
-        transform: rotate3d(0,0,1,-450deg);
-        z-index: 10000;
-    }
-}
-
-.hero__container-miss-2 {
-    position: relative;
-    animation-timing-function: cubic-bezier(1,-0.09,1,1.38);
-    animation-name: move-fight-miss-2;
-    animation-duration: .75s;
-    
-} */
 .hero__img {
     width: 30vw;
     aspect-ratio: 1/1;
@@ -509,7 +431,6 @@ input[type=text]:focus {
 .hero__anim {
     position: absolute;
     z-index: 100000;
-    
 }
 
 .anim__miss-1 {
@@ -633,19 +554,16 @@ input[type=text]:focus {
     position: relative;
     border: 1px solid var(--third-color);
     cursor: pointer;
-    transition: transform 0s ease;
     transform-style: preserve-3d;
     perspective: 1000px;
 }
 
 .hero-card-shadow {
-    transition: box-shadow 0s ease;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.6);
     perspective: 1000px;
 }
 
 .hero-card-shadow-2 {
-    transition: box-shadow 0s ease;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.6);
     perspective: 1000px;
 }
@@ -656,6 +574,7 @@ input[type=text]:focus {
     cursor: pointer;
     transform-style: preserve-3d;
     transition: transform 1s ease;
+    height: 100%;
 }
 
 .card.is-flipped {
@@ -673,43 +592,8 @@ input[type=text]:focus {
 }
 
 /*---------------------------------------*/
-
-.hero__character-card {
-    width: 30vw;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-    border: black 2px solid;
-    border-radius: 2vw;
-    background-color: var(--fifth-color);
-    padding: 1rem;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    overflow-y: scroll;
-}
-
-.character-card__list {
-    display: flex;
-    margin-bottom: 4px;
-    flex-direction: column;
-    height: auto;
-}
-
 .character-card__title {
     font-size: 3vw;
-}
-
-.character__points {
-    border: 1px var(--primary-color) solid;
-    width: 33px;
-    height: 33px;
-    border-radius: 9px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 4px;
-    margin-bottom: 0;
-    background-color: #f4d35e;
 }
 
 .character-card__features__text {
@@ -718,15 +602,6 @@ input[type=text]:focus {
     color: var(--sixth-color);
     font-weight: 700;
     margin-right: .5rem;
-    left: 1rem;
-}
-
-.character-card__features__text-2 {
-    margin-top: 0;
-    margin-bottom: 0;
-    color: var(--sixth-color);
-    font-weight: 700;
-    margin-right: 2rem;
     left: 1rem;
 }
 
@@ -746,13 +621,11 @@ input[type=text]:focus {
     align-items: center
 }
 
-
 .character-card__top {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
-
 
 .character-card__features {
     display: flex;
@@ -761,6 +634,7 @@ input[type=text]:focus {
     flex-direction: column;
     margin-bottom: .5rem;
 }
+
 
 /* PAGE LIST */
 
@@ -820,7 +694,6 @@ input[type=text]:focus {
     text-align: center;
 }
 
-
 .container-heros {
     list-style: none;
     width: 16rem;
@@ -849,16 +722,6 @@ input[type=text]:focus {
     padding: 1.3rem 0 1.3rem 0;
 }
 
-.list-character-card__list {
-    width: 100%;
-    padding: .5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-}
-
 .list-character-card__img {
     width: 50%;
     aspect-ratio: 1/1;
@@ -874,14 +737,6 @@ input[type=text]:focus {
     margin: .25rem 0 .25rem 0;
 }
 
-.list-progress {
-    z-index: 100;
-    width: 50%;
-    height: 1rem;
-    background-color: #fff;
-    border-radius: 1rem;
-}
-
 .list-character-card__top-title {
     display: flex;
     justify-content: space-between;
@@ -890,7 +745,6 @@ input[type=text]:focus {
     align-items: center;
     margin-bottom: 0.5rem;
 }
-
 
 
 /* HEART_IMG */
@@ -949,7 +803,6 @@ input[type=text]:focus {
     color: var(--primary-color);
     font-weight: 700;
 }
-
 
 .progress__val-life {
     z-index: 10000;
@@ -1059,43 +912,13 @@ input[type=text]:focus {
     }
 }
 
-
-/* PROFIL CARD */
-.profils__character-card {
-    display: flex;
-    margin-bottom: 4px;
-    background-color: var(--fifth-color);
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px var(--primary-color) solid;
-    flex-direction: column;
-    height: auto;
-    width: 150px;
-    margin: auto;
-}
-
-.profils__character-card__top {
-    display: none;
-}
-
-.profils__character-card__img {
-    border: 2px var(--primary-color) solid;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-    border-radius: 5px;
-    width: 120px;
-    height: 120px;
-}
-
 /* SECTION COMBAT */
 .combat-design {
-    /* background-image: url(img/entrance.gif); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     margin: 2rem auto;
     width: 90vw;
-    /* height: 80vh; */
     padding-bottom: 2rem;
     padding-top: 3rem;
     position: relative;
@@ -1126,10 +949,6 @@ input[type=text]:focus {
     width: 100%;
     justify-content: center;
     align-items: center;
-}
-
-.fight__ttl {
-    color: var(--fourth-color);
 }
 
 /* PROGRESS-BAR__LIFE-COMBAT */
@@ -1179,16 +998,18 @@ input[type=text]:focus {
 /* COLORS LIFE */
 .green {
     background-color: chartreuse;
+    transition: linear 2s;
 }
 
 .orange {
     background-color: orange;
+    transition: linear 2s;
 }
 
 .red {
     background-color: red;
+    transition: linear 2s;
 }
-
 
 /* RESUME */
 .resume__text {
@@ -1202,19 +1023,11 @@ input[type=text]:focus {
     margin: 2rem auto;
 }
 
-.resume__text_title {
-    display: flex;
-    justify-content: center;
-}
-
-
 .resume {
     position: relative;
     display: flex;
     justify-content: center;
 }
-
-
 
 /* Create Page */
 
@@ -1395,8 +1208,6 @@ input[type=text]:focus {
 
 /* UTILITIES  */
 
-
-
 .display-none {
     display: none;
 }
@@ -1430,4 +1241,32 @@ input[type=text]:focus {
     position: absolute;
     border-radius: 1rem;
     transition: background-color 2s ease;
+}
+
+.transition-0s {
+    transition: transform 0s ease, box-shadow 0s ease;
+}
+
+.transition-1s {
+    transition: transform 1s ease, box-shadow 1s ease;
+}
+
+.fight-width {
+    transition: width 1s ease, top 1s ease;
+    width: 20%;
+    max-width: 160px;
+    top: 0;
+}
+
+.opacity-0 {
+    opacity: 0%;
+}
+
+.fight-transition {
+    width: 80%;
+    top: -3rem;
+}
+
+.background-fight {
+    background-image: url(img/cataclysm.gif);
 }
