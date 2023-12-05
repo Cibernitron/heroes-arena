@@ -29,74 +29,74 @@ $_SESSION['token'] = md5(uniqid(mt_rand(), true));
         <div class="create_menu">
             <h1 class="menu_title">Create New Character</h1>
             <div class="menu_informations">
-                <form action="" class="informations_form">
+                <form action="../php/create-action.php" method="post" class="informations_form">
                     <div class="hero-card-container card">
                         <div class="hero-card hero-card-shadow card__face--front hero_information">
                             <div class="face-card">
                                 <h3 class="name-hero">
-                                    <input type="text" class="form_name" placeholder="Enter name of your Hero">
+                                    <input type="text" class="form_name" name="name" value="Enter name">
                                 </h3>
                                 <img src="../img/Choix perso mobile.png" alt="" class="picture_hero">
-                                <input type="file" id="uploadInput" style="display: none;">
+                                <input type="file" id="uploadInput" style="display: none;" name="img_hero" accept="image/*">
+
                             </div>
-                            
                         </div>
                     </div>
+                    <div class="informations_stats">
+                        <div class="stats_stat">
+                            <h3 class="stat_name">Attack</h3>
+                            <div class="stat_progress">
+                                <button class="progress_button" onclick="adjustStat('attack', -1, event)">-</button>
+                                <div class="progress_bar">
+                                    <div id="bar_attack" class="bar_stat"></div>
+                                    <input type="hidden" id="input_attack" name="attack" value="0">
+                                    <p id="value_attack" class="stat_value">0</p>
+                                </div>
+                                <button class="progress_button" onclick="adjustStat('attack', 1, event)">+</button>
+                            </div>
+                        </div>
+                        <div class="stats_stat">
+                            <h3 class="stat_name">Shield</h3>
+                            <div class="stat_progress">
+                                <button class="progress_button" onclick="adjustStat('shield', -1, event)">-</button>
+                                <div class="progress_bar">
+                                    <div id="bar_shield" class="bar_stat"></div>
+                                    <input type="hidden" id="input_shield" name="shield" value="0">
+                                    <p id="value_shield" class="stat_value">0</p>
+                                </div>
+                                <button class="progress_button" onclick="adjustStat('shield', 1, event)">+</button>
+                            </div>
+                        </div>
+                        <div class="stats_stat">
+                            <h3 class="stat_name">Speed</h3>
+                            <div class="stat_progress">
+                                <button class="progress_button" onclick="adjustStat('speed', -1, event)">-</button>
+                                <div class="progress_bar">
+                                    <div id="bar_speed" class="bar_stat"></div>
+                                    <input type="hidden" id="input_speed" name="speed" value="0">
+                                    <p id="value_speed" class="stat_value">0</p>
+                                </div>
+                                <button class="progress_button" onclick="adjustStat('speed', 1, event)">+</button>
+                            </div>
+                        </div>
+                        <div class="stats_stat">
+                            <h3 class="stat_name">Health</h3>
+                            <div class="stat_progress">
+                                <button class="progress_button" onclick="adjustStat('health', -1, event)">-</button>
+                                <div class="progress_bar">
+                                    <div id="bar_health" class="bar_stat"></div>
+                                    <input type="hidden" id="input_health" name="health" value="0">
+                                    <p id="value_health" class="stat_value">0</p>
+                                </div>
+                                <button class="progress_button" onclick="adjustStat('health', 1, event)">+</button>
+                            </div>
+                        </div>
+                        <div class="stats_rest">
+                            <h3 class="rest_title">Points to distribute: <span id="pointsToDistribute">40</span></h3>
+                        </div>
+                    </div>
+                    <input type="submit" name="createCharacter" value="Terminer la création">
                 </form>
-
-                
-                <div class="informations_stats">
-                    <div class="stats_stat">
-                        <h3 class="stat_name">Attack</h3>
-                        <div class="stat_progress">
-                            <button class="progress_button">-</button>
-                            <div class="progress_bar">
-                                <div class="bar_stat"></div>
-                                <p class="stat_value">hero_strength</p>
-                            </div>
-                            <button class="progress_button">+</button>
-                        </div>
-                    </div>
-                    <div class="stats_stat">
-                        <h3 class="stat_name">Shield</h3>
-                        <div class="stat_progress">
-                            <button class="progress_button">-</button>
-                            <div class="progress_bar">
-                                <div class="bar_stat"></div>
-                                <p class="stat_value">hero_combat</p>
-                            </div>
-                            <button class="progress_button">+</button>
-                        </div>
-                    </div>
-                    <div class="stats_stat">
-                        <h3 class="stat_name">Speed</h3>
-                        <div class="stat_progress">
-                            <button class="progress_button">-</button>
-                            <div class="progress_bar">
-                                <div class="bar_stat"></div>
-                                <p class="stat_value">hero_speed</p>
-                            </div>
-                            <button class="progress_button">+</button>
-                        </div>
-                    </div>
-                    <div class="stats_stat">
-                        <h3 class="stat_name">Health</h3>
-                        <div class="stat_progress">
-                            <button class="progress_button">-</button>
-                            <div class="progress_bar">
-                                <div class="bar_stat"></div>
-                                <p class="stat_value">hero_durability</p>
-                            </div>
-                            <button class="progress_button">+</button>
-                        </div>
-                    </div>
-
-
-
-                    <div class="stats_rest">
-                        <h3 class="rest_title">Points to distribute :</h3>
-                    </div>
-                </div>
             </div>
         </div>
 

@@ -7,20 +7,6 @@ header('content-type:application/json');
 
 $isOk = false;
 
-// if (
-//     !array_key_exists('token', $_SESSION) ||
-//     !array_key_exists('token', $data) ||
-//     $_SESSION['token'] !== $data['token']
-// ) {
-// echo json_encode([
-//     'result' => 'false',
-//     'error' => 'Accès refusé, jeton invalide.',
-//     'token session' => $_SESSION['token'],
-//     'token data' => $data['token']
-
-// ]);
-// exit;
-// }
 if ($data['action'] === 'showName' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $heroName = (string)strip_tags($data['hero_name']);
@@ -58,3 +44,8 @@ if ($data['action'] === 'giveAllId' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         'heroes_id' => $datas,
     ]);
 };
+
+
+
+
+

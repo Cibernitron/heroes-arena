@@ -1062,23 +1062,38 @@ input[type=text]:focus {
 }
 
 .informations_form {
-    width: 80%;
-    max-width: 15rem;
-
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 1rem;
 }
 
 .form_name {
-    background-color: var(--third-color);
-    color: white;
-    border: var(--primary-color) 1px solid;
-    border-radius: .5rem;
+    font-size: 100%;
     text-align: center;
-    height: 2rem;
+    background: rgb(121, 9, 9);
+    background: linear-gradient(180deg, rgba(121, 9, 9, 1) 0%, rgba(23, 26, 33, 1) 100%);
+    color: var(--sixth-color);
+    width: 15rem;
+    height: 1.8rem;
+    border-radius: 1rem 1rem 0 0;
+    border-top: 1px #790909 solid;
+    border-left: 1px #790909 solid;
+    border-right: 1px #790909 solid;
+    border-bottom: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'SuperBrigade', sans-serif;
+    text-shadow: -2px -2px 4px rgb(0, 0, 0);
+    padding: 1.3rem 0 1.3rem 0;
 }
 
 @media screen and (min-width:1200px) {
     .informations_form {
-        width: 20%;
+        width: 50%;
     }
 }
 
@@ -1100,6 +1115,7 @@ input[type=text]:focus {
     border-bottom: 1px #790909 solid;
     border-left: 1px #790909 solid;
     border-right: 1px #790909 solid;
+    z-index: 1000;
 }
 
 .informations_stats {
@@ -1115,7 +1131,7 @@ input[type=text]:focus {
 
 @media screen and (min-width:1200px) {
     .informations_stats {
-        width: 60%;
+        width: 100%;
     }
 }
 
@@ -1152,7 +1168,7 @@ input[type=text]:focus {
 }
 
 .bar_stat {
-    width: 50%;
+    width: 0%;
     height: 100%;
     background-color: var(--fifth-color);
     border-radius: 2rem;
