@@ -26,7 +26,7 @@ if ($data['action'] === 'showName' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $heroName = (string)strip_tags($data['hero_name']);
     $query = $dbCo->prepare("SELECT hero_name, id_hero FROM `heroes` WHERE `hero_name` LIKE :heroname;");
     $isOk = $query->execute([
-        'heroname' => $heroName . '%' 
+        'heroname' => '%' . $heroName . '%' 
     ]);
     $datas = $query -> fetchAll();
     echo json_encode([

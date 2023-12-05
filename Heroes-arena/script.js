@@ -13,27 +13,63 @@ probleme ligne 312 GET http://localhost/heroes-arena/heroes-arena/undefined
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/index.php") {
+
+    var hero1HTML = document.getElementById("hero1");
+    var hero2HTML = document.getElementById("hero2");
+    var hero1Name = hero1HTML.querySelector(".name-hero");
+    var hero2Name = hero2HTML.querySelector(".name-hero");
+    document.getElementById("btn-random").classList.remove("display-none")
+    var resumeText = document.querySelector('.resume__text')
+    var hero1Container = document.querySelector('.hero__container-1')
+    var hero2Container = document.querySelector('.hero__container-2')
+    var speed750 = 750;
+    var speed1000 = 1000;
+    var speed2000 = 2000;
+    var buttonCombat = document.querySelector("#button-combat");
+    var combatArea = document.querySelector(".combat-design");
+    var combatText = document.querySelector("#selection-combat-text");
+    var selectionTitle = document.querySelector("#selection-ttl");
+    var fightTitle = document.querySelector("#fight-ttl");
+    var imgVS = document.querySelector('.versus__img')
+
+}
+let heroes;
+let hero1;
+let hero2;
+let attacker;
+let defender;
+const search = document.querySelector("#search");
+const margin = document.querySelector("#margin-bottom");
+const selectionHeroes = document.querySelector('.selection__heroes')
+
+let searchBar = document.querySelector('.search__bar');
+let searchList = document.querySelector('.search__list');
+
 /*
                          +------------------------------------------+
                          |              Connection API              |
                          +------------------------------------------+ 
  */
+function ListenSearchBar() {
 
-let searchBar = document.querySelector('.search__bar');
-
-searchBar.addEventListener('keyup', e => {
-    showName(searchBar.value)
-        .then(Response => {
-            if (!Response.result) {
-                console.error('Problème avec la requête.');
-                return;
-            }
-            displayNames(Response.hero_name);
-
-
-        });
-});
-
+    searchBar.addEventListener('keyup', e => {
+        if (searchBar.value.length > 0) {
+            showName(searchBar.value)
+                .then(Response => {
+                    if (!Response.result) {
+                        console.error('Problème avec la requête.');
+                        return;
+                    }
+                    displayNames(Response.hero_name);
+                });
+        }
+        else {
+            searchList.classList.add("display-none")
+        }
+    });
+}
+ListenSearchBar()
 
 
 function showName(word) {
@@ -133,13 +169,13 @@ function rotateCard(event) {
 function isFlipped(target, cardCenterX, mouseX) {
     if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/index.php") {
         if (target.classList.contains('is-flipped')) {
-            return (mouseX - cardCenterX) * 0.5;
+            return (mouseX - cardCenterX) * 0.3;
         } else {
             return (mouseX - cardCenterX) * -0.3;
         }
     } else {
         if (target.firstElementChild.classList.contains('is-flipped')) {
-            return (mouseX - cardCenterX) * 0.5;
+            return (mouseX - cardCenterX) * 0.3;
         } else {
             return (mouseX - cardCenterX) * -0.3;
         }
@@ -165,18 +201,20 @@ function resetCardRotation(event) {
         card.parentElement.classList.remove('z-index');
     }, 1000);
 }
+function listenMyMouse() {
+    let cardContainers = document.querySelectorAll('.hero-card-container');
 
-let cardContainers = document.querySelectorAll('.hero-card-container');
-
-cardContainers.forEach((cardContainer) => {
-    cardContainer.addEventListener('mousemove', rotateCard);
-    cardContainer.addEventListener('mouseleave', resetCardRotation);
-    cardContainer.addEventListener('click', function (event) {
-        cardContainer.classList.toggle('is-flipped');
-        resetCardRotation(event);
-        getStats(this);
+    cardContainers.forEach((cardContainer) => {
+        cardContainer.addEventListener('mousemove', rotateCard);
+        cardContainer.addEventListener('mouseleave', resetCardRotation);
+        cardContainer.addEventListener('click', function (event) {
+            cardContainer.classList.toggle('is-flipped');
+            resetCardRotation(event);
+            getStats(this);
+        });
     });
-});
+}
+listenMyMouse()
 
 function getStats(card) {
     let stats = card.querySelectorAll('.progress__val');
@@ -215,7 +253,7 @@ function displayNames(array) {
     });
     // Displays the first 4 heroes returned by the table after a filter
     array.forEach(element => {
-        if (count >= 4) {
+        if (count >= 10) {
             return;
         }
         let buttonLiHeroes = document.createElement("button");
@@ -327,6 +365,7 @@ function displayNames(array) {
                         });
                     }
                 });
+            searchList.classList.add("display-none")
         });
 
         count++;
@@ -341,523 +380,505 @@ function displayNames(array) {
                      |                Variables                 |
                      +------------------------------------------+ 
                      */
-if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/index.php") {
-    let heroes;
-    let hero1;
-    let hero2;
-    let attacker;
-    let defender;
-    const hero1HTML = document.getElementById("hero1");
-    const hero2HTML = document.getElementById("hero2");
-    const buttonCombat = document.querySelector("#button-combat");
-    const combatArea = document.querySelector(".combat-design");
-    const combatText = document.querySelector("#selection-combat-text");
-    const selectionTitle = document.querySelector("#selection-ttl");
-    const fightTitle = document.querySelector("#fight-ttl");
-    const search = document.querySelector("#search");
-    const margin = document.querySelector("#margin-bottom");
-    const imgVS = document.querySelector('.versus__img')
-    const selectionHeroes = document.querySelector('.selection__heroes')
-    const resumeCbt = document.querySelector('.resume__button')
-    const hero1Name = hero1HTML.querySelector(".name-hero");
-    const hero2Name = hero2HTML.querySelector(".name-hero");
-    document.getElementById("btn-random").classList.remove("display-none")
-
-    const resumeText = document.querySelector('.resume__text')
-    const hero1Container = document.querySelector('.hero__container-1')
-    const hero2Container = document.querySelector('.hero__container-2')
-    let speed750 = 750;
-    let speed1000 = 1000;
-    let speed2000 = 2000;
-
-    // const controller = new AbortController();
-    // const signal = controller.signal;
-    //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    /*
-    +------------------------------------------+
-                         |                Functions                 |
-                         +------------------------------------------+ 
-                         */
 
 
 
-    /**
-     * Change color of button "combat" if it can not be used
-     * @param {string} hero1 is the parent HTML tag where we will add the hero                            
-     * @param {string} hero2 is the parent HTML tag where we will add the hero                            
-     * @return {string} if 2 heroes are selected, the button "combat" is active, else it is not
-    */
-    function verifyTheHeroes(hero1, hero2) {
-        if (hero1 == undefined || hero2 == undefined) {
-            buttonCombat.classList.remove("active");
-            buttonCombat.classList.add("inactive");
-            search.classList.add("display-flex");
-            search.classList.remove("display-none");
-        }
-        else if (hero1 == hero2) {
-            buttonCombat.classList.remove("active");
-            buttonCombat.classList.add("inactive");
-        }
-        else {
-            buttonCombat.classList.add("active");
-            buttonCombat.classList.remove("inactive");
-            search.classList.remove("display-flex");
-            search.classList.add("display-none");
-        }
+// const controller = new AbortController();
+// const signal = controller.signal;
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*
++------------------------------------------+
+                     |                Functions                 |
+                     +------------------------------------------+ 
+                     */
+
+
+
+/**
+ * Change color of button "combat" if it can not be used
+ * @param {string} hero1 is the parent HTML tag where we will add the hero                            
+ * @param {string} hero2 is the parent HTML tag where we will add the hero                            
+ * @return {string} if 2 heroes are selected, the button "combat" is active, else it is not
+*/
+function verifyTheHeroes(hero1, hero2) {
+    if (hero1 == undefined || hero2 == undefined) {
+        buttonCombat.classList.remove("active");
+        buttonCombat.classList.add("inactive");
+        search.classList.add("display-flex");
+        search.classList.remove("display-none");
     }
-
-
-
-    /**
-     * Add Hero
-     * This function is used to create a hero.                                              
-     * It can be used for the first hero or the second hero because their HTML is similar   
-     * @param hero is the JSON of the selected hero                                         
-     * @param heroHtml is the parent HTML tag where we will add the hero                    
-     */
-
-    function addHero(hero, heroHtml) {
-        // Add and display the name of the hero
-        heroHtml.querySelector(".name-hero").textContent = hero.hero_name;
-        heroHtml.querySelector(".hero__delete").classList.remove('display-none');
-        heroHtml.querySelector(".hero__delete").classList.add('display-flex');
-
-        // Display the picture of the hero
-        heroHtml.querySelector('.list_img').src = hero.hero_lg;
-        fillTheDescription(hero, heroHtml)
-
-
-        verifyTheHeroes(hero1, hero2);
+    else if (hero1 == hero2) {
+        buttonCombat.classList.remove("active");
+        buttonCombat.classList.add("inactive");
     }
-
-
-    /**
-     * Remove Hero
-     * This function is used to delete a hero                          
-     * Is the reverse of "addHero"                                        
-     * @param heroHtml is HTML relative tag where we will add the hero 
-    */
-    function removeHero(heroHtml) {
-
-        // Remove and hide the hero name
-        heroHtml.querySelector(".name-hero").textContent = 'Choose Hero';
-        heroHtml.querySelector(".hero__delete").classList.remove('display-flex')
-        heroHtml.querySelector(".hero__delete").classList.add('display-none')
-
-        // Remove health point
-        heroHtml.querySelector('.life-bar__modular').textContent = '';
-
-        // Remove hero picture
-        heroHtml.querySelector('.list_img').classList.remove('display-none');
-        heroHtml.querySelector('.list_img').src = "../img/Choix perso mobile.png";
-
-        // Remove hero character-card with hero information
-        heroHtml.querySelector('.list-character-card__title').textContent = `Choose Hero`;
-        heroHtml.querySelector('.progress__val-atq').textContent = `0`;
-        heroHtml.querySelector('.progress__val-shield').textContent = `0`;
-        heroHtml.querySelector('.progress__val-speed').textContent = `0`;
-        heroHtml.querySelector('.progress__val-life').textContent = `0`;
-        heroHtml.querySelector('.bio__text-name').textContent = `Undefined`;
-        heroHtml.querySelector('.bio__text-alignment').textContent = `Undefined`;
-        heroHtml.querySelector('.bio__text-universe').textContent = `Undefined`;
-
-        heroHtml.querySelector('.list-character-card__img').src = `../img/Choix perso.png`;
-
-
-        if (heroHtml.id === 'hero1') {
-            hero1 = undefined;
-        } else {
-            hero2 = undefined;
-        }
-        verifyTheHeroes(hero1, hero2);
+    else {
+        buttonCombat.classList.add("active");
+        buttonCombat.classList.remove("inactive");
+        search.classList.remove("display-flex");
+        search.classList.add("display-none");
     }
+}
+
+
+
+/**
+ * Add Hero
+ * This function is used to create a hero.                                              
+ * It can be used for the first hero or the second hero because their HTML is similar   
+ * @param hero is the JSON of the selected hero                                         
+ * @param heroHtml is the parent HTML tag where we will add the hero                    
+ */
+
+function addHero(hero, heroHtml) {
+    // Add and display the name of the hero
+    heroHtml.querySelector(".name-hero").textContent = hero.hero_name;
+    heroHtml.querySelector(".hero__delete").classList.remove('display-none');
+    heroHtml.querySelector(".hero__delete").classList.add('display-flex');
+
+    // Display the picture of the hero
+    heroHtml.querySelector('.list_img').src = hero.hero_lg;
+    fillTheDescription(hero, heroHtml)
+
+
+    verifyTheHeroes(hero1, hero2);
+}
+
+
+/**
+ * Remove Hero
+ * This function is used to delete a hero                          
+ * Is the reverse of "addHero"                                        
+ * @param heroHtml is HTML relative tag where we will add the hero 
+*/
+function removeHero(heroHtml) {
+
+    // Remove and hide the hero name
+    heroHtml.querySelector(".name-hero").textContent = 'Choose Hero';
+    heroHtml.querySelector(".hero__delete").classList.remove('display-flex')
+    heroHtml.querySelector(".hero__delete").classList.add('display-none')
+
+    // Remove health point
+    heroHtml.querySelector('.life-bar__modular').textContent = '';
+
+    // Remove hero picture
+    heroHtml.querySelector('.list_img').classList.remove('display-none');
+    heroHtml.querySelector('.list_img').src = "../img/Choix perso mobile.png";
+
+    // Remove hero character-card with hero information
+    heroHtml.querySelector('.list-character-card__title').textContent = `Choose Hero`;
+    heroHtml.querySelector('.progress__val-atq').textContent = `0`;
+    heroHtml.querySelector('.progress__val-shield').textContent = `0`;
+    heroHtml.querySelector('.progress__val-speed').textContent = `0`;
+    heroHtml.querySelector('.progress__val-life').textContent = `0`;
+    heroHtml.querySelector('.bio__text-name').textContent = `Undefined`;
+    heroHtml.querySelector('.bio__text-alignment').textContent = `Undefined`;
+    heroHtml.querySelector('.bio__text-universe').textContent = `Undefined`;
+
+    heroHtml.querySelector('.list-character-card__img').src = `../img/Choix perso.png`;
+
+
+    if (heroHtml.id === 'hero1') {
+        hero1 = undefined;
+    } else {
+        hero2 = undefined;
+    }
+    verifyTheHeroes(hero1, hero2);
+}
 
 
 
 
 
 
-    // If we click on the random button next to the search list then we add him as a new random fighter
-    const buttonRandom = document.querySelector("#btn-random");
-    buttonRandom.addEventListener('click', function (e) {
+// If we click on the random button next to the search list then we add him as a new random fighter
+const buttonRandom = document.querySelector("#btn-random");
+buttonRandom.addEventListener('click', function (e) {
 
-        giveAllId()
-            .then(Response => {
-                if (!Response.result) {
-                    console.error('Problème avec la requête.');
-                    return;
-                }
+    giveAllId()
+        .then(Response => {
+            if (!Response.result) {
+                console.error('Problème avec la requête.');
+                return;
+            }
 
-                heroes = Response.heroes_id;
+            heroes = Response.heroes_id;
 
-            });
+        });
 
 
-        let iterations = 10; // Nombre d'itérations avant de s'arrêter sur un héros aléatoire
+    let iterations = 10; // Nombre d'itérations avant de s'arrêter sur un héros aléatoire
 
-        if (hero1Name.textContent === "Choose Hero") {
-            const interval = setInterval(function () {
+    if (hero1Name.textContent === "Choose Hero") {
+        const interval = setInterval(function () {
+            let id = dice(heroes.length);
+            selectHero(id)
+                .then(Response => {
+                    if (!Response.result) {
+                        console.error('Problème avec la requête.');
+                        return;
+                    }
+
+                    hero1 = Response.hero_name[0];
+                    addHero(hero1, hero1HTML);
+
+
+                });
+            // Display the image corresponding to the random ID
+            addHero(heroes[id], hero1HTML);
+
+            iterations--;
+
+            if (iterations <= 0) {
+                clearInterval(interval); // Stop animation when number of iterations is reached
+
                 let id = dice(heroes.length);
-                selectHero(id)
-                    .then(Response => {
-                        if (!Response.result) {
-                            console.error('Problème avec la requête.');
-                            return;
-                        }
-
-                        hero1 = Response.hero_name[0];
-                        addHero(hero1, hero1HTML);
-
-
-                    });
-                // Display the image corresponding to the random ID
                 addHero(heroes[id], hero1HTML);
 
-                iterations--;
+                // Select a random hero
+                const randomIndex = Math.floor(Math.random() * heroes.length);
+                const selectedHero = heroes[randomIndex];
 
-                if (iterations <= 0) {
-                    clearInterval(interval); // Stop animation when number of iterations is reached
-
-                    let id = dice(heroes.length);
-                    addHero(heroes[id], hero1HTML);
-
-                    // Select a random hero
-                    const randomIndex = Math.floor(Math.random() * heroes.length);
-                    const selectedHero = heroes[randomIndex];
-
-                    hero1 = selectedHero;
-                    addHero(selectedHero, hero1HTML);
-                }
-            }, 150)// Time in milliseconds between each iteration (adjust as needed)
-        }
+                hero1 = selectedHero;
+                addHero(selectedHero, hero1HTML);
+            }
+        }, 150)// Time in milliseconds between each iteration (adjust as needed)
+    }
 
 
-        else if (hero2Name.textContent === "Choose Hero") {
-            const interval = setInterval(function () {
+    else if (hero2Name.textContent === "Choose Hero") {
+        const interval = setInterval(function () {
+            let id = dice(heroes.length);
+            const hero2Name = hero2HTML.querySelector(".hero__name");
+            selectHero(id)
+                .then(Response => {
+                    if (!Response.result) {
+                        console.error('Problème avec la requête.');
+                        return;
+                    }
+                    hero2 = Response.hero_name[0];
+                    addHero(hero2, hero2HTML);
+                });
+            // Display the image corresponding to the random ID
+            addHero(heroes[id], hero2HTML);
+
+            iterations--;
+
+            if (iterations <= 0) {
+                clearInterval(interval); // Stop animation when number of iterations is reached
+
                 let id = dice(heroes.length);
-                const hero2Name = hero2HTML.querySelector(".hero__name");
-                selectHero(id)
-                    .then(Response => {
-                        if (!Response.result) {
-                            console.error('Problème avec la requête.');
-                            return;
-                        }
-                        hero2 = Response.hero_name[0];
-                        addHero(hero2, hero2HTML);
-                    });
-                // Display the image corresponding to the random ID
                 addHero(heroes[id], hero2HTML);
 
-                iterations--;
+                // Select a random hero
+                const randomIndex = Math.floor(Math.random() * heroes.length);
+                const selectedHero = heroes[randomIndex];
 
-                if (iterations <= 0) {
-                    clearInterval(interval); // Stop animation when number of iterations is reached
-
-                    let id = dice(heroes.length);
-                    addHero(heroes[id], hero2HTML);
-
-                    // Select a random hero
-                    const randomIndex = Math.floor(Math.random() * heroes.length);
-                    const selectedHero = heroes[randomIndex];
-
-                    hero2 = selectedHero;
-                    addHero(selectedHero, hero2HTML);
-                }
-            }, 150)//Time in milliseconds between each iteration (adjust as needed)
-        }
-        // If both heroes are already chosen, display an error message
-        else {
-            console.log('Both hero zones are full');
-        }
-    })
-
-
-
-
-
-    function dice(number) {
-        return parseInt(Math.random() * number);
-    }
-
-    // Define the difference of speed of selected heroes
-    function getMostSpeedHero(hero1, hero2) {
-        const speedHero1 = parseInt(hero1.hero_speed);
-        const speedHero2 = parseInt(hero2.hero_speed);
-        const speedDiff = speedHero1 - speedHero2;
-        let attacksLuckH1;
-        let attacksLuckH2;
-        // If Hero1 have more speed, he win the difference and add a dice (1-100)
-        if (speedDiff > 0) {
-            attacksLuckH1 = dice(100) + speedDiff
-            attacksLuckH2 = dice(100)
-        }
-        // If Hero2 have more speed, he win the difference and add a dice (1-100)
-        else if (speedDiff < 0) {
-            attacksLuckH1 = dice(100)
-            attacksLuckH2 = dice(100) - speedDiff // speedDiff = negative score (ex: 100 - (-50) = 150)
-        }
-        // If heroes have same speed, they just launch a dice (1-100)
-        else if (speedDiff == 0) {
-            attacksLuckH1 = dice(100)
-            attacksLuckH2 = dice(100)
-        }
-        // Return hero with hightest "speed" value
-        if (attacksLuckH1 > attacksLuckH2) {
-            attacker = hero1;
-            defender = hero2;
-            resumeText.innerHTML += `<br> ${attacker.hero_name} a obtenu un score de vitesse (${attacksLuckH1}) plus important que celui de ${defender.hero_name} (${attacksLuckH2})`;
-            return hero1.hero_name;
-        }
-        else if (attacksLuckH1 < attacksLuckH2) {
-            attacker = hero2;
-            defender = hero1;
-            resumeText.innerHTML += `<br> ${attacker.hero_name} a obtenu un score de vitesse (${attacksLuckH2}) plus important que celui de ${defender.hero_name} (${attacksLuckH1})`;
-            return hero2.hero_name;
-        }
-        else {
-            return getMostSpeedHero(hero1, hero2)
-        }
-    }
-
-    // Define "defense" value
-    // Add a random value to hero "defense" value 
-    function defenseScore(hero) {
-        return parseInt(hero.hero_combat);
-    }
-
-    // Define "strength" value
-    // Add a random value to defender "strength" value 
-    function attackDefenserScore(hero) {
-        return parseInt(hero.hero_strength) + dice(100);
-    }
-
-    // Define "strength" value
-    // Add a random value to attacker "strength" value 
-    function attackScore(hero) {
-        return parseInt(hero.hero_strength) + dice(100);
-    }
-
-
-    /**
-     * Execute Fight
-     * This function is used to give 1 turn of fight result.                                      
-     * @param {string} attacker - Hero with more "speed" (result to function "getMostSpeedHero")
-     * @param {string} defender - The other hero                                            
-     * @return {string} Return result of fight                                              
-    */
-    function executeFight(attacker, defender) {
-        let shieldDefense = defenseScore(defender);
-        let damagesAttack = attackScore(attacker);
-        // if Attack of attacker is higher than defense of defender, defender take damage 
-        if (damagesAttack > shieldDefense) {
-            let damage = (damagesAttack - shieldDefense);
-            if (defender.hero_durability <= 0) {
-                resumeText.innerHTML += `<br> ${defender.hero_name} est K.O`;
-                return
+                hero2 = selectedHero;
+                addHero(selectedHero, hero2HTML);
             }
-            resumeText.innerHTML += `<br> ${attacker.hero_name} a attaqué ${defender.hero_name} et lui a infligé ${damagesAttack}`;
-            resumeText.innerHTML += `<br> Il reste ${defender.hero_durability}hp a ${defender.hero_name}.<br>`;
-            if (attacker === hero1) {
-                // if hero1 is attacker, image of hero go to hero2 and display bubble 
+        }, 150)//Time in milliseconds between each iteration (adjust as needed)
+    }
+    // If both heroes are already chosen, display an error message
+    else {
+        console.log('Both hero zones are full');
+    }
+})
+
+
+
+
+
+function dice(number) {
+    return parseInt(Math.random() * number);
+}
+
+// Define the difference of speed of selected heroes
+function getMostSpeedHero(hero1, hero2) {
+    const speedHero1 = parseInt(hero1.hero_speed);
+    const speedHero2 = parseInt(hero2.hero_speed);
+    const speedDiff = speedHero1 - speedHero2;
+    let attacksLuckH1;
+    let attacksLuckH2;
+    // If Hero1 have more speed, he win the difference and add a dice (1-100)
+    if (speedDiff > 0) {
+        attacksLuckH1 = dice(100) + speedDiff
+        attacksLuckH2 = dice(100)
+    }
+    // If Hero2 have more speed, he win the difference and add a dice (1-100)
+    else if (speedDiff < 0) {
+        attacksLuckH1 = dice(100)
+        attacksLuckH2 = dice(100) - speedDiff // speedDiff = negative score (ex: 100 - (-50) = 150)
+    }
+    // If heroes have same speed, they just launch a dice (1-100)
+    else if (speedDiff == 0) {
+        attacksLuckH1 = dice(100)
+        attacksLuckH2 = dice(100)
+    }
+    // Return hero with hightest "speed" value
+    if (attacksLuckH1 > attacksLuckH2) {
+        attacker = hero1;
+        defender = hero2;
+        resumeText.innerHTML += `<br> ${attacker.hero_name} a obtenu un score de vitesse (${attacksLuckH1}) plus important que celui de ${defender.hero_name} (${attacksLuckH2})`;
+        return hero1.hero_name;
+    }
+    else if (attacksLuckH1 < attacksLuckH2) {
+        attacker = hero2;
+        defender = hero1;
+        resumeText.innerHTML += `<br> ${attacker.hero_name} a obtenu un score de vitesse (${attacksLuckH2}) plus important que celui de ${defender.hero_name} (${attacksLuckH1})`;
+        return hero2.hero_name;
+    }
+    else {
+        return getMostSpeedHero(hero1, hero2)
+    }
+}
+
+// Define "defense" value
+// Add a random value to hero "defense" value 
+function defenseScore(hero) {
+    return parseInt(hero.hero_combat);
+}
+
+// Define "strength" value
+// Add a random value to defender "strength" value 
+function attackDefenserScore(hero) {
+    return parseInt(hero.hero_strength) + dice(100);
+}
+
+// Define "strength" value
+// Add a random value to attacker "strength" value 
+function attackScore(hero) {
+    return parseInt(hero.hero_strength) + dice(100);
+}
+
+
+/**
+ * Execute Fight
+ * This function is used to give 1 turn of fight result.                                      
+ * @param {string} attacker - Hero with more "speed" (result to function "getMostSpeedHero")
+ * @param {string} defender - The other hero                                            
+ * @return {string} Return result of fight                                              
+*/
+function executeFight(attacker, defender) {
+    let shieldDefense = defenseScore(defender);
+    let damagesAttack = attackScore(attacker);
+    // if Attack of attacker is higher than defense of defender, defender take damage 
+    if (damagesAttack > shieldDefense) {
+        let damage = (damagesAttack - shieldDefense);
+        if (defender.hero_durability <= 0) {
+            resumeText.innerHTML += `<br> ${defender.hero_name} est K.O`;
+            return
+        }
+        resumeText.innerHTML += `<br> ${attacker.hero_name} a attaqué ${defender.hero_name} et lui a infligé ${damagesAttack}`;
+        resumeText.innerHTML += `<br> Il reste ${defender.hero_durability}hp a ${defender.hero_name}.<br>`;
+        if (attacker === hero1) {
+            // if hero1 is attacker, image of hero go to hero2 and display bubble 
+            setTimeout(() => {
+                document.querySelector('#hero1').classList.add("hero__container-1")
                 setTimeout(() => {
-                    document.querySelector('#hero1').classList.add("hero__container-1")
+                    if (defender.hero_durability > 0) {
+                        document.querySelector('#bam-hero2').classList.remove("display-none")
+                    }
+                    else if (defender.hero_durability <= 0) {
+                        document.querySelector('#aargh-hero2').classList.remove("display-none")
+                    }
                     setTimeout(() => {
-                        if (defender.hero_durability > 0) {
-                            document.querySelector('#bam-hero2').classList.remove("display-none")
-                        }
-                        else if (defender.hero_durability <= 0) {
-                            document.querySelector('#aargh-hero2').classList.remove("display-none")
-                        }
-                        setTimeout(() => {
-                            document.querySelector('#aargh-hero2').classList.add("display-none")
-                            document.querySelector('#bam-hero2').classList.add("display-none")
-                        }, speed1000)
-                    }, speed750)
+                        document.querySelector('#aargh-hero2').classList.add("display-none")
+                        document.querySelector('#bam-hero2').classList.add("display-none")
+                    }, speed1000)
+                }, speed750)
 
-                }, speed1000)
+            }, speed1000)
 
-                document.querySelector('#hero1').classList.remove("hero__container-1")
-            }
-            else if (attacker === hero2) {
-                // if hero2 is attacker, image of hero go to hero1 and display bubble 
+            document.querySelector('#hero1').classList.remove("hero__container-1")
+        }
+        else if (attacker === hero2) {
+            // if hero2 is attacker, image of hero go to hero1 and display bubble 
+            setTimeout(() => {
+                document.querySelector('#hero2').classList.add("hero__container-2")
                 setTimeout(() => {
-                    document.querySelector('#hero2').classList.add("hero__container-2")
+                    if (defender.hero_durability > 0) {
+                        document.querySelector('#bam-hero1').classList.remove("display-none")
+                    }
+                    else if (defender.hero_durability <= 0) {
+                        document.querySelector('#aargh-hero1').classList.remove("display-none")
+                    }
                     setTimeout(() => {
-                        if (defender.hero_durability > 0) {
-                            document.querySelector('#bam-hero1').classList.remove("display-none")
-                        }
-                        else if (defender.hero_durability <= 0) {
-                            document.querySelector('#aargh-hero1').classList.remove("display-none")
-                        }
-                        setTimeout(() => {
-                            document.querySelector('#aargh-hero1').classList.add("display-none")
-                            document.querySelector('#bam-hero1').classList.add("display-none")
-                        }, speed1000)
-                    }, speed750)
+                        document.querySelector('#aargh-hero1').classList.add("display-none")
+                        document.querySelector('#bam-hero1').classList.add("display-none")
+                    }, speed1000)
+                }, speed750)
 
-                }, speed1000,)
+            }, speed1000,)
 
-                document.querySelector('#hero2').classList.remove("hero__container-2")
-            }
-            defender.hero_durability -= damage;
+            document.querySelector('#hero2').classList.remove("hero__container-2")
         }
-        // if Attack of attacker is lower than defense of defender, defender don't take damage, and defender become attacker and attacker become defender, and launch other turn
-        else if (damagesAttack < shieldDefense) {
-            if (defender.hero_durability <= 0) {
-                resumeText.innerHTML += `<br> ${defender.hero_name} est K.O`;
-                return
-            }
-            resumeText.innerHTML += `<br> ${defender.hero_name} arrive à se défendre, ${attacker.hero_name} n'inflige aucun dégat.`;
-            if (attacker === hero1) {
-                // if hero1 is attacker, image of hero go to hero2 and display bubble 
+        defender.hero_durability -= damage;
+    }
+    // if Attack of attacker is lower than defense of defender, defender don't take damage, and defender become attacker and attacker become defender, and launch other turn
+    else if (damagesAttack < shieldDefense) {
+        if (defender.hero_durability <= 0) {
+            resumeText.innerHTML += `<br> ${defender.hero_name} est K.O`;
+            return
+        }
+        resumeText.innerHTML += `<br> ${defender.hero_name} arrive à se défendre, ${attacker.hero_name} n'inflige aucun dégat.`;
+        if (attacker === hero1) {
+            // if hero1 is attacker, image of hero go to hero2 and display bubble 
+            setTimeout(() => {
+                document.querySelector('#hero1').classList.add("hero__container-1")
                 setTimeout(() => {
-                    document.querySelector('#hero1').classList.add("hero__container-1")
+                    document.querySelector('#oops-hero2').classList.remove("display-none")
                     setTimeout(() => {
-                        document.querySelector('#oops-hero2').classList.remove("display-none")
-                        setTimeout(() => {
-                            document.querySelector('#oops-hero2').classList.add("display-none")
-                        }, speed1000)
-                    }, speed750)
+                        document.querySelector('#oops-hero2').classList.add("display-none")
+                    }, speed1000)
+                }, speed750)
 
-                }, speed1000)
+            }, speed1000)
 
-                document.querySelector('#hero1').classList.remove("hero__container-1")
-            }
-            else if (attacker === hero2) {
-                // if hero2 is attacker, image of hero go to hero1 and display bubble 
+            document.querySelector('#hero1').classList.remove("hero__container-1")
+        }
+        else if (attacker === hero2) {
+            // if hero2 is attacker, image of hero go to hero1 and display bubble 
+            setTimeout(() => {
+                document.querySelector('#hero2').classList.add("hero__container-2")
                 setTimeout(() => {
-                    document.querySelector('#hero2').classList.add("hero__container-2")
+                    document.querySelector('#oops-hero1').classList.remove("display-none")
                     setTimeout(() => {
-                        document.querySelector('#oops-hero1').classList.remove("display-none")
-                        setTimeout(() => {
-                            document.querySelector('#oops-hero1').classList.add("display-none")
-                        }, speed1000)
-                    }, speed750)
+                        document.querySelector('#oops-hero1').classList.add("display-none")
+                    }, speed1000)
+                }, speed750)
 
-                }, speed1000,)
+            }, speed1000,)
 
-                document.querySelector('#hero2').classList.remove("hero__container-2")
+            document.querySelector('#hero2').classList.remove("hero__container-2")
+        }
+        // attacker == defender && defender == attacker
+
+        // executeFight(attacker, defender);
+    }
+    else {
+        resumeText.innerHTML += `<br> Il y a égalité ! Rien ne se passe.`;
+    }
+}
+
+
+// Add console log fight in HTML 
+function battle(hero1, hero2) {
+    const hero1Life = hero1.hero_durability;
+    const hero2Life = hero2.hero_durability;
+    let hero1LifeAfterDamage;
+    let hero2LifeAfterDamage;
+    setTimeout(() => {
+        document.querySelector('.fight__img').classList.add('fight-width');
+    }, "1000");
+
+    // Executing fight, turn by turn all the 1 sec
+    const timer = setInterval(
+
+        function () {
+            hero1LifeAfterDamage = (hero1.hero_durability / hero1Life) * 100 // Give percent of life remaining of hero 1
+            hero2LifeAfterDamage = (hero2.hero_durability / hero2Life) * 100 // Give percent of life remaining of hero 2
+            hero1HTML.querySelector('.life-combat').style.width = Math.max(hero1LifeAfterDamage, 0) + `%`; // Reduce life-bar of hero 1 in terms of his remaining life 
+            hero2HTML.querySelector('.life-combat').style.width = Math.max(hero2LifeAfterDamage, 0) + `%`; // Reduce life-bar of hero 2 in terms of his remaining life 
+            hero1HTML.querySelector('.progress__life-point').textContent = `${hero1.hero_durability}/${hero1Life}`
+            hero2HTML.querySelector('.progress__life-point').textContent = `${hero2.hero_durability}/${hero2Life}`
+            getMostSpeedHero(hero1, hero2); //L401
+            executeFight(attacker, defender); //L460
+
+            if (hero1LifeAfterDamage < 60) {
+                hero1HTML.querySelector('.life-bar__modular').classList.remove("green")
+                hero1HTML.querySelector('.life-bar__modular').classList.add("orange")
             }
-            // attacker == defender && defender == attacker
+            if (hero2LifeAfterDamage < 60) {
+                hero2HTML.querySelector('.life-bar__modular').classList.remove("green")
+                hero2HTML.querySelector('.life-bar__modular').classList.add("orange")
+            }
+            if (hero1LifeAfterDamage < 30) {
+                hero1HTML.querySelector('.life-bar__modular').classList.remove("orange")
+                hero1HTML.querySelector('.life-bar__modular').classList.add("red")
+            }
+            if (hero2LifeAfterDamage < 30) {
+                hero2HTML.querySelector('.life-bar__modular').classList.remove("orange")
+                hero2HTML.querySelector('.life-bar__modular').classList.add("red")
+            }
+            if (hero1.hero_durability <= 0) {
+                setTimeout(() => {
+                    hero1HTML.querySelector('.life-combat').style.width = `0%`;
+                    hero1HTML.querySelector('.progress__life-point').textContent = `0/${hero1Life}`
+                    hero1HTML.querySelectorAll('.filter-death').forEach(element => {
+                        element.classList.add("background-grey")
+                    });
+                    document.querySelector(".combat-background").classList.toggle("display-none")
+                }, speed2000)
+            }
+            else if (hero2.hero_durability <= 0) {
+                setTimeout(() => {
+                    hero2HTML.querySelector('.life-combat').style.width = `0%`;
+                    hero2HTML.querySelector('.progress__life-point').textContent = `0/${hero2Life}`
+                    hero2HTML.querySelectorAll('.filter-death').forEach(element => {
+                        element.classList.add("background-grey")
+                    });
+                    document.querySelector(".combat-background").classList.toggle("display-none")
+                }, speed2000)
+            }
 
-            // executeFight(attacker, defender);
-        }
-        else {
-            resumeText.innerHTML += `<br> Il y a égalité ! Rien ne se passe.`;
-        }
+            if (attacker.hero_durability <= 0) { // If attacker have not life, defender win, and the fight is close 
+                winner = defender.hero_name;
+                clearInterval(timer);
+                resumeText.innerHTML += `<br><br><strong>${winner} gagne le combat !</strong>`
+            } else if (defender.hero_durability <= 0) {// If defender have not life, attacker win, and the fight is close 
+                winner = attacker.hero_name;
+                clearInterval(timer);
+                resumeText.innerHTML += `<br><br><strong>${winner} gagne le combat !</strong>`
+            };
+            document.getElementById('selection-combat-text').scrollTop = document.getElementById('selection-combat-text').scrollHeight; // automatic scroll of text of fight
+        }, speed2000)
+}
+
+
+/**
+ * Customize page for fight
+ *  Return design for the fight page                                                    
+ *  @param {string} heroHTML is the parent HTML tag where we will add the hero          
+ *  @return {string} return modification of css                                         
+ */
+function preparHeroToCombat(heroHTML) {
+    heroHTML.querySelector(".life-bar__modular").classList.add("life-combat");
+    heroHTML.querySelector(".life-bar__modular").classList.remove("display-none");
+    heroHTML.querySelector(".hero__life-container").classList.remove("display-none");
+    document.querySelector(".health-img-1").classList.remove("display-none");
+    document.querySelector(".health-img-2").classList.remove("display-none");
+    document.querySelector(".body__background").classList.add('opacity-0');
+    heroHTML.querySelector(".hero__delete").classList.add('display-none');
+    heroHTML.querySelector(".hero__delete").classList.remove('display-flex');
+
+}
+
+function preparCharacterCard(hero, heroHTML) {
+    if (hero !== undefined) {
+
+        heroHTML.querySelector('.progress__val-atq').style.width = hero.hero_strength + '%'
+        heroHTML.querySelector('.progress__val-life').style.width = hero.hero_durability + '%'
+        heroHTML.querySelector('.progress__val-shield').style.width = hero.hero_combat + '%'
+        heroHTML.querySelector('.progress__val-speed').style.width = hero.hero_speed + '%'
     }
+};
 
 
-    // Add console log fight in HTML 
-    function battle(hero1, hero2) {
-        const hero1Life = hero1.hero_durability;
-        const hero2Life = hero2.hero_durability;
-        let hero1LifeAfterDamage;
-        let hero2LifeAfterDamage;
-        setTimeout(() => {
-            document.querySelector('.fight__img').classList.add('fight-width');
-        }, "1000");
-
-        // Executing fight, turn by turn all the 1 sec
-        const timer = setInterval(
-
-            function () {
-                hero1LifeAfterDamage = (hero1.hero_durability / hero1Life) * 100 // Give percent of life remaining of hero 1
-                hero2LifeAfterDamage = (hero2.hero_durability / hero2Life) * 100 // Give percent of life remaining of hero 2
-                hero1HTML.querySelector('.life-combat').style.width = Math.max(hero1LifeAfterDamage, 0) + `%`; // Reduce life-bar of hero 1 in terms of his remaining life 
-                hero2HTML.querySelector('.life-combat').style.width = Math.max(hero2LifeAfterDamage, 0) + `%`; // Reduce life-bar of hero 2 in terms of his remaining life 
-                hero1HTML.querySelector('.progress__life-point').textContent = `${hero1.hero_durability}/${hero1Life}`
-                hero2HTML.querySelector('.progress__life-point').textContent = `${hero2.hero_durability}/${hero2Life}`
-                getMostSpeedHero(hero1, hero2); //L401
-                executeFight(attacker, defender); //L460
-
-                if (hero1LifeAfterDamage < 60) {
-                    hero1HTML.querySelector('.life-bar__modular').classList.remove("green")
-                    hero1HTML.querySelector('.life-bar__modular').classList.add("orange")
-                }
-                if (hero2LifeAfterDamage < 60) {
-                    hero2HTML.querySelector('.life-bar__modular').classList.remove("green")
-                    hero2HTML.querySelector('.life-bar__modular').classList.add("orange")
-                }
-                if (hero1LifeAfterDamage < 30) {
-                    hero1HTML.querySelector('.life-bar__modular').classList.remove("orange")
-                    hero1HTML.querySelector('.life-bar__modular').classList.add("red")
-                }
-                if (hero2LifeAfterDamage < 30) {
-                    hero2HTML.querySelector('.life-bar__modular').classList.remove("orange")
-                    hero2HTML.querySelector('.life-bar__modular').classList.add("red")
-                }
-                if (hero1.hero_durability <= 0) {
-                    setTimeout(() => {
-                        hero1HTML.querySelector('.life-combat').style.width = `0%`;
-                        hero1HTML.querySelector('.progress__life-point').textContent = `0/${hero1Life}`
-                        hero1HTML.querySelectorAll('.filter-death').forEach(element => {
-                            element.classList.add("background-grey")
-                        });
-                        document.querySelector(".combat-background").classList.toggle("display-none")
-                    }, speed2000)
-                }
-                else if (hero2.hero_durability <= 0) {
-                    setTimeout(() => {
-                        hero2HTML.querySelector('.life-combat').style.width = `0%`;
-                        hero2HTML.querySelector('.progress__life-point').textContent = `0/${hero2Life}`
-                        hero2HTML.querySelectorAll('.filter-death').forEach(element => {
-                            element.classList.add("background-grey")
-                        });
-                        document.querySelector(".combat-background").classList.toggle("display-none")
-                    }, speed2000)
-                }
-
-                if (attacker.hero_durability <= 0) { // If attacker have not life, defender win, and the fight is close 
-                    winner = defender.hero_name;
-                    clearInterval(timer);
-                    resumeText.innerHTML += `<br><br><strong>${winner} gagne le combat !</strong>`
-                } else if (defender.hero_durability <= 0) {// If defender have not life, attacker win, and the fight is close 
-                    winner = attacker.hero_name;
-                    clearInterval(timer);
-                    resumeText.innerHTML += `<br><br><strong>${winner} gagne le combat !</strong>`
-                };
-                document.getElementById('selection-combat-text').scrollTop = document.getElementById('selection-combat-text').scrollHeight; // automatic scroll of text of fight
-            }, speed2000)
-    }
 
 
-    /**
-     * Customize page for fight
-     *  Return design for the fight page                                                    
-     *  @param {string} heroHTML is the parent HTML tag where we will add the hero          
-     *  @return {string} return modification of css                                         
-     */
-    function preparHeroToCombat(heroHTML) {
-        heroHTML.querySelector(".life-bar__modular").classList.add("life-combat");
-        heroHTML.querySelector(".life-bar__modular").classList.remove("display-none");
-        heroHTML.querySelector(".hero__life-container").classList.remove("display-none");
-        document.querySelector(".health-img-1").classList.remove("display-none");
-        document.querySelector(".health-img-2").classList.remove("display-none");
-        document.querySelector(".body__background").classList.add('opacity-0');
-        heroHTML.querySelector(".hero__delete").classList.add('display-none');
-    }
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    function preparCharacterCard(hero, heroHTML) {
-        if (hero !== undefined) {
-
-            heroHTML.querySelector('.progress__val-atq').style.width = hero.hero_strength + '%'
-            heroHTML.querySelector('.progress__val-life').style.width = hero.hero_durability + '%'
-            heroHTML.querySelector('.progress__val-shield').style.width = hero.hero_combat + '%'
-            heroHTML.querySelector('.progress__val-speed').style.width = hero.hero_speed + '%'
-        }
-    };
-
-    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    /*
-                             +------------------------------------------+
-                             |                Execution                 |
-                             +------------------------------------------+ 
-     */
+/*
+                         +------------------------------------------+
+                         |                Execution                 |
+                         +------------------------------------------+ 
+ */
+if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/index.php") {
+    const resumeCbt = document.querySelector('.resume__button');
+    const hero1HTML = document.getElementById("hero1");
+    const hero2HTML = document.getElementById("hero2");
     searchBar.value = ("")
     // waitingForResponse();
-
     resumeCbt.addEventListener('click', function (e) {
         combatText.classList.toggle("display-none")
     });

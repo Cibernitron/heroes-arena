@@ -3,8 +3,9 @@
 // Database connection parameters
 $db_host = 'localhost';
 $db_name = 'Heroes_Arena';
-$db_user = 'Jason';
-$db_password = 'PasswordSécurisé4875447';
+$db_user = 'phplocal';
+$db_password = 'phplocal';
+
 // Establish database connection
 $conn = new mysqli($db_host, $db_user, $db_password, $db_name);
 // Check if the connection was successful
