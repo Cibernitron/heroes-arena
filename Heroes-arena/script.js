@@ -208,9 +208,11 @@ function listenMyMouse() {
         cardContainer.addEventListener('mousemove', rotateCard);
         cardContainer.addEventListener('mouseleave', resetCardRotation);
         cardContainer.addEventListener('click', function (event) {
+            let card = event.currentTarget.querySelector('.hero-card');
             cardContainer.classList.toggle('is-flipped');
             resetCardRotation(event);
             getStats(this);
+            card.classList.toggle('card-shadow-flip');
         });
     });
 }
@@ -437,6 +439,7 @@ function addHero(hero, heroHtml) {
 
     // Display the picture of the hero
     heroHtml.querySelector('.list_img').src = hero.hero_lg;
+    console.log(hero);
     fillTheDescription(hero, heroHtml)
 
 
@@ -501,7 +504,7 @@ buttonRandom.addEventListener('click', function (e) {
                 return;
             }
 
-            heroes = Response.heroes_id;
+            heroes = Response.heroes_ids;
 
         });
 
@@ -673,7 +676,7 @@ function executeFight(attacker, defender) {
         if (attacker === hero1) {
             // if hero1 is attacker, image of hero go to hero2 and display bubble 
             setTimeout(() => {
-                document.querySelector('#hero1').classList.add("hero__container-1")
+                document.querySelector('#hero-container-1').classList.add("hero__container-1")
                 setTimeout(() => {
                     if (defender.hero_durability > 0) {
                         document.querySelector('#bam-hero2').classList.remove("display-none")
@@ -689,12 +692,12 @@ function executeFight(attacker, defender) {
 
             }, speed1000)
 
-            document.querySelector('#hero1').classList.remove("hero__container-1")
+            document.querySelector('#hero-container-1').classList.remove("hero__container-1")
         }
         else if (attacker === hero2) {
             // if hero2 is attacker, image of hero go to hero1 and display bubble 
             setTimeout(() => {
-                document.querySelector('#hero2').classList.add("hero__container-2")
+                document.querySelector('#hero-container-2').classList.add("hero__container-2")
                 setTimeout(() => {
                     if (defender.hero_durability > 0) {
                         document.querySelector('#bam-hero1').classList.remove("display-none")
@@ -710,7 +713,7 @@ function executeFight(attacker, defender) {
 
             }, speed1000,)
 
-            document.querySelector('#hero2').classList.remove("hero__container-2")
+            document.querySelector('#hero-container-2').classList.remove("hero__container-2")
         }
         defender.hero_durability -= damage;
     }
@@ -724,7 +727,7 @@ function executeFight(attacker, defender) {
         if (attacker === hero1) {
             // if hero1 is attacker, image of hero go to hero2 and display bubble 
             setTimeout(() => {
-                document.querySelector('#hero1').classList.add("hero__container-1")
+                document.querySelector('#hero-container-1').classList.add("hero__container-1")
                 setTimeout(() => {
                     document.querySelector('#oops-hero2').classList.remove("display-none")
                     setTimeout(() => {
@@ -734,12 +737,12 @@ function executeFight(attacker, defender) {
 
             }, speed1000)
 
-            document.querySelector('#hero1').classList.remove("hero__container-1")
+            document.querySelector('#hero-container-1').classList.remove("hero__container-1")
         }
         else if (attacker === hero2) {
             // if hero2 is attacker, image of hero go to hero1 and display bubble 
             setTimeout(() => {
-                document.querySelector('#hero2').classList.add("hero__container-2")
+                document.querySelector('#hero-container-2').classList.add("hero__container-2")
                 setTimeout(() => {
                     document.querySelector('#oops-hero1').classList.remove("display-none")
                     setTimeout(() => {
@@ -749,7 +752,7 @@ function executeFight(attacker, defender) {
 
             }, speed1000,)
 
-            document.querySelector('#hero2').classList.remove("hero__container-2")
+            document.querySelector('#hero-container-2').classList.remove("hero__container-2")
         }
         // attacker == defender && defender == attacker
 

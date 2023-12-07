@@ -41,7 +41,7 @@ if ($data['action'] === 'giveAllId' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $datas = $query -> fetchAll();
     echo json_encode([
         'result' => $isOk,
-        'heroes_id' => $datas,
+        'heroes_ids' => $datas,
     ]);
 };
 

@@ -48,7 +48,7 @@ include "../php/_function.php";
                                 </div>
                             </div>
                         </div>
-                        <div class="container-heros ">
+                        <div class="container-heros " id="hero-container-1">
                             <div class="hero-card-container card ">
                                 <div class="hero__anim">
                                     <img id="aargh-hero1" class="anim__aargh-1 display-none" src="../img/AARGH!.png" alt="">
@@ -111,7 +111,7 @@ include "../php/_function.php";
                     </div>
                     <!-- Img VS & Img Fight & Fight Text & Button -->
                     <div class="versus__container">
-                        <img id="versus" class="versus__img" src="../img/vs!.png" alt="versus">
+                        <img id="versus" class="versus__img" src="../img/download.png" alt="versus">
                         <img id="versus" class="fight__img" src="../img/fight-logo.png" alt="fight">
                         <button class="button inactive" id="button-combat">
                             <p>Combat</p>
@@ -128,7 +128,7 @@ include "../php/_function.php";
                                 </div>
                             </div>
                         </div>
-                        <div class="container-heros">
+                        <div class="container-heros" id="hero-container-2">
                             <div class="hero-card-container card">
                                 <div class="hero__anim">
                                     <img id="aargh-hero2" class="anim__aargh-2 display-none" src="../img/AARGH!.png" alt="">

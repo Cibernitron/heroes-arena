@@ -137,7 +137,8 @@ input[type=text]:focus {
 }
 
 .body__background {
-    background-image: url(img/entrance.gif);
+    /* background-image: url(img/entrance.gif); */
+    background-color: var(--sixth-color);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -159,6 +160,7 @@ input[type=text]:focus {
 .heroes__container {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     margin: 0 5rem;
 }
 
@@ -257,7 +259,6 @@ input[type=text]:focus {
 
 /* SEARCH-BAR */
 .search {
-    margin: 1rem 0;
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -561,13 +562,44 @@ input[type=text]:focus {
 }
 
 .hero-card-shadow {
-    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.6);
+    box-shadow: -200px 0px 10px 1px rgba(0, 0, 0, 0.6);
     perspective: 1000px;
 }
 
 .hero-card-shadow-2 {
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.6);
     perspective: 1000px;
+}
+
+@keyframes shadowGrow {
+    0% {
+        perspective: 10px;
+        box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.6);
+    }
+    25% {
+        perspective: 10px;
+        box-shadow: -200px 0px 10px 1px rgba(0, 0, 0, 0.6);
+        box-shadow: 200px 0px 10px 1px rgba(0, 0, 0, 0.6);
+    }
+    50% {
+        perspective: 10px;
+        box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.6);
+    }
+    75% {
+        perspective: 10px;
+        box-shadow: -200px 0px 10px 1px rgba(0, 0, 0, 0.6);
+        box-shadow: 200px 0px 10px 1px rgba(0, 0, 0, 0.6);
+    }
+    100% {
+        perspective: 10px;
+        box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.6);
+    }
+}
+
+.card-shadow-flip {
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.6);
+    transition: box-shadow 1s ease;
+    animation: shadowGrow 1s ease-in-out; /* Utilisez la même durée que votre transition */
 }
 
 /*---------------------------------------*/
