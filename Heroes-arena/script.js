@@ -208,11 +208,9 @@ function listenMyMouse() {
         cardContainer.addEventListener('mousemove', rotateCard);
         cardContainer.addEventListener('mouseleave', resetCardRotation);
         cardContainer.addEventListener('click', function (event) {
-            let card = event.currentTarget.querySelector('.hero-card');
             cardContainer.classList.toggle('is-flipped');
             resetCardRotation(event);
             getStats(this);
-            card.classList.toggle('card-shadow-flip');
         });
     });
 }
@@ -363,7 +361,6 @@ function displayNames(array) {
                             this.firstElementChild.classList.toggle('is-flipped');
                             resetCardRotation(event);
                             getStats(this);
-
                         });
                     }
                 });
@@ -439,10 +436,7 @@ function addHero(hero, heroHtml) {
 
     // Display the picture of the hero
     heroHtml.querySelector('.list_img').src = hero.hero_lg;
-    console.log(hero);
     fillTheDescription(hero, heroHtml)
-
-
     verifyTheHeroes(hero1, hero2);
 }
 
@@ -523,26 +517,13 @@ buttonRandom.addEventListener('click', function (e) {
 
                     hero1 = Response.hero_name[0];
                     addHero(hero1, hero1HTML);
-
-
                 });
-            // Display the image corresponding to the random ID
-            addHero(heroes[id], hero1HTML);
 
             iterations--;
 
             if (iterations <= 0) {
                 clearInterval(interval); // Stop animation when number of iterations is reached
 
-                let id = dice(heroes.length);
-                addHero(heroes[id], hero1HTML);
-
-                // Select a random hero
-                const randomIndex = Math.floor(Math.random() * heroes.length);
-                const selectedHero = heroes[randomIndex];
-
-                hero1 = selectedHero;
-                addHero(selectedHero, hero1HTML);
             }
         }, 150)// Time in milliseconds between each iteration (adjust as needed)
     }
@@ -561,23 +542,11 @@ buttonRandom.addEventListener('click', function (e) {
                     hero2 = Response.hero_name[0];
                     addHero(hero2, hero2HTML);
                 });
-            // Display the image corresponding to the random ID
-            addHero(heroes[id], hero2HTML);
 
             iterations--;
 
             if (iterations <= 0) {
                 clearInterval(interval); // Stop animation when number of iterations is reached
-
-                let id = dice(heroes.length);
-                addHero(heroes[id], hero2HTML);
-
-                // Select a random hero
-                const randomIndex = Math.floor(Math.random() * heroes.length);
-                const selectedHero = heroes[randomIndex];
-
-                hero2 = selectedHero;
-                addHero(selectedHero, hero2HTML);
             }
         }, 150)//Time in milliseconds between each iteration (adjust as needed)
     }
