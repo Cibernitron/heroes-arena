@@ -100,7 +100,14 @@ function displaySearchBar() {
                     <h2 id="selection-ttl" class="search__ttl">Selection</h2>
                     <input class="search__bar" type="text" id="name" name="name" placeholder="Selectionnez un héro" required minlength="3" size="30" autocomplete="off">
                     <ul id="search-list" class="search__list"></ul>
-                    <button id="btn-random" class="button search__button-random display-none">Random</button>
+                    
+                    <button id="btn-random" class="button-82-pushable display-none" role="button">
+                    <span class="button-82-shadow"></span>
+                    <span class="button-82-edge"></span>
+                    <span class="button-82-front text">
+                      Random
+                    </span>
+                  </button>
                 </section>
             </div>';
 };

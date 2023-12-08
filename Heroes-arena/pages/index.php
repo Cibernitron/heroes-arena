@@ -106,15 +106,15 @@ include "../php/_function.php";
                             </div>
                         </div>
                         <div class="hero__delete">
-                            <button class="delete__button">Delete Hero</button>
+                            <button class="noselect"><span class="text">Delete Hero</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span></button>
                         </div>
                     </div>
                     <!-- Img VS & Img Fight & Fight Text & Button -->
                     <div class="versus__container">
                         <img id="versus" class="versus__img" src="../img/download.png" alt="versus">
                         <img id="versus" class="fight__img" src="../img/fight-logo.png" alt="fight">
-                        <button class="button inactive" id="button-combat">
-                            <p>Combat</p>
+                        <button class="button_batman inactive" id="button-combat">
+                           <span>COMBAT</span> 
                         </button>
                     </div>
                     <!-- Selection Hero2 -->
@@ -187,7 +187,7 @@ include "../php/_function.php";
                         </div>
 
                         <div class="hero__delete">
-                            <button class="delete__button">Delete Hero</button>
+                            <button class="noselect"><span class="text">Delete Hero</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span></button>
                         </div>
                     </div>
                 </div>

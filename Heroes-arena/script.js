@@ -71,6 +71,48 @@ function ListenSearchBar() {
 }
 ListenSearchBar()
 
+function adaptWidthSearchBar() {
+    const searchBar = document.getElementById("name");
+    const searchList = document.querySelector(".search__list ");
+    searchList.style.width = "60%";
+}
+
+function hideSearchList() {
+    const searchList = document.getElementById("search-list");
+    searchList.style.maxHeight = '0';
+    searchList.style.width = '10%';
+}
+function displaySearchList() {
+    const searchList = document.getElementById("search-list");
+    searchList.style.maxHeight = '4rem';
+    searchList.style.width = '60%';
+}
+
+function watchSearchBar() {
+    const searchBar = document.getElementById("name");
+    const searchList = document.getElementById("search-list");
+
+    // Gérer le clic sur la barre de recherche
+    searchBar.addEventListener('click', (e) => {
+        adaptWidthSearchBar();
+        e.stopPropagation();
+    });
+
+    // Gérer le clic en dehors de la barre de recherche
+    document.addEventListener('click', (e) => {
+        const isClickedInsideSearchBar = searchBar.contains(e.target);
+        if (!isClickedInsideSearchBar) {
+            hideSearchList();
+        }
+    });
+    searchBar.addEventListener('click', (e) => {
+        displaySearchList()
+    });
+}
+
+watchSearchBar();
+
+
 
 function showName(word) {
     const data = {
@@ -157,7 +199,6 @@ function rotateCard(event) {
         } else {
             event.currentTarget.firstElementChild.classList.add('z-index');
         }
-
         if (event.currentTarget.firstElementChild.classList.contains('is-flipped')) {
             shadow2.style.boxShadow = `${(mouseX - cardCenterX) * .35 - 1}px ${shadowThicknessY}px 10px 1px rgba(0, 0, 0, .6)`;
         } else {

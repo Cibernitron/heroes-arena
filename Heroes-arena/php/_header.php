@@ -4,7 +4,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 <header class="header">
         <div class="header__band"></div>
-        <div class="header__background"></div>
         <a class="header__link" href="index.php">
             <img class="header__logo" src="../img/logo_heroes-arena.png" alt="logo">
         </a>
