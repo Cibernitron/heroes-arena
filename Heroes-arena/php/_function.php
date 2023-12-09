@@ -97,17 +97,24 @@ function displayCards($hero)
 function displaySearchBar() {
     return '<div class="character__srch">
                 <section id="search" class="search">
-                    <h2 id="selection-ttl" class="search__ttl">Selection</h2>
-                    <input class="search__bar" type="text" id="name" name="name" placeholder="Selectionnez un héro" required minlength="3" size="30" autocomplete="off">
-                    <ul id="search-list" class="search__list"></ul>
-                    
+                    <div class="search__bar-ul">
+                        <div class="search-box">
+                            <button class=" btn-search opacity-100"><i class="fas fa-search"></i></button>
+                            <input type="text" id="name" name="name" class="input-search" autocomplete="off">
+                        </div>
+                        <ul id="search-list" class="search__list"></ul>
+                    </div>
                     <button id="btn-random" class="button-82-pushable display-none" role="button">
-                    <span class="button-82-shadow"></span>
-                    <span class="button-82-edge"></span>
-                    <span class="button-82-front text">
-                      Random
-                    </span>
-                  </button>
+                        <span class="button-82-shadow"></span>
+                        <span class="button-82-edge"></span>
+                        <span class="button-82-front text">
+                            Random
+                        </span>
+                    </button>
+                    <div class="speed__selection">
+                        <img class="play__button" src="../img/play.png" alt="">
+                        <img class="speed__button" src="../img/play.png" alt="">
+                    </div>
                 </section>
             </div>';
 };

@@ -43,16 +43,10 @@ const search = document.querySelector("#search");
 const margin = document.querySelector("#margin-bottom");
 const selectionHeroes = document.querySelector('.selection__heroes')
 
-let searchBar = document.querySelector('.search__bar');
+let searchBar = document.querySelector('.input-search');
 let searchList = document.querySelector('.search__list');
 
-/*
-                         +------------------------------------------+
-                         |              Connection API              |
-                         +------------------------------------------+ 
- */
 function ListenSearchBar() {
-
     searchBar.addEventListener('keyup', e => {
         if (searchBar.value.length > 0) {
             showName(searchBar.value)
@@ -71,27 +65,23 @@ function ListenSearchBar() {
 }
 ListenSearchBar()
 
+
 function adaptWidthSearchBar() {
-    const searchBar = document.getElementById("name");
-    const searchList = document.querySelector(".search__list ");
-    searchList.style.width = "60%";
+    searchList.style.width = "100%";
 }
 
 function hideSearchList() {
-    const searchList = document.getElementById("search-list");
     searchList.style.maxHeight = '0';
     searchList.style.width = '10%';
 }
 function displaySearchList() {
-    const searchList = document.getElementById("search-list");
     searchList.style.maxHeight = '4rem';
-    searchList.style.width = '60%';
+    searchList.style.width = '100%';
 }
 
 function watchSearchBar() {
-    const searchBar = document.getElementById("name");
-    const searchList = document.getElementById("search-list");
-
+    const buttonSearch = document.querySelector(".btn-search");
+    const box = document.querySelector(".search-box");
     // Gérer le clic sur la barre de recherche
     searchBar.addEventListener('click', (e) => {
         adaptWidthSearchBar();
@@ -100,19 +90,28 @@ function watchSearchBar() {
 
     // Gérer le clic en dehors de la barre de recherche
     document.addEventListener('click', (e) => {
-        const isClickedInsideSearchBar = searchBar.contains(e.target);
+        const isClickedInsideSearchBar = box.contains(e.target);
         if (!isClickedInsideSearchBar) {
+            buttonSearch.classList.remove("opacity-0")
+            buttonSearch.classList.add("opacity-100")
             hideSearchList();
         }
     });
-    searchBar.addEventListener('click', (e) => {
-        displaySearchList()
-    });
+
+    box.addEventListener('click', (e) => {
+        buttonSearch.classList.add("opacity-0");
+        buttonSearch.classList.remove("opacity-100");
+        displaySearchList();
+    })
 }
 
 watchSearchBar();
 
-
+/*
++------------------------------------------+
+|              Connection API              |
++------------------------------------------+ 
+ */
 
 function showName(word) {
     const data = {
@@ -340,7 +339,6 @@ function displayNames(array) {
                         else {
                             console.log('Both hero zones are full');
                         }
-                        // console.log(Response.hero_name);
                     }
                     else if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/list.php") {
                         let hero = Response.hero_name[0];
@@ -441,11 +439,15 @@ function displayNames(array) {
  * @return {string} if 2 heroes are selected, the button "combat" is active, else it is not
 */
 function verifyTheHeroes(hero1, hero2) {
+    const random = document.querySelector(".button-82-pushable");
+    const searchBar = document.querySelector(".search__bar-ul");
     if (hero1 == undefined || hero2 == undefined) {
         buttonCombat.classList.remove("active");
         buttonCombat.classList.add("inactive");
-        search.classList.add("display-flex");
-        search.classList.remove("display-none");
+        random.classList.add("display-flex");
+        random.classList.remove("display-none");
+        searchBar.classList.add("display-flex");
+        searchBar.classList.remove("display-none");
     }
     else if (hero1 == hero2) {
         buttonCombat.classList.remove("active");
@@ -454,8 +456,10 @@ function verifyTheHeroes(hero1, hero2) {
     else {
         buttonCombat.classList.add("active");
         buttonCombat.classList.remove("inactive");
-        search.classList.remove("display-flex");
-        search.classList.add("display-none");
+        searchBar.classList.remove("display-flex");
+        searchBar.classList.add("display-none");
+        random.classList.remove("display-flex");
+        random.classList.add("display-none");
     }
 }
 
@@ -904,7 +908,7 @@ if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/i
 
     document.querySelector('.speed__selection').addEventListener('click', function (event) {
         document.querySelector('.speed__button').classList.toggle("display-none")
-        document.querySelector('.play__button').classList.toggle("margin-right")
+        document.querySelector('.play__button').classList.toggle("margin-left")
         if (speed1000 === 1000) {
             speed750 /= 5;
 
@@ -945,7 +949,6 @@ if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/i
         document.querySelector(".combat-background").classList.toggle("display-none");
         resumeCbt.classList.toggle("display-none");
         buttonCombat.classList.add('display-none');
-        selectionTitle.classList.toggle("display-none");
         search.classList.add('display-none');
         margin.classList.toggle("margin-bottom");
         imgVS.classList.toggle("display-none");
