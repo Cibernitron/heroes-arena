@@ -29,7 +29,7 @@ $_SESSION['token'] = md5(uniqid(mt_rand(), true));
         <div class="create_menu">
             <h1 class="menu_title">Create New Character</h1>
             <div class="menu_informations">
-                <form action="../php/create-action.php" method="post" class="informations_form">
+                <form action="../php/create-action.php" method="post" class="informations_form" enctype="multipart/form-data">
                     <div class="hero-card-container card">
                         <div class="hero-card hero-card-shadow card__face--front hero_information">
                             <div class="face-card">

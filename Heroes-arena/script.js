@@ -545,64 +545,38 @@ buttonRandom.addEventListener('click', function (e) {
 
             heroes = Response.heroes_ids;
 
+            let iterations = 10; // Nombre d'itérations avant de s'arrêter sur un héros aléatoire
+
+            function changeHeroWithDelay(delay, heroHTML, heroName) {
+                let id = dice(heroes.length);
+                selectHero(id)
+                    .then(Response => {
+                        if (!Response.result) {
+                            console.error('Problème avec la requête.');
+                            return;
+                        }
+
+                        const heroNameText = Response.hero_name[0];
+                        addHero(heroNameText, heroHTML);
+                    });
+
+                iterations--;
+
+                if (iterations > 0) {
+                    setTimeout(() => changeHeroWithDelay(delay *1.5, heroHTML, heroName), delay); // Appeler la fonction récursivement avec un délai ajusté
+                }
+            }
+
+            if (hero1Name.textContent === "Choose Hero") {
+                changeHeroWithDelay(50, hero1HTML, hero1Name);
+            } else if (hero2Name.textContent === "Choose Hero") {
+                changeHeroWithDelay(50, hero2HTML, hero2Name);
+            }
+        })
+        .catch(error => {
+            console.error('Error in giveAllId:', error);
         });
-
-
-    let iterations = 10; // Nombre d'itérations avant de s'arrêter sur un héros aléatoire
-
-    if (hero1Name.textContent === "Choose Hero") {
-        const interval = setInterval(function () {
-            let id = dice(heroes.length);
-            selectHero(id)
-                .then(Response => {
-                    if (!Response.result) {
-                        console.error('Problème avec la requête.');
-                        return;
-                    }
-
-                    hero1 = Response.hero_name[0];
-                    addHero(hero1, hero1HTML);
-                });
-
-            iterations--;
-
-            if (iterations <= 0) {
-                clearInterval(interval); // Stop animation when number of iterations is reached
-
-            }
-        }, 150)// Time in milliseconds between each iteration (adjust as needed)
-    }
-
-
-    else if (hero2Name.textContent === "Choose Hero") {
-        const interval = setInterval(function () {
-            let id = dice(heroes.length);
-            const hero2Name = hero2HTML.querySelector(".hero__name");
-            selectHero(id)
-                .then(Response => {
-                    if (!Response.result) {
-                        console.error('Problème avec la requête.');
-                        return;
-                    }
-                    hero2 = Response.hero_name[0];
-                    addHero(hero2, hero2HTML);
-                });
-
-            iterations--;
-
-            if (iterations <= 0) {
-                clearInterval(interval); // Stop animation when number of iterations is reached
-            }
-        }, 150)//Time in milliseconds between each iteration (adjust as needed)
-    }
-    // If both heroes are already chosen, display an error message
-    else {
-        console.log('Both hero zones are full');
-    }
-})
-
-
-
+});
 
 
 function dice(number) {

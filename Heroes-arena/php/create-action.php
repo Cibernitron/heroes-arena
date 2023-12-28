@@ -2,8 +2,7 @@
 session_start();
 require "_connection-bdd.php";
 
-var_dump($_POST);
-exit;
+var_dump($_FILES);
 
 if ($_POST['createCharacter'] === 'Terminer la création' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
@@ -12,27 +11,49 @@ if ($_POST['createCharacter'] === 'Terminer la création' && $_SERVER['REQUEST_M
     $speed = $_POST['speed'];
     $health = $_POST['health'];
 
+
     // Gestion de l'image
     $img_hero = $_FILES['img_hero']['name'];
     $img_hero_tmp = $_FILES['img_hero']['tmp_name'];
-    $img_hero_path = "chemin/vers/le/dossier/ou/sauvegarder/".$img_hero;
 
-    // Déplace le fichier temporaire vers le dossier de destination
-    move_uploaded_file($img_hero_tmp, $img_hero_path);
+    // Utilisez l'API ImgBB pour téléverser l'image
+    $apiKey = 'f48ccdbe42587d8aae813f576ad093c8';
+    $uploadUrl = 'https://api.imgbb.com/1/upload?key=' . $apiKey;
 
-    // Assuming you have a 'heroes' table with columns 'name', 'attack', 'shield', 'speed', and 'health'
-    $query = $dbCo->prepare("INSERT INTO heroes (hero_name, hero_strength, hero_combat, hero_speed, hero_durability, hero_lg) VALUES (:hero_name, :attack, :shield, :speed, :health, :img_hero )");
-    $query->bindParam(':hero_name', $name);
-    $query->bindParam(':attack', $attack);
-    $query->bindParam(':shield', $shield);
-    $query->bindParam(':speed', $speed);
-    $query->bindParam(':health', $health);
-    $query->bindParam(':img_hero', $img_hero_content, PDO::PARAM_LOB);
+    $imgData = file_get_contents($img_hero_tmp);
+    $base64ImgData = base64_encode($imgData);
 
-    $isOk = $query->execute();
+    $uploadResponse = json_decode(file_get_contents($uploadUrl, false, stream_context_create([
+        'http' => [
+            'method' => 'POST',
+            'header' => 'Content-Type: application/x-www-form-urlencoded',
+            'content' => http_build_query(['image' => $base64ImgData]),
+        ],
+    ])), true);
 
-    echo json_encode([
-        'result' => $isOk,
-        'message' => $isOk ? 'Hero added successfully' : 'Failed to add hero',
-    ]);
+    // Vérifiez si le téléversement a réussi
+    if ($uploadResponse && isset($uploadResponse['data']['url'])) {
+        $imgUrl = $uploadResponse['data']['url'];
+
+        // Ajoutez le lien de l'image dans la base de données
+        $query = $dbCo->prepare("INSERT INTO heroes (hero_name, hero_strength, hero_combat, hero_speed, hero_durability, hero_xs, hero_sm, hero_md, hero_lg) VALUES (:hero_name, :attack, :shield, :speed, :health, :img_hero, :img_hero ,:img_hero ,:img_hero)");
+        $query->bindParam(':hero_name', $name);
+        $query->bindParam(':attack', $attack);
+        $query->bindParam(':shield', $shield);
+        $query->bindParam(':speed', $speed);
+        $query->bindParam(':health', $health);
+        $query->bindParam(':img_hero', $imgUrl);
+
+        $isOk = $query->execute();
+
+        echo json_encode([
+            'result' => $isOk,
+            'message' => $isOk ? 'Hero added successfully' : 'Failed to add hero',
+        ]);
+    } else {
+        echo json_encode([
+            'result' => false,
+            'message' => 'Failed to upload image to ImgBB',
+        ]);
+    }
 }
