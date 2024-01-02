@@ -392,6 +392,7 @@ h6 {
 /* SEARCH-BAR */
 .search {
     display: flex;
+    margin-top: 1rem;
     gap: 1rem;
     align-items: center;
     justify-content: end;
@@ -1495,19 +1496,13 @@ h6 {
     pointer-events: painted;  
     z-index: 10000;
   }
-  .btn-search:focus ~ .input-search{
+  .btn-search:focus ~ .input-search, .input-search:focus{
     width: 300px;
-    border-radius: 0px;
+    border-radius: 50px;
     background-color: var(--secondary-color-dark);
     border-bottom:1px solid rgba(255,255,255,.5);
     transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
-  }
-  .input-search:focus{
-    width: 300px;
-    border-radius: 0px;
-    background-color: var(--secondary-color);
-    border-bottom:1px solid rgba(255,255,255,.5);
-    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+    border: 1px var(--primary-color) solid;
   }
 
   .noselect {
@@ -1569,3 +1564,14 @@ h6 {
    .noselect:active .icon svg {
     transform: scale(0.8);
    }
+
+   .carousel-item {
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.carousel-item.active {
+    opacity: 1;
+    transform: translateY(0);
+}

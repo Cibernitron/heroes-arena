@@ -333,7 +333,6 @@ function displayNames(array) {
                             hero2 = Response.hero_name[0];
                             addHero(hero2, hero2HTML);
                             searchList.classList.add("display-none")
-
                         }
                         // If the 2 heroes are selected then nothing is done
                         else {
@@ -417,7 +416,7 @@ function displayNames(array) {
                      +------------------------------------------+
                      |                Variables                 |
                      +------------------------------------------+ 
-                     */
+*/
 
 
 
@@ -425,10 +424,10 @@ function displayNames(array) {
 // const signal = controller.signal;
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*
-+------------------------------------------+
+                     +------------------------------------------+
                      |                Functions                 |
                      +------------------------------------------+ 
-                     */
+ */
 
 
 
@@ -441,6 +440,7 @@ function displayNames(array) {
 function verifyTheHeroes(hero1, hero2) {
     const random = document.querySelector(".button-82-pushable");
     const searchBar = document.querySelector(".search__bar-ul");
+
     if (hero1 == undefined || hero2 == undefined) {
         buttonCombat.classList.remove("active");
         buttonCombat.classList.add("inactive");
@@ -537,7 +537,7 @@ const buttonRandom = document.querySelector("#btn-random");
 buttonRandom.addEventListener('click', function (e) {
 
     giveAllId()
-        .then(Response => {
+        .then(async Response => {
             if (!Response.result) {
                 console.error('Problème avec la requête.');
                 return;
@@ -545,38 +545,68 @@ buttonRandom.addEventListener('click', function (e) {
 
             heroes = Response.heroes_ids;
 
-            let iterations = 10; // Nombre d'itérations avant de s'arrêter sur un héros aléatoire
-
-            function changeHeroWithDelay(delay, heroHTML, heroName) {
-                let id = dice(heroes.length);
-                selectHero(id)
-                    .then(Response => {
+            async function changeHeroWithDelay(delay, heroHTML) {
+                // Afficher 9 héros aléatoires
+                for (let i = 0; i < 9; i++) {
+                    let id = dice(heroes.length);
+                    try {
+                        const Response = await selectHero(id);
                         if (!Response.result) {
                             console.error('Problème avec la requête.');
                             return;
                         }
 
-                        const heroNameText = Response.hero_name[0];
-                        addHero(heroNameText, heroHTML);
-                    });
+                        const hero = Response.hero_name[0];
+                        addHero(hero, heroHTML);
+                        delay = delay*1.25;
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                    } catch (error) {
+                        console.error('Erreur dans la sélection du héros:', error);
+                    }
+                }
 
-                iterations--;
+                // Retourner le 10ème héros pour attribution externe
+                let id = dice(heroes.length);
+                try {
+                    const Response = await selectHero(id);
+                    if (!Response.result) {
+                        console.error('Problème avec la requête.');
+                        return null;
+                    }
 
-                if (iterations > 0) {
-                    setTimeout(() => changeHeroWithDelay(delay *1.5, heroHTML, heroName), delay); // Appeler la fonction récursivement avec un délai ajusté
+                    const hero = Response.hero_name[0];
+                    return hero;
+                } catch (error) {
+                    console.error('Erreur dans la sélection du héros:', error);
+                    return null;
                 }
             }
 
-            if (hero1Name.textContent === "Choose Hero") {
-                changeHeroWithDelay(50, hero1HTML, hero1Name);
-            } else if (hero2Name.textContent === "Choose Hero") {
-                changeHeroWithDelay(50, hero2HTML, hero2Name);
+            if (hero1 === undefined) {
+                changeHeroWithDelay(50, hero1HTML)
+                    .then(hero => {
+                        if (hero) {
+                            hero1 = hero;
+                            addHero(hero1, hero1HTML);
+                        }
+                    });
+            } else if (hero2 === undefined) {
+                changeHeroWithDelay(50, hero2HTML)
+                    .then(hero => {
+                        if (hero) {
+                            hero2 = hero;
+                            addHero(hero2, hero2HTML);
+                        }
+                    });
             }
         })
         .catch(error => {
+            console.log(error);
             console.error('Error in giveAllId:', error);
         });
 });
+
+
 
 
 function dice(number) {
