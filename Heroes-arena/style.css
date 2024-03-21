@@ -360,16 +360,20 @@ h6 {
 
 .button__lnk {
     width: 100%;
+    padding: .25rem;
     border: 1px solid var(--third-color);
     z-index: 100;
     font-size: 16px;
-    background-color: var(--sixth-color);
+    background-color: var(--secondary-color-dark);
+    color: var(--sixth-color);
 }
 
 .button__lnk:hover {
-    background-color: var(--fifth-color);
+    background-color: var(--secondary-color);
     color: var(--fourth-color);
+    font-size: 24px;
     z-index: 100;
+    transition: all .5s ease;
 }
 
 .resume__button {
@@ -392,7 +396,7 @@ h6 {
 /* SEARCH-BAR */
 .search {
     display: flex;
-    margin-top: 1rem;
+    margin: 1rem 0;
     gap: 1rem;
     align-items: center;
     justify-content: end;
@@ -434,7 +438,7 @@ h6 {
     list-style: none;
     position: relative;
     width: 100%;
-    max-height: 4rem;
+    max-height: 10rem;
     overflow-y: auto;
     border-radius: 0 0 10px 10px;
     border-top: 0;
@@ -1472,7 +1476,7 @@ h6 {
     transition: all .5s ease-in-out;
     background-color: var(--secondary-color-dark);
     padding-right: 40px;
-    color:var(--primary-color);
+    color:var(--sixth-color);
   }
   .input-search::placeholder{
     color:var(--secondary-color-dark);

@@ -19,7 +19,7 @@ if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/i
     var hero2HTML = document.getElementById("hero2");
     var hero1Name = hero1HTML.querySelector(".name-hero");
     var hero2Name = hero2HTML.querySelector(".name-hero");
-    document.getElementById("btn-random").classList.remove("display-none")
+    document.querySelector(".speed__selection").classList.remove("display-none")
     var resumeText = document.querySelector('.resume__text')
     var hero1Container = document.querySelector('.hero__container-1')
     var hero2Container = document.querySelector('.hero__container-2')
@@ -544,60 +544,136 @@ buttonRandom.addEventListener('click', function (e) {
             }
 
             heroes = Response.heroes_ids;
+            if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/index.php") {
 
-            async function changeHeroWithDelay(delay, heroHTML) {
-                // Afficher 9 héros aléatoires
-                for (let i = 0; i < 9; i++) {
+                async function changeHeroWithDelay(delay, heroHTML) {
+                    // Afficher 9 héros aléatoires
+                    for (let i = 0; i < 9; i++) {
+                        let id = dice(heroes.length);
+                        try {
+                            const Response = await selectHero(id);
+                            if (!Response.result) {
+                                console.error('Problème avec la requête.');
+                                return;
+                            }
+
+                            const hero = Response.hero_name[0];
+                            addHero(hero, heroHTML);
+                            delay = delay * 1.25;
+                            await new Promise(resolve => setTimeout(resolve, delay));
+                        } catch (error) {
+                            console.error('Erreur dans la sélection du héros:', error);
+                        }
+                    }
+
+                    // Retourner le 10ème héros pour attribution externe
                     let id = dice(heroes.length);
                     try {
                         const Response = await selectHero(id);
                         if (!Response.result) {
                             console.error('Problème avec la requête.');
-                            return;
+                            return null;
                         }
 
                         const hero = Response.hero_name[0];
-                        addHero(hero, heroHTML);
-                        delay = delay*1.25;
-                        await new Promise(resolve => setTimeout(resolve, delay));
+                        return hero;
                     } catch (error) {
                         console.error('Erreur dans la sélection du héros:', error);
+                        return null;
                     }
                 }
 
-                // Retourner le 10ème héros pour attribution externe
+                if (hero1 === undefined) {
+                    changeHeroWithDelay(50, hero1HTML)
+                        .then(hero => {
+                            if (hero) {
+                                hero1 = hero;
+                                addHero(hero1, hero1HTML);
+                            }
+                        });
+                } else if (hero2 === undefined) {
+                    changeHeroWithDelay(50, hero2HTML)
+                        .then(hero => {
+                            if (hero) {
+                                hero2 = hero;
+                                addHero(hero2, hero2HTML);
+                            }
+                        });
+                }
+            }
+            else if (window.location.href === "http://localhost/heroes-arena/heroes-arena/pages/list.php") {
                 let id = dice(heroes.length);
                 try {
                     const Response = await selectHero(id);
                     if (!Response.result) {
                         console.error('Problème avec la requête.');
-                        return null;
+                        return;
                     }
 
-                    const hero = Response.hero_name[0];
-                    return hero;
-                } catch (error) {
-                    console.error('Erreur dans la sélection du héros:', error);
-                    return null;
+                    let hero = Response.hero_name[0];
+                    const newLiElement = document.createElement("li");
+                    newLiElement.classList.add("container-heros")
+                    newLiElement.innerHTML = `
+                        <div class="hero-card-container card">
+                        <div class="hero-card hero-card-shadow card__face card__face--front hero_information">
+                        <div class="face-card">
+                        <h3 class="name-hero">${hero.hero_name}</h3>
+                        <img class="list_img" src="${hero.hero_md}">
+                            </div>
+                            <div class="hero-card hero-card-shadow-2 card__face card__face--back hero_information">
+                            <div class="character-card__top">
+                            <div class="list-character-card__top-title">
+                                        <img class="list-character-card__img" src="${hero.hero_sm}">
+                                        <h2 class="list-character-card__title">${hero.hero_name}</h2>
+                                    </div>
+                                    <ul class="character-card__features">
+                                        <li class="list-character-card__progress abilities">
+                                        <p class="character-card__features__text">Attack:</p>
+                                            <div class="progress-list">
+                                                <div class="progress__val progress__val-atq">${hero.hero_strength}</div>
+                                            </div>
+                                            </li>
+                                        <li class="list-character-card__progress abilities">
+                                        <p class="character-card__features__text">Shield:</p>
+                                        <div class="progress-list">
+                                        <div class="progress__val progress__val-shield">${hero.hero_combat}</div>
+                                        </div>
+                                        </li>
+                                        <li class="list-character-card__progress abilities">
+                                        <p class="character-card__features__text">Speed:</p>
+                                            <div class="progress-list">
+                                                <div class="progress__val progress__val-speed">${hero.hero_speed}</div>
+                                                </div>
+                                                </li>
+                                                <li class="list-character-card__progress abilities">
+                                            <p class="character-card__features__text">Health:</p>
+                                            <div class="progress-list">
+                                                <div class="progress__val progress__val-life">${hero.hero_durability}</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="character-card__bio">
+                                        <p class="bio__title">Biography:</p>
+                                        <p class="bio__text"><span class="bio__text-title">Real-Name:</span><span class="bio__text-text"> ${hero.hero_full_name}</span></p>
+                                        <p class="bio__text"><span class="bio__text-title">Alignement:</span><span class="bio__text-text"> ${hero.hero_alignment}</span></p>
+                                        <p class="bio__text"><span class="bio__text-title">Universe:</span><span class="bio__text-text"> ${hero.hero_publisher}</span></p>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>`;
+                    document.querySelector(".heroes-list").appendChild(newLiElement);
+                    newLiElement.addEventListener('mousemove', rotateCard);
+                    newLiElement.addEventListener('mouseleave', resetCardRotation);
+                    newLiElement.addEventListener('click', function (event) {
+                        this.firstElementChild.classList.toggle('is-flipped');
+                        resetCardRotation(event);
+                        getStats(this);
+                    })
                 }
-            }
-
-            if (hero1 === undefined) {
-                changeHeroWithDelay(50, hero1HTML)
-                    .then(hero => {
-                        if (hero) {
-                            hero1 = hero;
-                            addHero(hero1, hero1HTML);
-                        }
-                    });
-            } else if (hero2 === undefined) {
-                changeHeroWithDelay(50, hero2HTML)
-                    .then(hero => {
-                        if (hero) {
-                            hero2 = hero;
-                            addHero(hero2, hero2HTML);
-                        }
-                    });
+                catch (error) {
+                    console.error('Erreur dans la sélection du héros:', error);
+                }
             }
         })
         .catch(error => {

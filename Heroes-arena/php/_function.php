@@ -104,14 +104,14 @@ function displaySearchBar() {
                         </div>
                         <ul id="search-list" class="search__list"></ul>
                     </div>
-                    <button id="btn-random" class="button-82-pushable display-none" role="button">
+                    <button id="btn-random" class="button-82-pushable" role="button">
                         <span class="button-82-shadow"></span>
                         <span class="button-82-edge"></span>
                         <span class="button-82-front text">
                             Random
                         </span>
                     </button>
-                    <div class="speed__selection">
+                    <div class="speed__selection display-none">
                         <img class="play__button" src="../img/play.png" alt="">
                         <img class="speed__button" src="../img/play.png" alt="">
                     </div>
