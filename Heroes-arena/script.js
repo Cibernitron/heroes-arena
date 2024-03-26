@@ -602,8 +602,9 @@ buttonRandom.addEventListener("click", function (e) {
         }
       } else if (
         window.location.href ===
-        "http://localhost/heroes-arena/heroes-arena/pages/list.php"
+        "http://localhost/heroes-arena/Heroes-arena/pages/list.php"
       ) {
+        console.log("test");
         let id = dice(heroes.length);
         try {
           const Response = await selectHero(id);
