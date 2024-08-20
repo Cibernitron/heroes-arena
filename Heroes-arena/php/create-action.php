@@ -45,15 +45,18 @@ if ($_POST['createCharacter'] === 'Terminer la création' && $_SERVER['REQUEST_M
         $query->bindParam(':img_hero', $imgUrl);
 
         $isOk = $query->execute();
-
-        echo json_encode([
-            'result' => $isOk,
-            'message' => $isOk ? 'Hero added successfully' : 'Failed to add hero',
-        ]);
+        if ($isOk) {
+            // Redirection vers la page d'accueil en cas de succès
+            header('Location: /index.php');
+            exit;
+        } else {
+            // Redirection avec un message d'erreur
+            header('Location: /index.php?message=Failed%20to%20add%20hero');
+            exit;
+        }
     } else {
-        echo json_encode([
-            'result' => false,
-            'message' => 'Failed to upload image to ImgBB',
-        ]);
+        // Redirection avec un message d'erreur
+        header('Location: /index.php?message=Failed%20to%20upload%20image%20to%20ImgBB');
+        exit;
     }
 }
